@@ -540,7 +540,7 @@ footer a i{
     }
 }
 
-@media(max-width:600px) {
+@media(max-width:400px) {
     #menu-icon{
         display: block;
         transition: all .4s ease;
