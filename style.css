@@ -598,6 +598,12 @@ footer a i{
         grid-template-columns: 1fr;
 
     }
+    .main-text h1{
+        margin-left: 3rem;
+    }
+    .project-gallery{
+        margin-left: 3rem;
+    }
     .fillter-button{
         margin: 2.5rem 0;
     }
