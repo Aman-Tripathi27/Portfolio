@@ -1,209 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset=""UTF-8>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Website</title>
-    <link rel="stylesheet" href="style.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-</head>
-<body>
-    <!-- ----------header----------- -->
-    <header>
-        <img src="images/logo.JPG" class="logo">
-        <ul class="navlist">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div id="menu-icon" class="bx bx-menu"></div>
-    </header>
-
-
-
-    <!-- -----------home section----------- -->
-    <section id="home" class="home">
-        <div class="home-content">
-            <h1>Hi! I'm Aman,</h1>
-            <div class="change-text">
-                <h3><span class="word">Data Maniac</span></h3>
-            </div>
-
-            <p>A Data enthusiast with deep interest in Data World.</p>
-
-                <div class="info-box">
-                    <div class="email-info">
-                        <h5>Email :</h5>
-                        <span>amantripathi3273@gmail.com</span>
-                    </div>
-                </div>
-
-                <div class="btn-box">
-                    <a href="images/Aman_Resume.pdf" download class="btn">Download CV</a>
-                    
-                </div>
-
-                <div class="social-icons">
-                    <a href="https://www.linkedin.com/in/aman-tripathi27/"><i class='bx bxl-linkedin' ></i></a>
-                    <a href="https://github.com/Aman-Tripathi27"><i class='bx bxl-github' ></i></a>
-                    <a href="https://www.instagram.com/arryann02/"><i class='bx bxl-instagram'></i></a>
-                    <a href="https://twitter.com/AmanTri37784580"><i class='bx bxl-twitter' ></i></a> 
-                </div>
-
-        </div>
-
-        <div class="home-image">
-            <div class="img-box">
-                <img src="images/R.png" alt="">
-            </div>
-        </div>
-            
-           
-
-    </section>
-
-    <!-- ----------------about section---------------- -->
-    <div id="about">
-        <div class="container">
-            <div class="row">
-                <div class="about-col-1">
-                    <img src="images/bout.jpeg">
-                </div>
-                <div class="about-col-2">
-                    <h1 class="sub-title">About Me</h1>
-                    <p>I'm Aman Tripathi, a passionate and results-driven student (of data science) <br>
-                         with a knack for turning raw data into meaningful insights. With a solid <br>
-                         foundation in statistics, programming, and machine learning, I thrive on <br>
-                         solving complex problems and uncovering hidden patterns that drive strategic decisions. <br>
-                    </p>
-
-<!-- ----------------skill section---------------- -->
-
-                        <div class="tab-titles">
-                            <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
-                            <p class="tab-links" onclick="opentab('experience')">Experience</p>
-                            <p class="tab-links" onclick="opentab('education')">Education</p>
-                        </div>
-                        <div class="tab-contents active-tab" id="skills">
-                            <ul>
-                                <li><span>Languages</span><br>Python, HTML, Machine Learning, SQL</li>
-                                <li><span>Areas of Interest</span><br>Data Science, Data Analysis, Data Visualization, Machine Learning, Web Scraping</li>
-                                <li><span>Tools</span><br>Excel, Tableau, VScode, Kaggle, Github</li>
-                                <li><span>Soft-skills</span><br>Problem solving, Adaptability, Management</li>
-                            </ul>
-                        </div>
-                        <div class="tab-contents" id="experience">
-                            <ul>
-                                <li><span>Sep-Oct 2023</span><br>Data Science Virtual Internship at <span style="display:contents; color: red;">Bharat Intern</span></li>
-                                <li><span>Oct-Nov 2023</span><br>Data Science Virtial Internship at <span style="display:contents; color: red;">Code Clause</span></li>
-                            </ul>
-                        </div>
-                        <div class="tab-contents" id="education">
-                            <ul>
-                                <li><span>2021-2024</span><br>B.Sc. in Computer Science, Statistics and Mathematics</li>
-                            </ul>
-                        </div>
-
-<script>
-    var tablinks = document.getElementsByClassName("tab-links");
-    var tabcontents = document.getElementsByClassName("tab-contents");
-
-    function opentab(tabname){
-        for(tablink of tablinks){
-            tablink.classList.remove("active-link");
-        }
-        for(tabcontent of tabcontents){
-            tabcontent.classList.remove("active-tab");
-        }
-        event.currentTarget.classList.add("active-link");
-        document.getElementById(tabname).classList.add("active-tab");
-    }
-
-</script>
-
-<!-- ------------Project section---------- -->
-
-<section id="projects" class="projects">
-    <div class="main-text">
-        <h1>MY PROJECTS</h1>
+<!-- In index.html -->
+<header>
+  <nav>
+    <span class="logo">Aman</span>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      ...
+    </ul>
+    <button id="theme-toggle">🌙</button>
+  </nav>
+</header>
+<main>
+  <section id="hero">
+    <img src="images/profile.png" alt="Aman's Profile" class="profile-pic" />
+    <h1>Hi, I'm Aman</h1>
+    <p>Data enthusiast specializing in AI-driven healthcare solutions.</p>
+  </section>
+  <section id="projects">
+    <div class="project-card">
+      <img src="images/medicine-reco.png" alt="Medicine System" />
+      <h2>Personalised Medicine Recommendation System</h2>
+      <a href="https://github.com/Aman-Tripathi27/Personalised-medicine-recommendation-system/tree/main?tab=readme-ov-file">GitHub</a>
     </div>
-    <div class="projects-gallery">
-        <div class="port-box">
-            <div class="port-image">
-                <img src="images/med1.jpg" alt="">
-            </div>
-            <div class="port-content">
-                <h3>Medicine Recommendation System</h3>
-                <p>My Medicine Recommendation System is a cutting-edge <br>
-                    solution to transform healthcare. .</p>
-                <a href="https://github.com/Aman-Tripathi27/Personalised-medicine-recommendation-system"><i class='bx bx-link-external'></i></a>
-            </div>
-        </div>
-
-        <div class="port-box">
-            <div class="port-image">
-                <img src="images/Q.jpg" alt="">
-            </div>
-            <div class="port-content">
-                <h3>Coming Soon...</h3>
-                <a href="#"><i class='bx bx-link-external'></i></a>
-            </div>
-        </div>
-
-
+    <div class="project-card">
+      <img src="images/gnn-ddi.png" alt="GNN-DDI App" />
+      <h2>Drug-Drug Interaction (GNN-DDI)</h2>
+      <a href="https://gnn-ddi.streamlit.app">Live App</a>
     </div>
-</section>
-
-<!-- ----------- Contact Section ----------- -->
-
-<section id="contact" class="contant">
-    <div class="main-text">
-        <h1>Contact Me!</h1>
-    </div>
-
-    <form name="submit-to-google-sheet">
-        <input type="text" name="Name" placeholder="Your Name" required>
-        <input type="text" name="Email" placeholder="Your Email" required>
-        <input type="number" name="Phone number" placeholder="Phone Number">
-        <textarea name="Message" rows="10" placeholder="Your Message"></textarea>
-        <div class="btn-box formBtn">
-            <button type="submit" class="btn">Send Message</button>
-        </div>
-    </form>
-    <span id="msg"></span>
-</section>
-
-
-<!-- ----------footer website---------- -->
-
-<footer>
-    <p>Copyright &copy; 2023 by Aman Tripathi || All Rights Reserved.</p>
-    <a href="#home"><i class='bx bx-up-arrow-alt'></i></a>
-</footer>
-
+  </section>
+  <section id="contact">
+    <p>Email: amantripathi3273@gmail.com</p>
+    <a href="https://www.linkedin.com/in/YOUR-LINKEDIN-ID/">LinkedIn</a>
+  </section>
+</main>
 <script src="script.js"></script>
-
-
-<script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwCGQlQkoveKGI0LR0JyTlocu2T_rVF5j5Sghoi49JD8Nr9v3CIF5XfysDUNGM5mxwR/exec'
-    const form = document.forms['submit-to-google-sheet']
-    const msg = document.getElementById("msg")
-  
-    form.addEventListener('submit', e => {
-      e.preventDefault()
-      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-        .then(response => {
-            msg.innerHTML = "Message sent succesfully"
-            setTimeout(function(){
-                msg.innerHTML = ""
-            },5000)
-            form.reset()
-        })
-        .catch(error => console.error('Error!', error.message))
-    })
-  </script>
-
-</body>
-</html>
