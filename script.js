@@ -1,218 +1,159 @@
-// Loading Screen
+// Neural Loading Animation
 window.addEventListener('load', () => {
-    const loadingScreen = document.querySelector('.loading-screen');
+    const loadingScreen = document.querySelector('.neural-loading');
+    
     setTimeout(() => {
         loadingScreen.style.opacity = '0';
         setTimeout(() => {
             loadingScreen.style.display = 'none';
-            initializeAnimations();
-        }, 500);
-    }, 1500);
+            initializeNeural();
+        }, 800);
+    }, 3000);
 });
 
-// Particles.js Configuration
-document.addEventListener('DOMContentLoaded', () => {
-    if (typeof particlesJS !== 'undefined') {
-        particlesJS('particles-js', {
-            particles: {
-                number: {
-                    value: 80,
-                    density: {
-                        enable: true,
-                        value_area: 800
-                    }
-                },
-                color: {
-                    value: '#2563eb'
-                },
-                shape: {
-                    type: 'circle'
-                },
-                opacity: {
-                    value: 0.5,
-                    random: false,
-                    anim: {
-                        enable: false
-                    }
-                },
-                size: {
-                    value: 3,
-                    random: true,
-                    anim: {
-                        enable: false
-                    }
-                },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: '#2563eb',
-                    opacity: 0.4,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 2,
-                    direction: 'none',
-                    random: false,
-                    straight: false,
-                    out_mode: 'out',
-                    bounce: false
-                }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: {
-                    onhover: {
-                        enable: true,
-                        mode: 'grab'
-                    },
-                    onclick: {
-                        enable: true,
-                        mode: 'push'
-                    },
-                    resize: true
-                },
-                modes: {
-                    grab: {
-                        distance: 140,
-                        line_linked: {
-                            opacity: 1
-                        }
-                    },
-                    push: {
-                        particles_nb: 4
-                    }
-                }
-            },
-            retina_detect: true
-        });
+// Neural Canvas Background
+function initializeNeuralCanvas() {
+    const canvas = document.getElementById('neural-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const nodes = [];
+    const maxNodes = 50;
+    const connectionDistance = 150;
+    
+    class NeuralNode {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.vx = (Math.random() - 0.5) * 0.5;
+            this.vy = (Math.random() - 0.5) * 0.5;
+            this.radius = Math.random() * 2 + 1;
+            this.opacity = Math.random() * 0.5 + 0.5;
+        }
+        
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            
+            if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+            if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+        }
+        
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(0, 255, 136, ${this.opacity})`;
+            ctx.fill();
+            
+            // Glow effect
+            ctx.shadowColor = '#00ff88';
+            ctx.shadowBlur = 10;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        }
     }
-});
+    
+    // Initialize nodes
+    for (let i = 0; i < maxNodes; i++) {
+        nodes.push(new NeuralNode());
+    }
+    
+    function drawConnections() {
+        for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+                const dx = nodes[i].x - nodes[j].x;
+                const dy = nodes[i].y - nodes[j].y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < connectionDistance) {
+                    const opacity = (1 - distance / connectionDistance) * 0.5;
+                    ctx.beginPath();
+                    ctx.moveTo(nodes[i].x, nodes[i].y);
+                    ctx.lineTo(nodes[j].x, nodes[j].y);
+                    ctx.strokeStyle = `rgba(0, 255, 136, ${opacity})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            }
+        }
+    }
+    
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        nodes.forEach(node => {
+            node.update();
+            node.draw();
+        });
+        
+        drawConnections();
+        requestAnimationFrame(animate);
+    }
+    
+    animate();
+    
+    // Handle resize
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+}
 
-// Typewriter Effect
-const typewriterTexts = [
-    'Machine Learning Engineer',
-    'Data Analyst',
-    'Python Developer',
-    'Statistical Modeler',
-    'Business Intelligence Analyst'
+// Neural Typewriter Effect
+const neuralTexts = [
+    'MACHINE_LEARNING_ENGINEER',
+    'DATA_ANALYST_SPECIALIST', 
+    'AI_RESEARCHER',
+    'NEURAL_NETWORK_ARCHITECT',
+    'PREDICTIVE_MODELER'
 ];
 
 let textIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
 
-function typeWriter() {
-    const typedTextElement = document.querySelector('.typed-text');
-    if (!typedTextElement) return;
+function neuralTypewriter() {
+    const typedElement = document.querySelector('.typed-output');
+    if (!typedElement) return;
 
-    const currentText = typewriterTexts[textIndex];
+    const currentText = neuralTexts[textIndex];
     
     if (isDeleting) {
-        typedTextElement.textContent = currentText.substring(0, charIndex - 1);
+        typedElement.textContent = currentText.substring(0, charIndex - 1);
         charIndex--;
     } else {
-        typedTextElement.textContent = currentText.substring(0, charIndex + 1);
+        typedElement.textContent = currentText.substring(0, charIndex + 1);
         charIndex++;
     }
 
-    let typeSpeed = isDeleting ? 50 : 150;
+    let typeSpeed = isDeleting ? 30 : 100;
 
     if (!isDeleting && charIndex === currentText.length) {
         typeSpeed = 2000;
         isDeleting = true;
     } else if (isDeleting && charIndex === 0) {
         isDeleting = false;
-        textIndex = (textIndex + 1) % typewriterTexts.length;
+        textIndex = (textIndex + 1) % neuralTexts.length;
         typeSpeed = 500;
     }
 
-    setTimeout(typeWriter, typeSpeed);
+    setTimeout(neuralTypewriter, typeSpeed);
 }
 
-// Counter Animation
-function animateCounters() {
-    const counters = document.querySelectorAll('.stat-number');
-    counters.forEach(counter => {
-        const target = parseInt(counter.getAttribute('data-count'));
-        const speed = target / 200;
-        let count = 0;
-        
-        const updateCounter = () => {
-            if (count < target) {
-                count += speed;
-                counter.textContent = Math.ceil(count);
-                requestAnimationFrame(updateCounter);
-            } else {
-                counter.textContent = target;
-            }
-        };
-        
-        updateCounter();
-    });
-}
-
-// Skills Animation
-function animateSkills() {
-    const skillBars = document.querySelectorAll('.skill-progress');
-    skillBars.forEach(bar => {
-        const width = bar.getAttribute('data-width');
-        bar.style.width = width + '%';
-    });
-}
-
-// Tab System
-function initTabs() {
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
-
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const targetTab = btn.getAttribute('data-tab');
-            
-            tabBtns.forEach(b => b.classList.remove('active'));
-            tabContents.forEach(c => c.classList.remove('active'));
-            
-            btn.classList.add('active');
-            document.getElementById(targetTab).classList.add('active');
-            
-            if (targetTab === 'skills') {
-                setTimeout(animateSkills, 300);
-            }
-        });
-    });
-}
-
-// Mobile Menu
-function initMobileMenu() {
-    const menuIcon = document.querySelector('#menu-icon');
-    const navlist = document.querySelector('.navlist');
-    
-    if (menuIcon && navlist) {
-        menuIcon.addEventListener('click', () => {
-            navlist.classList.toggle('open');
-            menuIcon.classList.toggle('bx-x');
-        });
-        
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                navlist.classList.remove('open');
-                menuIcon.classList.remove('bx-x');
-            });
-        });
-    }
-}
-
-// Smooth Scrolling & Active Menu
-function initNavigation() {
-    const navLinks = document.querySelectorAll('.nav-link');
+// Neural Navigation
+function initializeNavigation() {
+    const navItems = document.querySelectorAll('.nav-item');
     const sections = document.querySelectorAll('section');
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const navNeural = document.querySelector('.nav-neural');
     
     // Smooth scrolling
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
+    navItems.forEach(item => {
+        item.addEventListener('click', (e) => {
             e.preventDefault();
-            const targetId = link.getAttribute('href');
+            const targetId = item.getAttribute('href');
             const targetSection = document.querySelector(targetId);
             if (targetSection) {
                 targetSection.scrollIntoView({ behavior: 'smooth' });
@@ -220,7 +161,7 @@ function initNavigation() {
         });
     });
     
-    // Active menu highlighting
+    // Active section highlighting
     window.addEventListener('scroll', () => {
         let current = '';
         sections.forEach(section => {
@@ -230,17 +171,160 @@ function initNavigation() {
             }
         });
         
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active');
+        navItems.forEach(item => {
+            item.classList.remove('active');
+            if (item.getAttribute('href') === `#${current}`) {
+                item.classList.add('active');
+            }
+        });
+    });
+    
+    // Mobile menu
+    if (mobileToggle && navNeural) {
+        mobileToggle.addEventListener('click', () => {
+            navNeural.classList.toggle('open');
+        });
+        
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navNeural.classList.remove('open');
+            });
+        });
+    }
+}
+
+// Neural Tabs System
+function initializeNeuralTabs() {
+    const tabButtons = document.querySelectorAll('.neural-tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetTab = button.getAttribute('data-tab');
+            
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            button.classList.add('active');
+            document.getElementById(targetTab).classList.add('active');
+            
+            // Animate skill circuits
+            if (targetTab === 'skills') {
+                setTimeout(animateSkillCircuits, 300);
+            }
+        });
+    });
+}
+
+// Skill Circuit Animation
+function animateSkillCircuits() {
+    const circuits = document.querySelectorAll('.circuit-flow');
+    circuits.forEach((circuit, index) => {
+        setTimeout(() => {
+            const flowValue = circuit.getAttribute('data-flow');
+            circuit.style.width = flowValue + '%';
+        }, index * 200);
+    });
+}
+
+// Neural Node Connections
+function drawNeuralConnections() {
+    const svg = document.querySelector('.neural-connections');
+    const nodes = document.querySelectorAll('.node');
+    
+    if (!svg || nodes.length === 0) return;
+    
+    svg.innerHTML = '';
+    
+    const svgRect = svg.getBoundingClientRect();
+    
+    for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+            const node1 = nodes[i].getBoundingClientRect();
+            const node2 = nodes[j].getBoundingClientRect();
+            
+            const x1 = node1.left - svgRect.left + node1.width / 2;
+            const y1 = node1.top - svgRect.top + node1.height / 2;
+            const x2 = node2.left - svgRect.left + node2.width / 2;
+            const y2 = node2.top - svgRect.top + node2.height / 2;
+            
+            const distance = Math.sqrt((x2-x1)**2 + (y2-y1)**2);
+            
+            if (distance < 200) {
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', x1);
+                line.setAttribute('y1', y1);
+                line.setAttribute('x2', x2);
+                line.setAttribute('y2', y2);
+                line.setAttribute('stroke', '#00ff88');
+                line.setAttribute('stroke-width', '1');
+                line.setAttribute('opacity', (1 - distance / 200) * 0.5);
+                
+                svg.appendChild(line);
+            }
+        }
+    }
+    
+    // Animate connections
+    const lines = svg.querySelectorAll('line');
+    lines.forEach((line, index) => {
+        line.style.animation = `connectionPulse 3s ease-in-out infinite ${index * 0.1}s`;
+    });
+}
+
+// Node Hover Effects
+function initializeNodeEffects() {
+    const nodes = document.querySelectorAll('.node');
+    nodes.forEach(node => {
+        node.addEventListener('mouseenter', () => {
+            const skill = node.getAttribute('data-skill');
+            console.log(`Neural pathway activated: ${skill}`);
+            
+            // Add pulse effect to connected nodes
+            nodes.forEach(otherNode => {
+                if (otherNode !== node) {
+                    otherNode.style.opacity = '0.3';
+                }
+            });
+        });
+        
+        node.addEventListener('mouseleave', () => {
+            nodes.forEach(otherNode => {
+                otherNode.style.opacity = '1';
+            });
+        });
+    });
+}
+
+// Form Neural Effects
+function initializeNeuralForm() {
+    const inputs = document.querySelectorAll('.input-neural input, .input-neural textarea');
+    
+    inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            input.parentElement.classList.add('focused');
+        });
+        
+        input.addEventListener('blur', () => {
+            if (!input.value) {
+                input.parentElement.classList.remove('focused');
+            }
+        });
+        
+        input.addEventListener('input', () => {
+            if (input.value.length > 0) {
+                input.style.borderColor = '#00ff88';
+                input.style.boxShadow = '0 0 15px rgba(0, 255, 136, 0.3)';
+            } else {
+                input.style.borderColor = '#333333';
+                input.style.boxShadow = 'none';
             }
         });
     });
 }
 
 // Scroll Animations
-function initScrollAnimations() {
+function initializeScrollAnimations() {
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -249,59 +333,52 @@ function initScrollAnimations() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                if (entry.target.classList.contains('stats-container')) {
-                    animateCounters();
+                if (entry.target.classList.contains('skills-matrix')) {
+                    animateSkillCircuits();
                 }
-                if (entry.target.classList.contains('skills-grid')) {
-                    animateSkills();
+                if (entry.target.classList.contains('brain-nodes')) {
+                    setTimeout(drawNeuralConnections, 500);
                 }
             }
         });
     }, observerOptions);
 
-    document.querySelectorAll('.stats-container, .skills-grid').forEach(el => {
+    document.querySelectorAll('.skills-matrix, .brain-nodes').forEach(el => {
         observer.observe(el);
     });
 }
 
-// Form Enhancement
-function initForm() {
-    const form = document.querySelector('.contact-form');
-    const inputs = form.querySelectorAll('input, textarea');
-    
-    inputs.forEach(input => {
-        input.addEventListener('focus', () => {
-            input.style.borderColor = '#2563eb';
-            input.style.boxShadow = '0 0 0 3px rgba(37, 99, 235, 0.1)';
-        });
-        
-        input.addEventListener('blur', () => {
-            if (!input.value) {
-                input.style.borderColor = '#e2e8f0';
-                input.style.boxShadow = 'none';
-            }
-        });
-    });
-}
+// Add CSS animations for connections
+const connectionStyles = `
+    @keyframes connectionPulse {
+        0%, 100% { opacity: 0.2; }
+        50% { opacity: 0.8; }
+    }
+`;
 
-// Initialize Everything
-function initializeAnimations() {
+const styleSheet = document.createElement('style');
+styleSheet.textContent = connectionStyles;
+document.head.appendChild(styleSheet);
+
+// Initialize everything
+function initializeNeural() {
     setTimeout(() => {
-        typeWriter();
-        initTabs();
-        initMobileMenu();
-        initNavigation();
-        initScrollAnimations();
-        initForm();
+        initializeNeuralCanvas();
+        neuralTypewriter();
+        initializeNavigation();
+        initializeNeuralTabs();
+        initializeNodeEffects();
+        initializeNeuralForm();
+        initializeScrollAnimations();
         
-        console.log('🚀 Portfolio loaded successfully!');
+        // Draw initial neural connections
+        setTimeout(drawNeuralConnections, 1000);
+        
+        console.log('🧠 Neural Interface Online');
     }, 100);
 }
 
-// Handle resize
+// Handle window resize
 window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) {
-        document.querySelector('.navlist').classList.remove('open');
-        document.querySelector('#menu-icon').classList.remove('bx-x');
-    }
+    setTimeout(drawNeuralConnections, 100);
 });
