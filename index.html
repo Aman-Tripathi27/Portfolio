@@ -4,241 +4,425 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Website</title>
+    <title>Data Scientist Portfolio - Futuristic Edition</title>
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 </head>
 <body>
-    <!-- Custom Cursor -->
-    <div class="cursor"></div>
-    <div class="cursor-trail"></div>
-
-    <!-- Loading Screen -->
-    <div class="loading-screen">
-        <div class="loading-text">
-            <span>A</span><span>M</span><span>A</span><span>N</span>
-        </div>
-        <div class="loading-bar">
-            <div class="loading-progress"></div>
+    <!-- Holographic Grid Background -->
+    <div class="hologram-grid"></div>
+    
+    <!-- Futuristic Loading Screen -->
+    <div class="cyber-loading">
+        <div class="loading-container">
+            <div class="cyber-logo">
+                <div class="logo-text">INITIALIZING</div>
+                <div class="scanning-line"></div>
+            </div>
+            <div class="loading-progress-cyber">
+                <div class="progress-bar-cyber"></div>
+            </div>
+            <div class="loading-stats">
+                <span id="loading-percent">0%</span>
+                <span class="loading-status">LOADING NEURAL NETWORKS...</span>
+            </div>
         </div>
     </div>
 
-    <!-- ----------header----------- -->
-    <header>
-        <img src="images/logo.JPG" class="logo fade-in-left">
-        <ul class="navlist">
-            <li><a href="#home" class="nav-link">Home</a></li>
-            <li><a href="#about" class="nav-link">About</a></li>
-            <li><a href="#projects" class="nav-link">Projects</a></li>
-            <li><a href="#contact" class="nav-link">Contact</a></li>
-        </ul>
-        <div id="menu-icon" class="bx bx-menu"></div>
+    <!-- Cyber Cursor -->
+    <div class="cyber-cursor">
+        <div class="cursor-core"></div>
+        <div class="cursor-ring"></div>
+    </div>
+
+    <!-- Header - Futuristic Nav -->
+    <header class="cyber-header">
+        <div class="nav-brand">
+            <div class="brand-icon">⚡</div>
+            <span class="brand-text">DATA NEXUS</span>
+        </div>
+        <nav class="cyber-nav">
+            <a href="#home" class="nav-link" data-text="HOME">HOME</a>
+            <a href="#about" class="nav-link" data-text="PROFILE">PROFILE</a>
+            <a href="#projects" class="nav-link" data-text="PROJECTS">PROJECTS</a>
+            <a href="#contact" class="nav-link" data-text="CONNECT">CONNECT</a>
+        </nav>
+        <div class="menu-toggle cyber-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </header>
 
-    <!-- -----------home section----------- -->
-    <section id="home" class="home">
-        <!-- Particle Background -->
-        <div class="particles">
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-        </div>
-
-        <div class="home-content fade-in-up">
-            <h1>Hi! I'm <span class="name-glow">Aman</span>,</h1>
-            <div class="change-text">
-                <h3><span class="word"></span><span class="cursor-blink">|</span></h3>
-            </div>
-
-            <p class="typing-text">A Data enthusiast with deep interest in Data World.</p>
-
-            <div class="info-box fade-in-left">
-                <div class="email-info">
-                    <h5><i class='bx bx-mail-send'></i> Email :</h5>
-                    <span>amantripathi3273@gmail.com</span>
+    <!-- Home Section - Cyber Hero -->
+    <section id="home" class="cyber-hero">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="bi bi-lightning-charge"></i>
+                    <span>ACTIVE STATUS</span>
                 </div>
-            </div>
-
-            <div class="btn-box">
-                <a href="images/Aman_Resume.pdf" download class="btn magnetic-btn">
-                    <i class='bx bx-download'></i>Download CV
-                </a>
-            </div>
-
-            <div class="social-icons fade-in-up">
-                <a href="https://www.linkedin.com/in/aman-tripathi27/" class="social-link"><i class='bx bxl-linkedin'></i></a>
-                <a href="https://github.com/Aman-Tripathi27" class="social-link"><i class='bx bxl-github'></i></a>
-                <a href="https://www.instagram.com/arryann02/" class="social-link"><i class='bx bxl-instagram'></i></a>
-                <a href="https://twitter.com/AmanTri37784580" class="social-link"><i class='bx bxl-twitter'></i></a> 
-            </div>
-        </div>
-
-        <div class="home-image fade-in-right">
-            <div class="img-box">
-                <img src="images/R.png" alt="" class="profile-img">
-            </div>
-            <!-- Floating Data Icons -->
-            <div class="floating-icons">
-                <i class='bx bx-code-curly floating-icon' style="--delay: 0s;"></i>
-                <i class='bx bx-bar-chart-alt-2 floating-icon' style="--delay: 2s;"></i>
-                <i class='bx bx-chip floating-icon' style="--delay: 4s;"></i>
-                <i class='bx bxl-python floating-icon' style="--delay: 1s;"></i>
-                <i class='bx bx-data floating-icon' style="--delay: 3s;"></i>
-            </div>
-        </div>
-    </section>
-
-    <!-- ----------------about section---------------- -->
-    <div id="about">
-        <div class="container">
-            <div class="row">
-                <div class="about-col-1 fade-in-left">
-                    <img src="images/bout.jpeg" class="about-img-3d">
+                
+                <h1 class="hero-title">
+                    <span class="title-line">NEURAL</span>
+                    <span class="title-line glow-text">DATA ARCHITECT</span>
+                </h1>
+                
+                <div class="hero-subtitle">
+                    <span class="typing-container">
+                        <span class="typed-text"></span>
+                        <span class="typing-cursor">|</span>
+                    </span>
                 </div>
-                <div class="about-col-2 fade-in-right">
-                    <h1 class="sub-title glitch" data-text="About Me">About Me</h1>
-                    <p class="typing-paragraph">I'm Aman Tripathi, a passionate and results-driven student (of data science) 
-                         with a knack for turning raw data into meaningful insights. With a solid 
-                         foundation in statistics, programming, and machine learning, I thrive on 
-                         solving complex problems and uncovering hidden patterns that drive strategic decisions. 
-                    </p>
+                
+                <p class="hero-description">
+                    Transforming raw data into intelligent solutions through 
+                    <span class="highlight">advanced analytics</span> and 
+                    <span class="highlight">machine learning</span>
+                </p>
 
-                    <div class="tab-titles">
-                        <p class="tab-links active-link magnetic-btn" onclick="opentab('skills')">
-                            <i class='bx bx-code-alt'></i>Skills
-                        </p>
-                        <p class="tab-links magnetic-btn" onclick="opentab('experience')">
-                            <i class='bx bx-briefcase'></i>Experience
-                        </p>
-                        <p class="tab-links magnetic-btn" onclick="opentab('education')">
-                            <i class='bx bx-book'></i>Education
-                        </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="50">0</div>
+                        <div class="stat-label">Projects</div>
                     </div>
-
-                    <div class="tab-contents active-tab" id="skills">
-                        <ul>
-                            <li class="skill-item fade-in-up">
-                                <i class='bx bxl-python skill-icon'></i>
-                                <span>Languages</span><br>Python, HTML, Machine Learning, SQL
-                                <div class="skill-bar">
-                                    <div class="skill-progress" style="--width: 85%;"></div>
-                                </div>
-                            </li>
-                            <li class="skill-item fade-in-up">
-                                <i class='bx bx-analyse skill-icon'></i>
-                                <span>Areas of Interest</span><br>Data Science, Data Analysis, Data Visualization, Machine Learning, Web Scraping
-                                <div class="skill-bar">
-                                    <div class="skill-progress" style="--width: 90%;"></div>
-                                </div>
-                            </li>
-                            <li class="skill-item fade-in-up">
-                                <i class='bx bx-data skill-icon'></i>
-                                <span>Tools</span><br>Excel, Tableau, VScode, Kaggle, Github
-                                <div class="skill-bar">
-                                    <div class="skill-progress" style="--width: 75%;"></div>
-                                </div>
-                            </li>
-                            <li class="skill-item fade-in-up">
-                                <i class='bx bx-brain skill-icon'></i>
-                                <span>Soft-skills</span><br>Problem solving, Adaptability, Management
-                                <div class="skill-bar">
-                                    <div class="skill-progress" style="--width: 95%;"></div>
-                                </div>
-                            </li>
-                        </ul>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="5">0</div>
+                        <div class="stat-label">Years Exp</div>
                     </div>
-
-                    <div class="tab-contents" id="experience">
-                        <ul>
-                            <li class="experience-item fade-in-up">
-                                <i class='bx bx-building skill-icon'></i>
-                                <span>Sep-Oct 2023</span><br>Data Science Virtual Internship at <span style="display:contents; color: red;">Bharat Intern</span>
-                            </li>
-                            <li class="experience-item fade-in-up">
-                                <i class='bx bx-building skill-icon'></i>
-                                <span>Oct-Nov 2023</span><br>Data Science Virtual Internship at <span style="display:contents; color: red;">Code Clause</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="tab-contents" id="education">
-                        <ul>
-                            <li class="education-item fade-in-up">
-                                <i class='bx bx-medal skill-icon'></i>
-                                <span>2021-2024</span><br>B.Sc. in Computer Science, Statistics and Mathematics
-                            </li>
-                        </ul>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="100">0</div>
+                        <div class="stat-label">Success Rate</div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- ------------Project section---------- -->
-    <section id="projects" class="projects">
-        <div class="main-text fade-in-up">
-            <h1 class="glitch" data-text="MY PROJECTS">MY PROJECTS</h1>
-        </div>
-        <div class="projects-gallery">
-            <div class="port-box card-3d fade-in-up">
-                <div class="port-image">
-                    <img src="images/med1.jpg" alt="">
+                <div class="hero-actions">
+                    <a href="#projects" class="cyber-btn primary">
+                        <span>VIEW PROJECTS</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                    <a href="images/Resume.pdf" download class="cyber-btn secondary">
+                        <span>DOWNLOAD CV</span>
+                        <i class="bi bi-download"></i>
+                    </a>
                 </div>
-                <div class="port-content">
-                    <h3>Medicine Recommendation System</h3>
-                    <p>My Medicine Recommendation System is a cutting-edge solution to transform healthcare.</p>
-                    <a href="https://github.com/Aman-Tripathi27/Personalised-medicine-recommendation-system" class="magnetic-btn">
-                        <i class='bx bx-link-external'></i>
+
+                <div class="social-links-cyber">
+                    <a href="https://linkedin.com/in/aman-tripathi27/" class="social-cyber">
+                        <i class="bi bi-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/Aman-Tripathi27" class="social-cyber">
+                        <i class="bi bi-github"></i>
+                    </a>
+                    <a href="https://instagram.com/arryann02/" class="social-cyber">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                    <a href="https://twitter.com/AmanTri37784580" class="social-cyber">
+                        <i class="bi bi-twitter"></i>
                     </a>
                 </div>
             </div>
 
-            <div class="port-box card-3d fade-in-up">
-                <div class="port-image">
-                    <img src="images/Q.jpg" alt="">
+            <div class="hero-visual">
+                <div class="hologram-container">
+                    <div class="hologram-image">
+                        <img src="images/R.png" alt="Profile" class="profile-hologram">
+                        <div class="scan-lines"></div>
+                    </div>
+                    <div class="floating-elements">
+                        <div class="float-item" style="--delay: 0s;">
+                            <i class="bi bi-cpu"></i>
+                        </div>
+                        <div class="float-item" style="--delay: 1s;">
+                            <i class="bi bi-graph-up"></i>
+                        </div>
+                        <div class="float-item" style="--delay: 2s;">
+                            <i class="bi bi-database"></i>
+                        </div>
+                        <div class="float-item" style="--delay: 3s;">
+                            <i class="bi bi-lightning"></i>
+                        </div>
+                    </div>
                 </div>
-                <div class="port-content">
-                    <h3>Coming Soon...</h3>
-                    <a href="#" class="magnetic-btn"><i class='bx bx-link-external'></i></a>
+            </div>
+        </div>
+
+        <!-- Floating Data Particles -->
+        <div class="data-particles">
+            <div class="particle" data-value="ML"></div>
+            <div class="particle" data-value="AI"></div>
+            <div class="particle" data-value="DATA"></div>
+            <div class="particle" data-value="PYTHON"></div>
+            <div class="particle" data-value="SQL"></div>
+        </div>
+    </section>
+
+    <!-- About Section - Cyber Profile -->
+    <section id="about" class="cyber-about">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="title-icon">👤</span>
+                NEURAL PROFILE
+            </h2>
+            <div class="title-underline"></div>
+        </div>
+
+        <div class="about-grid">
+            <div class="about-visual">
+                <div class="profile-card">
+                    <div class="card-header">
+                        <div class="status-indicator online"></div>
+                        <span>ONLINE</span>
+                    </div>
+                    <div class="profile-image-container">
+                        <img src="images/bout.jpeg" alt="Profile" class="profile-image">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="profile-info">
+                        <h3>Data Scientist</h3>
+                        <p>Neural Network Specialist</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-content">
+                <div class="content-tabs">
+                    <button class="tab-btn active" data-tab="skills">
+                        <i class="bi bi-gear"></i>
+                        SKILLS
+                    </button>
+                    <button class="tab-btn" data-tab="experience">
+                        <i class="bi bi-briefcase"></i>
+                        EXPERIENCE
+                    </button>
+                    <button class="tab-btn" data-tab="education">
+                        <i class="bi bi-mortarboard"></i>
+                        EDUCATION
+                    </button>
+                </div>
+
+                <div class="tab-content active" id="skills">
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h4><i class="bi bi-code-slash"></i> Programming</h4>
+                            <div class="skill-item">
+                                <span>Python</span>
+                                <div class="skill-bar">
+                                    <div class="skill-fill" data-skill="90"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span>SQL</span>
+                                <div class="skill-bar">
+                                    <div class="skill-fill" data-skill="85"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span>JavaScript</span>
+                                <div class="skill-bar">
+                                    <div class="skill-fill" data-skill="75"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-category">
+                            <h4><i class="bi bi-brain"></i> Machine Learning</h4>
+                            <div class="skill-item">
+                                <span>Neural Networks</span>
+                                <div class="skill-bar">
+                                    <div class="skill-fill" data-skill="88"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span>Deep Learning</span>
+                                <div class="skill-bar">
+                                    <div class="skill-fill" data-skill="82"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span>Data Analysis</span>
+                                <div class="skill-bar">
+                                    <div class="skill-fill" data-skill="95"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="experience">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4>Data Science Intern</h4>
+                                <span class="company">Bharat Intern</span>
+                                <span class="period">Sep-Oct 2023</span>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h4>Data Science Intern</h4>
+                                <span class="company">Code Clause</span>
+                                <span class="period">Oct-Nov 2023</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="education">
+                    <div class="education-item">
+                        <div class="education-icon">
+                            <i class="bi bi-mortarboard"></i>
+                        </div>
+                        <div class="education-details">
+                            <h4>B.Sc. Computer Science</h4>
+                            <p>Statistics and Mathematics</p>
+                            <span class="duration">2021-2024</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ----------- Contact Section ----------- -->
-    <section id="contact" class="contant">
-        <div class="main-text fade-in-up">
-            <h1 class="glitch" data-text="Contact Me!">Contact Me!</h1>
+    <!-- Projects Section -->
+    <section id="projects" class="cyber-projects">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="title-icon">🚀</span>
+                PROJECT PORTFOLIO
+            </h2>
+            <div class="title-underline"></div>
         </div>
 
-        <form name="submit-to-google-sheet" class="contact-form fade-in-up">
-            <input type="text" name="Name" placeholder="Your Name" required class="form-input">
-            <input type="text" name="Email" placeholder="Your Email" required class="form-input">
-            <input type="number" name="Phone number" placeholder="Phone Number" class="form-input">
-            <textarea name="Message" rows="10" placeholder="Your Message" class="form-input"></textarea>
-            <div class="btn-box formBtn">
-                <button type="submit" class="btn magnetic-btn">
-                    <i class='bx bx-send'></i>Send Message
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="card-status active"></div>
+                    <span>ACTIVE PROJECT</span>
+                </div>
+                <div class="project-image">
+                    <img src="images/med1.jpg" alt="Medicine Recommendation">
+                    <div class="image-overlay">
+                        <div class="overlay-content">
+                            <h3>Medicine Recommendation System</h3>
+                            <p>AI-powered healthcare solution using machine learning algorithms</p>
+                            <a href="https://github.com/Aman-Tripathi27/Personalised-medicine-recommendation-system" class="project-link">
+                                <i class="bi bi-box-arrow-up-right"></i>
+                                VIEW PROJECT
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">ML</span>
+                    <span class="tech-tag">Healthcare</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="card-status pending"></div>
+                    <span>IN DEVELOPMENT</span>
+                </div>
+                <div class="project-image">
+                    <img src="images/Q.jpg" alt="Coming Soon">
+                    <div class="image-overlay">
+                        <div class="overlay-content">
+                            <h3>Neural Network Optimizer</h3>
+                            <p>Advanced deep learning project in development phase</p>
+                            <div class="project-link disabled">
+                                <i class="bi bi-clock"></i>
+                                COMING SOON
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-tech">
+                    <span class="tech-tag">TensorFlow</span>
+                    <span class="tech-tag">AI</span>
+                    <span class="tech-tag">Neural Networks</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="cyber-contact">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="title-icon">📡</span>
+                ESTABLISH CONNECTION
+            </h2>
+            <div class="title-underline"></div>
+        </div>
+
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Ready to collaborate?</h3>
+                <p>Let's build the future of data science together</p>
+                
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <i class="bi bi-envelope"></i>
+                        <span>amantripathi3273@gmail.com</span>
+                    </div>
+                    <div class="contact-method">
+                        <i class="bi bi-geo-alt"></i>
+                        <span>Available Worldwide</span>
+                    </div>
+                </div>
+            </div>
+
+            <form class="cyber-form" name="submit-to-google-sheet">
+                <div class="form-group">
+                    <input type="text" name="Name" required>
+                    <label>Full Name</label>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="Email" required>
+                    <label>Email Address</label>
+                </div>
+                <div class="form-group">
+                    <input type="tel" name="Phone">
+                    <label>Phone Number</label>
+                </div>
+                <div class="form-group">
+                    <textarea name="Message" required></textarea>
+                    <label>Message</label>
+                </div>
+                <button type="submit" class="cyber-btn primary">
+                    <span>SEND MESSAGE</span>
+                    <i class="bi bi-send"></i>
                 </button>
-            </div>
-        </form>
-        <span id="msg"></span>
+            </form>
+        </div>
+        <div id="msg" class="form-message"></div>
     </section>
 
-    <!-- ----------footer website---------- -->
-    <footer class="fade-in-up">
-        <p>Copyright &copy; 2023 by Aman Tripathi || All Rights Reserved.</p>
-        <a href="#home" class="magnetic-btn"><i class='bx bx-up-arrow-alt'></i></a>
+    <!-- Footer -->
+    <footer class="cyber-footer">
+        <div class="footer-content">
+            <div class="footer-text">
+                <p>&copy; 2025 Data Nexus. All systems operational.</p>
+            </div>
+            <div class="footer-actions">
+                <a href="#home" class="back-to-top">
+                    <i class="bi bi-arrow-up"></i>
+                </a>
+            </div>
+        </div>
     </footer>
 
     <script src="script.js"></script>
 
-    <!-- Form submission script -->
+    <!-- Form Script -->
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwCGQlQkoveKGI0LR0JyTlocu2T_rVF5j5Sghoi49JD8Nr9v3CIF5XfysDUNGM5mxwR/exec'
         const form = document.forms['submit-to-google-sheet']
@@ -248,13 +432,15 @@
           e.preventDefault()
           fetch(scriptURL, { method: 'POST', body: new FormData(form)})
             .then(response => {
-                msg.innerHTML = "Message sent successfully"
-                setTimeout(function(){
-                    msg.innerHTML = ""
-                },5000)
+                msg.innerHTML = "✅ Message transmitted successfully"
+                msg.style.color = "#00ff41"
+                setTimeout(() => { msg.innerHTML = "" }, 5000)
                 form.reset()
             })
-            .catch(error => console.error('Error!', error.message))
+            .catch(error => {
+                msg.innerHTML = "❌ Transmission failed"
+                msg.style.color = "#ff0041"
+            })
         })
     </script>
 </body>
