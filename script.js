@@ -83,6 +83,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// CV Download Function
+function initCVDownload() {
+    const downloadBtn = document.querySelector('.btn.primary');
+    
+    if (downloadBtn && downloadBtn.textContent.includes('Download CV')) {
+        downloadBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Try multiple methods to ensure download works
+            try {
+                // Method 1: Direct download
+                const link = document.createElement('a');
+                link.href = 'images/cv.png';
+                link.download = 'Aman_Tripathi_CV.png';
+                link.style.display = 'none';
+                
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                console.log('CV download initiated');
+            } catch (error) {
+                // Method 2: Fallback - open in new tab
+                console.log('Fallback method used');
+                window.open('images/cv.png', '_blank');
+            }
+        });
+    }
+}
+
 // Typewriter Effect
 const typewriterTexts = [
     'Data Visualization Specialist',
@@ -258,6 +288,53 @@ function initFloatCards() {
     });
 }
 
+// Enhanced File Check Function
+function checkFileExists(url) {
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve(true);
+        img.onerror = () => resolve(false);
+        img.src = url;
+    });
+}
+
+// Alternative CV Download with File Check
+async function initAdvancedCVDownload() {
+    const downloadBtn = document.querySelector('.btn.primary');
+    
+    if (downloadBtn && downloadBtn.textContent.includes('Download CV')) {
+        // Check if CV file exists
+        const fileExists = await checkFileExists('images/cv.png');
+        
+        if (!fileExists) {
+            console.warn('CV file not found at images/cv.png');
+            // You could show a message to user or use alternative method
+        }
+        
+        downloadBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            if (fileExists) {
+                // File exists, proceed with download
+                const link = document.createElement('a');
+                link.href = 'images/cv.png';
+                link.download = 'Aman_Tripathi_CV.png';
+                link.style.display = 'none';
+                
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                console.log('✅ CV download successful');
+            } else {
+                // File doesn't exist, show error or use alternative
+                console.log('❌ CV file not found');
+                alert('CV file is currently unavailable. Please try again later.');
+            }
+        });
+    }
+}
+
 // Initialize Everything
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
@@ -268,6 +345,11 @@ document.addEventListener('DOMContentLoaded', () => {
         initScrollAnimations();
         initFloatCards();
         
+        // Initialize CV download functionality
+        initCVDownload();
+        // Or use the advanced version:
+        // initAdvancedCVDownload();
+        
         console.log('🚀 Portfolio loaded successfully!');
     }, 100);
 });
@@ -275,7 +357,23 @@ document.addEventListener('DOMContentLoaded', () => {
 // Handle window resize
 window.addEventListener('resize', () => {
     if (window.innerWidth > 768) {
-        document.querySelector('.navlist').classList.remove('open');
-        document.querySelector('#menu-icon').classList.remove('bx-x');
+        const navlist = document.querySelector('.navlist');
+        const menuIcon = document.querySelector('#menu-icon');
+        
+        if (navlist) navlist.classList.remove('open');
+        if (menuIcon) menuIcon.classList.remove('bx-x');
     }
 });
+
+// Debug helper - check if all elements are loaded
+function debugPortfolio() {
+    console.log('=== Portfolio Debug Info ===');
+    console.log('Particles loaded:', typeof particlesJS !== 'undefined');
+    console.log('Download button found:', !!document.querySelector('.btn.primary'));
+    console.log('Float cards found:', document.querySelectorAll('.float-card').length);
+    console.log('Navigation links:', document.querySelectorAll('.nav-link').length);
+    console.log('=== End Debug ===');
+}
+
+// Uncomment to run debug
+// setTimeout(debugPortfolio, 2000);
