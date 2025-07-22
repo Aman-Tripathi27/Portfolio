@@ -88,14 +88,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Typewriter Effect
+// Fixed Typewriter Effect with Data Science Terms
 const typewriterTexts = [
-    'Machine Learning Expert',
-    'Data Analytics Specialist',
-    'Python Developer',
-    'Statistical Analyst',
-    'Business Intelligence Consultant',
-    'Predictive Modeling Expert'
+    'Data Visualization Specialist',
+    'Machine Learning Expert', 
+    'Statistical Modeler',
+    'Business Intelligence Analyst',
+    'Predictive Analytics Expert',
+    'Big Data Scientist'
 ];
 
 let textIndex = 0;
