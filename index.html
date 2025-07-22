@@ -4,291 +4,257 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aman Tripathi - Data Scientist</title>
+    <title>Aman Tripathi - Data Scientist Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Neural Grid Background -->
-    <canvas id="neural-canvas"></canvas>
-    
-    <!-- Brain Wave Scanner -->
-    <div class="brain-scanner">
-        <div class="scanner-line"></div>
-    </div>
-
-    <!-- Neural Loading -->
-    <div class="neural-loading">
-        <div class="brain-outline">
-            <div class="synapses">
-                <div class="synapse"></div>
-                <div class="synapse"></div>
-                <div class="synapse"></div>
-                <div class="synapse"></div>
-                <div class="synapse"></div>
-            </div>
-        </div>
-        <div class="loading-text">INITIALIZING NEURAL INTERFACE...</div>
-    </div>
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
 
     <!-- Header -->
-    <header class="neural-header">
-        <div class="logo-neural">Aman Tripathi</div>
-        <nav class="nav-neural">
-            <a href="#home" class="nav-item" data-neural="01">Home</a>
-            <a href="#about" class="nav-item" data-neural="02">Neural Profile</a>
-            <a href="#projects" class="nav-item" data-neural="03">Data Experiments</a>
-            <a href="#contact" class="nav-item" data-neural="04">Connect Interface</a>
-        </nav>
-        <div class="neural-status">
-            <div class="status-dot"></div>
-            <span>ONLINE</span>
-        </div>
-        <div class="mobile-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+    <header>
+        <div class="logo">Aman Tripathi</div>
+        <ul class="navlist">
+            <li><a href="#home" class="nav-link">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <div id="menu-icon" class="bx bx-menu"></div>
     </header>
 
     <!-- Home Section -->
-    <section id="home" class="neural-home">
-        <div class="home-grid">
-            <div class="home-content">
-                <div class="neural-badge">
-                    <div class="badge-pulse"></div>
-                    <span>SYSTEM ACTIVE</span>
-                </div>
-                
-                <h1 class="neural-title">
-                    <span class="title-line">DATA</span>
-                    <span class="title-line glow">SCIENTIST</span>
-                </h1>
-                
-                <div class="neural-subtitle">
-                    <div class="type-container">
-                        <span class="typed-output"></span>
-                        <span class="neural-cursor">█</span>
-                    </div>
-                </div>
-                
-                <p class="neural-description">
-                    Interfacing with data streams to extract patterns and intelligence 
-                    through <span class="highlight">advanced algorithms</span> and 
-                    <span class="highlight">neural networks</span>
-                </p>
+    <section id="home" class="home">
+        <div class="home-content">
+            <div class="status-badge">
+                <i class='bx bx-check-circle'></i>
+                <span>Available for Work</span>
+            </div>
+            
+            <h1 class="hero-title">
+                <span class="line">Data</span>
+                <span class="line highlight">Scientist</span>
+            </h1>
+            
+            <div class="typing-container">
+                <h3><span class="typed-text"></span><span class="cursor">|</span></h3>
+            </div>
+            
+            <p class="hero-description">
+                Transforming complex datasets into actionable business insights through 
+                <span class="accent">advanced analytics</span>, 
+                <span class="accent">machine learning</span>, and 
+                <span class="accent">statistical modeling</span>.
+            </p>
 
-                <div class="action-interface">
-                    <a href="images/Aman_Resume.pdf" download class="neural-btn primary">
-                        <div class="btn-circuit"></div>
-                        <i class='bx bx-download'></i>
-                        <span>DOWNLOAD NEURAL MAP</span>
-                    </a>
-                    <a href="#contact" class="neural-btn secondary">
-                        <div class="btn-circuit"></div>
-                        <i class='bx bx-wifi'></i>
-                        <span>ESTABLISH LINK</span>
-                    </a>
-                </div>
-
-                <div class="social-neural">
-                    <a href="https://www.linkedin.com/in/aman-tripathi27/" class="social-node">
-                        <div class="node-pulse"></div>
-                        <i class='bx bxl-linkedin'></i>
-                    </a>
-                    <a href="https://github.com/Aman-Tripathi27" class="social-node">
-                        <div class="node-pulse"></div>
-                        <i class='bx bxl-github'></i>
-                    </a>
-                    <a href="https://twitter.com/AmanTri37784580" class="social-node">
-                        <div class="node-pulse"></div>
-                        <i class='bx bxl-twitter'></i>
-                    </a>
-                </div>
+            <div class="action-buttons">
+                <a href="images/Aman_Resume.pdf" download class="btn primary">
+                    <i class='bx bx-download'></i>
+                    Download CV
+                </a>
             </div>
 
-            <div class="home-neural">
-                <div class="brain-container">
-                    <div class="brain-nodes">
-                        <div class="node" data-skill="Python">
-                            <div class="node-core"></div>
-                            <div class="node-ring"></div>
-                        </div>
-                        <div class="node" data-skill="ML">
-                            <div class="node-core"></div>
-                            <div class="node-ring"></div>
-                        </div>
-                        <div class="node" data-skill="AI">
-                            <div class="node-core"></div>
-                            <div class="node-ring"></div>
-                        </div>
-                        <div class="node" data-skill="Data">
-                            <div class="node-core"></div>
-                            <div class="node-ring"></div>
-                        </div>
-                        <div class="node" data-skill="Analytics">
-                            <div class="node-core"></div>
-                            <div class="node-ring"></div>
-                        </div>
-                        <div class="node" data-skill="SQL">
-                            <div class="node-core"></div>
-                            <div class="node-ring"></div>
-                        </div>
-                    </div>
-                    <svg class="neural-connections" width="100%" height="100%">
-                        <!-- Neural pathways will be drawn here -->
-                    </svg>
-                </div>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/aman-tripathi27/" class="social-btn">
+                    <i class='bx bxl-linkedin'></i>
+                </a>
+                <a href="https://github.com/Aman-Tripathi27" class="social-btn">
+                    <i class='bx bxl-github'></i>
+                </a>
+                <a href="https://twitter.com/AmanTri37784580" class="social-btn">
+                    <i class='bx bxl-twitter'></i>
+                </a>
             </div>
         </div>
 
-        <!-- Data Stream -->
-        <div class="data-stream">
-            <div class="stream-line"></div>
-            <div class="data-packets">
-                <div class="packet">01100001</div>
-                <div class="packet">01101101</div>
-                <div class="packet">01100001</div>
-                <div class="packet">01101110</div>
+        <div class="home-visual">
+            <div class="floating-elements">
+                <div class="float-item" data-text="Python">
+                    <i class='bx bxl-python'></i>
+                    <span>Python</span>
+                </div>
+                <div class="float-item" data-text="Machine Learning">
+                    <i class='bx bx-brain'></i>
+                    <span>Machine Learning</span>
+                </div>
+                <div class="float-item" data-text="Data Analysis">
+                    <i class='bx bx-line-chart'></i>
+                    <span>Data Analysis</span>
+                </div>
+                <div class="float-item" data-text="Statistical Modeling">
+                    <i class='bx bx-math'></i>
+                    <span>Statistical Modeling</span>
+                </div>
+                <div class="float-item" data-text="Deep Learning">
+                    <i class='bx bx-chip'></i>
+                    <span>Deep Learning</span>
+                </div>
+                <div class="float-item" data-text="Data Visualization">
+                    <i class='bx bx-bar-chart-alt'></i>
+                    <span>Data Visualization</span>
+                </div>
+                <div class="float-item" data-text="SQL Database">
+                    <i class='bx bx-data'></i>
+                    <span>SQL Database</span>
+                </div>
+                <div class="float-item" data-text="Predictive Analytics">
+                    <i class='bx bx-trending-up'></i>
+                    <span>Predictive Analytics</span>
+                </div>
+                <div class="float-item" data-text="Big Data">
+                    <i class='bx bx-server'></i>
+                    <span>Big Data</span>
+                </div>
+                <div class="float-item" data-text="AI Research">
+                    <i class='bx bx-search-alt'></i>
+                    <span>AI Research</span>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="neural-about">
-        <div class="section-neural">
+    <section id="about" class="about">
+        <div class="container">
             <div class="section-header">
-                <h2 class="neural-heading">
-                    <span class="heading-code">&lt;NEURAL_PROFILE&gt;</span>
-                </h2>
-                <div class="heading-underline"></div>
+                <h2 class="section-title">About Me</h2>
+                <div class="section-subtitle">Passionate about transforming data into insights</div>
             </div>
 
-            <div class="about-interface">
-                <div class="profile-terminal">
-                    <div class="terminal-header">
-                        <div class="terminal-dots">
-                            <div class="dot red"></div>
-                            <div class="dot yellow"></div>
-                            <div class="dot green"></div>
-                        </div>
-                        <div class="terminal-title">neural_profile.exe</div>
-                    </div>
-                    <div class="terminal-body">
-                        <div class="terminal-line">
-                            <span class="prompt">$</span>
-                            <span class="command">cat profile.txt</span>
-                        </div>
-                        <div class="profile-output">
-                            <p>I'm a Data Scientist specializing in machine learning and artificial intelligence. My expertise lies in transforming complex datasets into actionable insights using advanced statistical methods and neural networks.</p>
-                            <p>I develop predictive models, create data visualizations, and build intelligent systems that solve real-world problems.</p>
-                        </div>
-                    </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        I'm a passionate Data Scientist with expertise in transforming complex datasets 
+                        into actionable business insights. With a strong foundation in statistics, 
+                        machine learning, and programming, I specialize in developing predictive models 
+                        and data-driven solutions that drive strategic decision-making.
+                    </p>
+                    <p>
+                        My expertise spans across various domains including healthcare analytics, 
+                        business intelligence, and artificial intelligence research. I'm committed 
+                        to leveraging data science to solve real-world problems and create meaningful impact.
+                    </p>
                 </div>
 
-                <div class="neural-tabs">
-                    <div class="tab-interface">
-                        <button class="neural-tab active" data-tab="skills">
-                            <span>NEURAL_SKILLS.py</span>
+                <div class="skills-section">
+                    <div class="tab-navigation">
+                        <button class="tab-btn active" data-tab="skills">
+                            <i class='bx bx-code-alt'></i>
+                            Technical Skills
                         </button>
-                        <button class="neural-tab" data-tab="experience">
-                            <span>EXPERIENCE.log</span>
+                        <button class="tab-btn" data-tab="experience">
+                            <i class='bx bx-briefcase'></i>
+                            Experience
                         </button>
-                        <button class="neural-tab" data-tab="education">
-                            <span>EDUCATION.db</span>
+                        <button class="tab-btn" data-tab="education">
+                            <i class='bx bx-book'></i>
+                            Education
                         </button>
                     </div>
 
                     <div class="tab-content active" id="skills">
-                        <div class="skills-matrix">
+                        <div class="skills-grid">
                             <div class="skill-category">
-                                <h4>// Programming Languages</h4>
-                                <div class="skill-neural">
+                                <h4><i class='bx bxl-python'></i> Programming Languages</h4>
+                                <div class="skill-item">
                                     <span>Python</span>
-                                    <div class="skill-circuit">
-                                        <div class="circuit-flow" data-flow="90"></div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="90"></div>
                                     </div>
-                                    <span class="skill-percent">90%</span>
                                 </div>
-                                <div class="skill-neural">
+                                <div class="skill-item">
                                     <span>SQL</span>
-                                    <div class="skill-circuit">
-                                        <div class="circuit-flow" data-flow="85"></div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="85"></div>
                                     </div>
-                                    <span class="skill-percent">85%</span>
                                 </div>
-                                <div class="skill-neural">
-                                    <span>JavaScript</span>
-                                    <div class="skill-circuit">
-                                        <div class="circuit-flow" data-flow="75"></div>
+                                <div class="skill-item">
+                                    <span>R</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="75"></div>
                                     </div>
-                                    <span class="skill-percent">75%</span>
                                 </div>
                             </div>
 
                             <div class="skill-category">
-                                <h4>// Machine Learning</h4>
-                                <div class="skill-neural">
+                                <h4><i class='bx bx-brain'></i> Machine Learning</h4>
+                                <div class="skill-item">
                                     <span>Scikit-learn</span>
-                                    <div class="skill-circuit">
-                                        <div class="circuit-flow" data-flow="88"></div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="88"></div>
                                     </div>
-                                    <span class="skill-percent">88%</span>
                                 </div>
-                                <div class="skill-neural">
+                                <div class="skill-item">
                                     <span>TensorFlow</span>
-                                    <div class="skill-circuit">
-                                        <div class="circuit-flow" data-flow="80"></div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="80"></div>
                                     </div>
-                                    <span class="skill-percent">80%</span>
                                 </div>
-                                <div class="skill-neural">
-                                    <span>Neural Networks</span>
-                                    <div class="skill-circuit">
-                                        <div class="circuit-flow" data-flow="82"></div>
+                                <div class="skill-item">
+                                    <span>Deep Learning</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="78"></div>
                                     </div>
-                                    <span class="skill-percent">82%</span>
+                                </div>
+                            </div>
+
+                            <div class="skill-category">
+                                <h4><i class='bx bx-data'></i> Data Tools</h4>
+                                <div class="skill-item">
+                                    <span>Pandas & NumPy</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="92"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <span>Tableau</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="80"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <span>Excel</span>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="85"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="tab-content" id="experience">
-                        <div class="experience-neural">
-                            <div class="exp-item">
-                                <div class="exp-timestamp">2023.09-2023.10</div>
-                                <div class="exp-details">
+                        <div class="experience-timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date">Sep-Oct 2023</div>
+                                <div class="timeline-content">
                                     <h4>Data Science Intern</h4>
                                     <h5>Bharat Intern</h5>
-                                    <p>Developed machine learning models for data analysis and predictive insights.</p>
+                                    <p>Developed machine learning models for healthcare data analysis and gained practical experience in predictive modeling and data visualization.</p>
                                 </div>
-                                <div class="exp-status active"></div>
                             </div>
-                            <div class="exp-item">
-                                <div class="exp-timestamp">2023.10-2023.11</div>
-                                <div class="exp-details">
+                            <div class="timeline-item">
+                                <div class="timeline-date">Oct-Nov 2023</div>
+                                <div class="timeline-content">
                                     <h4>Data Science Intern</h4>
                                     <h5>Code Clause</h5>
-                                    <p>Implemented data visualization solutions and statistical analysis tools.</p>
+                                    <p>Worked on real-world datasets, implemented statistical analysis techniques, and contributed to data-driven decision making processes.</p>
                                 </div>
-                                <div class="exp-status active"></div>
                             </div>
                         </div>
                     </div>
 
                     <div class="tab-content" id="education">
-                        <div class="education-neural">
-                            <div class="edu-item">
-                                <div class="edu-icon">
-                                    <i class='bx bx-brain'></i>
-                                </div>
-                                <div class="edu-details">
-                                    <h4>B.Sc. Computer Science</h4>
-                                    <h5>Statistics and Mathematics</h5>
-                                    <span class="duration">2021-2024</span>
-                                    <p>Specialized in data science, statistical analysis, and computational mathematics.</p>
-                                </div>
+                        <div class="education-item">
+                            <div class="education-icon">
+                                <i class='bx bx-graduation'></i>
+                            </div>
+                            <div class="education-details">
+                                <h4>B.Sc. Computer Science</h4>
+                                <h5>Statistics and Mathematics</h5>
+                                <span class="duration">2021-2024</span>
+                                <p>Specialized in data science fundamentals, statistical analysis, mathematical modeling, and computational methods for data processing.</p>
                             </div>
                         </div>
                     </div>
@@ -298,63 +264,57 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="neural-projects">
-        <div class="section-neural">
+    <section id="projects" class="projects">
+        <div class="container">
             <div class="section-header">
-                <h2 class="neural-heading">
-                    <span class="heading-code">&lt;DATA_EXPERIMENTS&gt;</span>
-                </h2>
-                <div class="heading-underline"></div>
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="section-subtitle">Showcasing data science solutions</div>
             </div>
 
-            <div class="projects-neural">
-                <div class="project-neural">
+            <div class="projects-grid">
+                <div class="project-card">
                     <div class="project-header">
-                        <div class="project-status online"></div>
-                        <span>EXPERIMENT_01.ACTIVE</span>
-                        <div class="project-neural-id">#ML_001</div>
+                        <div class="project-status active"></div>
+                        <span>Live Project</span>
                     </div>
-                    <div class="project-visual">
+                    <div class="project-image">
                         <img src="images/med1.jpg" alt="Medicine Recommendation System">
                         <div class="project-overlay">
-                            <div class="overlay-content">
-                                <h3>Medicine Recommendation System</h3>
-                                <p>AI-powered healthcare solution using advanced machine learning algorithms for personalized medicine recommendations.</p>
-                                <div class="neural-tags">
-                                    <span>Python</span>
-                                    <span>Machine Learning</span>
-                                    <span>Healthcare AI</span>
-                                </div>
-                                <a href="https://github.com/Aman-Tripathi27/Personalised-medicine-recommendation-system" class="neural-link">
-                                    <i class='bx bx-link-external'></i>
-                                    <span>ACCESS NEURAL NET</span>
-                                </a>
+                            <h3>Medicine Recommendation System</h3>
+                            <p>Developed an AI-powered healthcare solution using machine learning algorithms to recommend personalized medicine based on patient symptoms and medical history. Built with Python, scikit-learn, and pandas.</p>
+                            <div class="project-tags">
+                                <span>Python</span>
+                                <span>Machine Learning</span>
+                                <span>Healthcare Analytics</span>
+                                <span>Recommendation Engine</span>
                             </div>
+                            <a href="https://github.com/Aman-Tripathi27/Personalised-medicine-recommendation-system" class="project-link">
+                                <i class='bx bx-link-external'></i>
+                                View Project
+                            </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-neural">
+                <div class="project-card">
                     <div class="project-header">
                         <div class="project-status pending"></div>
-                        <span>EXPERIMENT_02.DEVELOPMENT</span>
-                        <div class="project-neural-id">#AI_002</div>
+                        <span>In Development</span>
                     </div>
-                    <div class="project-visual">
+                    <div class="project-image">
                         <img src="images/Q.jpg" alt="Next Project">
                         <div class="project-overlay">
-                            <div class="overlay-content">
-                                <h3>Neural Analytics Platform</h3>
-                                <p>Advanced predictive analytics system with real-time data processing capabilities.</p>
-                                <div class="neural-tags">
-                                    <span>Deep Learning</span>
-                                    <span>Real-time Analytics</span>
-                                    <span>Neural Networks</span>
-                                </div>
-                                <div class="neural-link disabled">
-                                    <i class='bx bx-time'></i>
-                                    <span>NEURAL NET COMPILING...</span>
-                                </div>
+                            <h3>Predictive Analytics Dashboard</h3>
+                            <p>Building a comprehensive business intelligence dashboard with real-time data visualization and predictive analytics capabilities for business decision making.</p>
+                            <div class="project-tags">
+                                <span>Python</span>
+                                <span>Streamlit</span>
+                                <span>Business Intelligence</span>
+                                <span>Data Visualization</span>
+                            </div>
+                            <div class="project-link disabled">
+                                <i class='bx bx-time'></i>
+                                Coming Soon
                             </div>
                         </div>
                     </div>
@@ -364,85 +324,78 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="neural-contact">
-        <div class="section-neural">
+    <section id="contact" class="contact">
+        <div class="container">
             <div class="section-header">
-                <h2 class="neural-heading">
-                    <span class="heading-code">&lt;ESTABLISH_CONNECTION&gt;</span>
-                </h2>
-                <div class="heading-underline"></div>
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="section-subtitle">Ready to discuss your data science project?</div>
             </div>
 
-            <div class="contact-interface">
+            <div class="contact-container">
                 <div class="contact-info">
-                    <h3>Neural Interface Ready</h3>
-                    <p>Initiating communication protocols for data collaboration and neural network projects.</p>
+                    <h3>Let's Connect</h3>
+                    <p>I'm always interested in new opportunities and collaborations in the data science field. Whether you're looking for data analysis, machine learning solutions, or statistical insights, I'd love to help bring your project to life.</p>
                     
-                    <div class="contact-neural">
-                        <div class="contact-node">
-                            <div class="node-icon">
-                                <i class='bx bx-envelope'></i>
-                            </div>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class='bx bx-envelope'></i>
                             <span>amantripathi3273@gmail.com</span>
-                            <div class="node-connection"></div>
                         </div>
-                        <div class="contact-node">
-                            <div class="node-icon">
-                                <i class='bx bx-wifi'></i>
-                            </div>
-                            <span>Global Neural Network</span>
-                            <div class="node-connection"></div>
+                        <div class="contact-item">
+                            <i class='bx bx-map'></i>
+                            <span>Available for Remote Work</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class='bx bx-time'></i>
+                            <span>Response within 24 hours</span>
                         </div>
                     </div>
                 </div>
 
-                <form class="neural-form" name="submit-to-google-sheet">
-                    <div class="form-neural">
-                        <div class="input-neural">
-                            <input type="text" name="Name" required>
-                            <label>Neural Identity</label>
-                            <div class="input-circuit"></div>
-                        </div>
-                        <div class="input-neural">
-                            <input type="email" name="Email" required>
-                            <label>Communication Protocol</label>
-                            <div class="input-circuit"></div>
-                        </div>
-                        <div class="input-neural">
-                            <input type="tel" name="Phone">
-                            <label>Direct Neural Link</label>
-                            <div class="input-circuit"></div>
-                        </div>
-                        <div class="input-neural">
-                            <textarea name="Message" required></textarea>
-                            <label>Data Transmission</label>
-                            <div class="input-circuit"></div>
-                        </div>
-                        <button type="submit" class="neural-btn primary">
-                            <div class="btn-circuit"></div>
-                            <i class='bx bx-send'></i>
-                            <span>TRANSMIT DATA</span>
-                        </button>
+                <form class="contact-form" name="submit-to-google-sheet">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="Name" required>
                     </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="Phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn primary">
+                        <i class='bx bx-send'></i>
+                        Send Message
+                    </button>
                 </form>
             </div>
-            <div id="msg" class="neural-message"></div>
+            <div id="msg" class="form-message"></div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="neural-footer">
-        <div class="footer-neural">
-            <p>&copy; 2025 Neural Interface. All synapses reserved.</p>
-            <a href="#home" class="back-neural">
-                <i class='bx bx-up-arrow-alt'></i>
-            </a>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Aman Tripathi. All rights reserved.</p>
+                <a href="#home" class="back-to-top">
+                    <i class='bx bx-up-arrow-alt'></i>
+                </a>
+            </div>
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="particles.js"></script>
     <script src="script.js"></script>
 
+    <!-- Form submission script -->
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwCGQlQkoveKGI0LR0JyTlocu2T_rVF5j5Sghoi49JD8Nr9v3CIF5XfysDUNGM5mxwR/exec'
         const form = document.forms['submit-to-google-sheet']
@@ -452,14 +405,14 @@
           e.preventDefault()
           fetch(scriptURL, { method: 'POST', body: new FormData(form)})
             .then(response => {
-                msg.innerHTML = "✓ Neural transmission successful"
-                msg.style.color = "#00ff88"
+                msg.innerHTML = "✅ Message sent successfully"
+                msg.style.color = "#2563eb"
                 setTimeout(() => { msg.innerHTML = "" }, 5000)
                 form.reset()
             })
             .catch(error => {
-                msg.innerHTML = "✗ Neural connection failed"
-                msg.style.color = "#ff4444"
+                msg.innerHTML = "❌ Failed to send message"
+                msg.style.color = "#dc2626"
             })
         })
     </script>
