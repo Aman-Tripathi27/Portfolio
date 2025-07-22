@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
         particlesJS('particles-js', {
             particles: {
                 number: {
-                    value: 100,
+                    value: 80,
                     density: {
                         enable: true,
                         value_area: 800
@@ -17,12 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     type: 'circle'
                 },
                 opacity: {
-                    value: 0.6,
+                    value: 0.5,
                     random: false,
                     anim: {
                         enable: true,
                         speed: 1,
-                        opacity_min: 0.3,
+                        opacity_min: 0.2,
                         sync: false
                     }
                 },
@@ -45,17 +45,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 move: {
                     enable: true,
-                    speed: 3,
+                    speed: 2,
                     direction: 'none',
                     random: false,
                     straight: false,
                     out_mode: 'out',
-                    bounce: false,
-                    attract: {
-                        enable: false,
-                        rotateX: 600,
-                        rotateY: 1200
-                    }
+                    bounce: false
                 }
             },
             interactivity: {
@@ -73,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 modes: {
                     grab: {
-                        distance: 200,
+                        distance: 140,
                         line_linked: {
                             opacity: 1
                         }
@@ -88,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Fixed Typewriter Effect with Data Science Terms
+// Typewriter Effect
 const typewriterTexts = [
     'Data Visualization Specialist',
     'Machine Learning Expert', 
@@ -241,40 +236,24 @@ function initScrollAnimations() {
     });
 }
 
-// Form Enhancement
-function initForm() {
-    const inputs = document.querySelectorAll('.contact-form input, .contact-form textarea');
+// Float Cards Interaction
+function initFloatCards() {
+    const floatCards = document.querySelectorAll('.float-card');
     
-    inputs.forEach(input => {
-        input.addEventListener('focus', () => {
-            input.style.borderColor = '#2563eb';
-            input.style.boxShadow = '0 0 0 3px rgba(37, 99, 235, 0.1)';
+    floatCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.animationPlayState = 'paused';
         });
         
-        input.addEventListener('blur', () => {
-            if (!input.value) {
-                input.style.borderColor = '#e2e8f0';
-                input.style.boxShadow = 'none';
-            }
-        });
-    });
-}
-
-// Floating Elements Interaction
-function initFloatingElements() {
-    const floatItems = document.querySelectorAll('.float-item');
-    
-    floatItems.forEach(item => {
-        item.addEventListener('mouseenter', () => {
-            const text = item.getAttribute('data-text');
-            console.log(`Exploring: ${text}`);
+        card.addEventListener('mouseleave', () => {
+            card.style.animationPlayState = 'running';
         });
         
-        item.addEventListener('click', () => {
-            item.style.transform = 'scale(1.2)';
+        card.addEventListener('click', () => {
+            card.style.transform = 'scale(0.95)';
             setTimeout(() => {
-                item.style.transform = '';
-            }, 200);
+                card.style.transform = '';
+            }, 150);
         });
     });
 }
@@ -287,14 +266,13 @@ document.addEventListener('DOMContentLoaded', () => {
         initMobileMenu();
         initNavigation();
         initScrollAnimations();
-        initForm();
-        initFloatingElements();
+        initFloatCards();
         
         console.log('🚀 Portfolio loaded successfully!');
     }, 100);
 });
 
-// Handle resize
+// Handle window resize
 window.addEventListener('resize', () => {
     if (window.innerWidth > 768) {
         document.querySelector('.navlist').classList.remove('open');
