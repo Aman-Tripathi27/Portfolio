@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aman Tripathi - Data Scientist Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+</head>
+<body>
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Header/Navigation -->
+    <header>
+        <div class="logo">Aman Tripathi</div>
+        <nav>
+            <ul class="navlist">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+        <div id="menu-icon" class="bx bx-menu"></div>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="home">
+        <div class="home-content">
+            <div class="status-badge">
+                <span class="bx bxs-circle" style="font-size: 0.6rem;"></span>
+                Available for Work
+            </div>
+
+            <h1 class="hero-title">
+                <span class="line">Data</span>
+                <span class="line highlight">Scientist</span>
+            </h1>
+            
+            <div class="typing-container">
+                <h3><span class="typed-text"></span><span class="cursor">|</span></h3>
+            </div>
+
+            <!-- Glossary Search Container -->
+            <div class="glossary-search-container">
+                <input 
+                    type="text" 
+                    id="glossary-search" 
+                    class="glossary-search-input" 
+                    placeholder="Search data science terms..."
+                >
+                <div id="glossary-dropdown" class="glossary-dropdown"></div>
+            </div>
+            
+            <p class="hero-description">
+                Transforming complex datasets into actionable business insights through 
+                <span class="accent">advanced analytics</span>, 
+                <span class="accent">machine learning</span>, and 
+                <span class="accent">statistical modeling</span>.
+            </p>
+
+            <div class="action-buttons">
+                <button class="btn primary">
+                    <i class='bx bxs-download'></i>
+                    Download CV
+                </button>
+                <a href="#contact" class="btn" style="background: var(--bg-secondary); color: var(--text-primary); border: 2px solid var(--primary-color);">
+                    <i class='bx bxs-envelope'></i>
+                    Get in Touch
+                </a>
+            </div>
+
+            <div class="social-links">
+                <a href="https://linkedin.com/in/amanxtripathi" class="social-btn" title="LinkedIn">
+                    <i class='bx bxl-linkedin'></i>
+                </a>
+                <a href="https://github.com/amanxdata" class="social-btn" title="GitHub">
+                    <i class='bx bxl-github'></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="home-visual">
+            <div class="floating-grid">
+                <div class="float-card">
+                    <i class='bx bx-bar-chart'></i>
+                    <span>Data Visualization</span>
+                </div>
+                <div class="float-card">
+                    <i class='bx bx-brain'></i>
+                    <span>Machine Learning</span>
+                </div>
+                <div class="float-card">
+                    <i class='bx bx-math'></i>
+                    <span>Statistical Analysis</span>
+                </div>
+                <div class="float-card">
+                    <i class='bx bx-data'></i>
+                    <span>Data Mining</span>
+                </div>
+                <div class="float-card">
+                    <i class='bx bx-trending-up'></i>
+                    <span>Predictive Modeling</span>
+                </div>
+                <div class="float-card">
+                    <i class='bx bx-network-chart'></i>
+                    <span>Big Data Analytics</span>
+                </div>
+                <div class="float-card">
+                    <i class='bx bx-code-block'></i>
+                    <span>Python & SQL</span>
+                </div>
+                <div class="float-card">
+                    <i class='bx bx-search-alt'></i>
+                    <span>Deep Learning</span>
+                </div>
+                <div class="float-card">
+                    <i class='bx bx-chart'></i>
+                    <span>Business Intelligence</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">Passionate data scientist with a proven track record of transforming raw data into strategic insights</p>
+            </div>
+
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I'm a data science enthusiast with expertise in Python, SQL, and machine learning. My journey in data science has been driven by a passion for uncovering hidden patterns and transforming complex datasets into actionable business intelligence.</p>
+                    <p>With hands-on experience in statistical analysis, predictive modeling, and data visualization, I've successfully delivered multiple projects that have positively impacted business decisions and operational efficiency.</p>
+                </div>
+            </div>
+
+            <!-- Skills, Experience, Education Tabs -->
+            <div class="skills-section">
+                <div class="tab-navigation">
+                    <button class="tab-btn active" data-tab="skills">
+                        <i class='bx bx-trophy'></i>
+                        Skills
+                    </button>
+                    <button class="tab-btn" data-tab="experience">
+                        <i class='bx bx-briefcase'></i>
+                        Experience
+                    </button>
+                    <button class="tab-btn" data-tab="education">
+                        <i class='bx bx-book'></i>
+                        Education
+                    </button>
+                </div>
+
+                <div class="tab-content active" id="skills">
+                    <div class="skills-modern-grid">
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class='bx bxl-python'></i>
+                            </div>
+                            <h4>Programming Languages</h4>
+                            <div class="skill-tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">SQL</span>
+                                <span class="tag">R</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class='bx bx-brain'></i>
+                            </div>
+                            <h4>Machine Learning</h4>
+                            <div class="skill-tags">
+                                <span class="tag">Scikit-learn</span>
+                                <span class="tag">TensorFlow</span>
+                                <span class="tag">Neural Networks</span>
+                                <span class="tag">Classification</span>
+                                <span class="tag">Regression</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class='bx bx-bar-chart'></i>
+                            </div>
+                            <h4>Data Visualization</h4>
+                            <div class="skill-tags">
+                                <span class="tag">Matplotlib</span>
+                                <span class="tag">Seaborn</span>
+                                <span class="tag">Tableau</span>
+                                <span class="tag">Power BI</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class='bx bx-data'></i>
+                            </div>
+                            <h4>Data Processing</h4>
+                            <div class="skill-tags">
+                                <span class="tag">Pandas</span>
+                                <span class="tag">NumPy</span>
+                                <span class="tag">Data Cleaning</span>
+                                <span class="tag">EDA</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class='bx bx-code-block'></i>
+                            </div>
+                            <h4>Statistical Analysis</h4>
+                            <div class="skill-tags">
+                                <span class="tag">Hypothesis Testing</span>
+                                <span class="tag">Regression</span>
+                                <span class="tag">Bayesian Analysis</span>
+                                <span class="tag">A/B Testing</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-card">
+                            <div class="skill-icon">
+                                <i class='bx bx-cloud'></i>
+                            </div>
+                            <h4>Tools & Platforms</h4>
+                            <div class="skill-tags">
+                                <span class="tag">Git</span>
+                                <span class="tag">AWS</span>
+                                <span class="tag">Google Colab</span>
+                                <span class="tag">Jupyter</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="experience" style="display: none;">
+                    <div class="experience-timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-date">Oct 2023 - Nov 2023</div>
+                            <div class="timeline-content">
+                                <h4>Data Science Intern</h4>
+                                <h5>CodeClause</h5>
+                                <p>Developed machine learning models for predictive analytics and data visualization projects. Conducted exploratory data analysis on complex datasets and implemented data cleaning pipelines using Python and SQL.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-date">Jun 2023 - Aug 2023</div>
+                            <div class="timeline-content">
+                                <h4>Data Analytics Trainee</h4>
+                                <h5>Banking Sector Training Program</h5>
+                                <p>Completed comprehensive training in banking analytics, financial data analysis, and risk assessment methodologies. Gained hands-on experience with real-world financial datasets and statistical modeling techniques.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-date">Mar 2023 - Apr 2023</div>
+                            <div class="timeline-content">
+                                <h4>Machine Learning Hackathon Participant</h4>
+                                <h5>GBS Novo Nordisk Hackathon</h5>
+                                <p>Participated in a prestigious hackathon focused on healthcare analytics. Developed machine learning solutions for biomedical data analysis and presented findings to industry experts.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="education" style="display: none;">
+                    <div class="education-item">
+                        <div class="education-icon">
+                            <i class='bx bx-book-open'></i>
+                        </div>
+                        <div class="education-details">
+                            <h4>Bachelor of Technology in Data Science</h4>
+                            <h5>SRM University</h5>
+                            <span class="duration">Expected Graduation: 2024</span>
+                            <p>Specialized curriculum in data science, machine learning, and advanced analytics. Coursework includes Statistical Analysis, Machine Learning, Deep Learning, Natural Language Processing, and Business Intelligence.</p>
+                        </div>
+                    </div>
+
+                    <div class="education-item">
+                        <div class="education-icon">
+                            <i class='bx bx-certification'></i>
+                        </div>
+                        <div class="education-details">
+                            <h4>Professional Certifications</h4>
+                            <h5>Online Learning Platforms</h5>
+                            <span class="duration">2023 - 2024</span>
+                            <p>Advanced Python for Data Science, Machine Learning Specialization, SQL for Analytics, Data Visualization with Tableau, Bayesian Statistics, and Time Series Analysis certifications from industry-leading platforms.</p>
+                        </div>
+                    </div>
+
+                    <div class="education-item">
+                        <div class="education-icon">
+                            <i class='bx bx-award'></i>
+                        </div>
+                        <div class="education-details">
+                            <h4>Honors & Recognition</h4>
+                            <h5>Academic Excellence</h5>
+                            <span class="duration">2021 - 2024</span>
+                            <p>Maintained consistent academic excellence with recognition in data science competitions. Active participant in college placement programs and hackathons with multiple project submissions in machine learning and analytics.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-subtitle">Exploring data-driven solutions through innovative machine learning applications</p>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="card-status">
+                        <span class="status-dot active"></span>
+                        Live Project
+                    </div>
+                    <div class="project-visual">
+                        <div class="circuit-animation">
+                            <div class="circuit-line"></div>
+                            <div class="circuit-dots">
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                            </div>
+                        </div>
+                        <div class="project-icon">
+                            <i class='bx bx-bar-chart'></i>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Sales Analytics Dashboard</h3>
+                        <p>Interactive Tableau dashboard providing real-time sales insights, trend analysis, and predictive forecasting for business decision-making.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Tableau</span>
+                            <span class="tech-tag">SQL</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Data Visualization</span>
+                        </div>
+                        <a href="#" class="project-btn">
+                            <i class='bx bx-link-external'></i>
+                            View Project
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="card-status">
+                        <span class="status-dot active"></span>
+                        Completed
+                    </div>
+                    <div class="project-visual">
+                        <div class="circuit-animation">
+                            <div class="circuit-line"></div>
+                            <div class="circuit-dots">
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                            </div>
+                        </div>
+                        <div class="project-icon">
+                            <i class='bx bx-brain'></i>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Customer Churn Prediction</h3>
+                        <p>Machine learning model predicting customer churn with 87% accuracy using classification algorithms and feature engineering techniques.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Scikit-learn</span>
+                            <span class="tech-tag">Pandas</span>
+                            <span class="tech-tag">Classification</span>
+                        </div>
+                        <a href="#" class="project-btn">
+                            <i class='bx bx-link-external'></i>
+                            View Project
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="card-status">
+                        <span class="status-dot active"></span>
+                        Completed
+                    </div>
+                    <div class="project-visual">
+                        <div class="circuit-animation">
+                            <div class="circuit-line"></div>
+                            <div class="circuit-dots">
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                            </div>
+                        </div>
+                        <div class="project-icon">
+                            <i class='bx bx-data'></i>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Time Series Forecasting</h3>
+                        <p>ARIMA and Prophet models for time series analysis with 92% forecast accuracy for business metrics prediction.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">ARIMA</span>
+                            <span class="tech-tag">Statsmodels</span>
+                            <span class="tech-tag">Time Series</span>
+                        </div>
+                        <a href="#" class="project-btn">
+                            <i class='bx bx-link-external'></i>
+                            View Project
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section class="research-section" id="research">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Research & Publications</h2>
+                <p class="section-subtitle">Academic contributions in data science and machine learning</p>
+            </div>
+
+            <div class="research-showcase">
+                <div class="paper-info">
+                    <div class="paper-badge">
+                        <i class='bx bxs-award'></i>
+                        Featured Paper
+                    </div>
+                    <h2 class="paper-title">Sentiment Analysis of Government Policies Using NLP</h2>
+                    <p class="paper-subtitle">A comprehensive study on public perception analysis</p>
+                    <div class="paper-meta">
+                        <div class="meta-item">
+                            <i class='bx bxs-user'></i>
+                            <span>By Aman Tripathi</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class='bx bxs-calendar'></i>
+                            <span>2024</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class='bx bxs-file'></i>
+                            <span>Academic Paper</span>
+                        </div>
+                    </div>
+                    <p class="paper-abstract">
+                        This research explores advanced Natural Language Processing techniques to analyze public sentiment regarding government policies in the Indian context. The study employs machine learning models including BERT transformers and classical NLP methods to extract meaningful insights from social media data and policy documents.
+                    </p>
+                    <div class="paper-actions">
+                        <button class="paper-btn read-btn">
+                            <i class='bx bx-book-open'></i>
+                            Read Paper
+                        </button>
+                        <button class="paper-btn download-btn">
+                            <i class='bx bxs-download'></i>
+                            Download PDF
+                        </button>
+                    </div>
+
+                    <div class="co-authors">
+                        <h4>Co-Authors & Collaborators:</h4>
+                        <div class="authors-list">
+                            <a href="#" class="author-link">
+                                <i class='bx bxl-linkedin'></i>
+                                Dr. Research Guide
+                            </a>
+                            <a href="#" class="author-link">
+                                <i class='bx bxl-linkedin'></i>
+                                Prof. Academic Mentor
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="paper-viewer">
+                    <div class="book-container">
+                        <div class="book">
+                            <div class="book-page page-left">
+                                <div class="page-content">
+                                    <h4>Abstract</h4>
+                                    <p>Understanding public perception is crucial for the successful implementation of government policies. This study employs established Natural Language Processing (NLP) techniques to gauge public sentiment of government policies in Indian context.</p>
+                                    <h4 style="margin-top: 20px;">Methodology</h4>
+                                    <ul>
+                                        <li>Data Collection from multiple social media platforms</li>
+                                        <li>Text Preprocessing and Tokenization</li>
+                                        <li>Sentiment Classification using Deep Learning</li>
+                                        <li>Trend Analysis and Visualization</li>
+                                    </ul>
+                                    <span class="page-number">1</span>
+                                </div>
+                            </div>
+                            <div class="book-page page-right">
+                                <div class="page-content">
+                                    <h4>Key Findings</h4>
+                                    <ul>
+                                        <li>78% accuracy in sentiment classification</li>
+                                        <li>Identified 5 major policy sentiment clusters</li>
+                                        <li>Real-time trend tracking capability</li>
+                                        <li>Predictive insights for policy outcomes</li>
+                                    </ul>
+                                    <h4 style="margin-top: 20px;">Conclusions</h4>
+                                    <p>Our NLP framework provides actionable insights for policymakers and stakeholders to understand and respond to public opinion effectively.</p>
+                                    <span class="page-number">2</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="turn-btn">
+                            <i class='bx bx-right-arrow-alt'></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-info">
+                <h3>Let's Work Together</h3>
+                <p>I'm always interested in hearing about new projects and opportunities. Feel free to reach out if you'd like to collaborate or discuss data science solutions.</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class='bx bxs-envelope'></i>
+                    </div>
+                    <div class="contact-details">
+                        <span class="contact-label">Email</span>
+                        <a href="mailto:aman@example.com" class="contact-value">aman.tripathi@email.com</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class='bx bxs-phone'></i>
+                    </div>
+                    <div class="contact-details">
+                        <span class="contact-label">Phone</span>
+                        <a href="tel:+919876543210" class="contact-value">+91 9876 543 210</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class='bx bxs-map'></i>
+                    </div>
+                    <div class="contact-details">
+                        <span class="contact-label">Location</span>
+                        <span class="contact-value">Udupi, Karnataka, India</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <a href="mailto:aman@example.com" class="action-btn email">
+                    <i class='bx bxs-envelope'></i>
+                    Send Email
+                </a>
+                <a href="tel:+919876543210" class="action-btn call">
+                    <i class='bx bxs-phone'></i>
+                    Call Me
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Aman Tripathi. All rights reserved.</p>
+            <a href="#home" class="back-to-top">
+                <i class='bx bx-up-arrow-alt'></i>
+            </a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
