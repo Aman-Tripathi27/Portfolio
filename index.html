@@ -19,6 +19,7 @@
         <ul class="navlist">
             <li><a href="#home" class="nav-link">Home</a></li>
             <li><a href="#research" class="nav-link">Research</a></li>
+            <li><a href="#experience" class="nav-link">Experience</a></li>
             <li><a href="#about" class="nav-link">About</a></li>
             <li><a href="#projects" class="nav-link">Projects</a></li>
             <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -227,6 +228,106 @@
         </div>
     </section>
 
+    <!-- Experience Section -->
+    <section id="experience" class="experience-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Experience</h2>
+                <div class="section-subtitle">Deep learning for physiological signals & biomedical ML</div>
+            </div>
+
+            <div class="experience-showcase">
+                <article class="role-card featured-role">
+                    <div class="role-top">
+                        <div class="role-badge">
+                            <i class='bx bx-briefcase'></i>
+                            <span>Current Role</span>
+                        </div>
+                        <span class="duration">March 2025 – Present</span>
+                    </div>
+
+                    <h3 class="role-title">Deep Learning Engineer</h3>
+                    <h4 class="role-company">Temple (Eternal)</h4>
+                    <p class="location">
+                        <i class='bx bx-map'></i>
+                        Gurugram, Haryana
+                    </p>
+
+                    <p class="role-summary">
+                        Building production-oriented deep learning systems for sleep onset/offset detection
+                        from wearable physiological time-series (EEG, accelerometer, PPG), with a focus on
+                        temporal segmentation, signal decomposition, and real-world hardware constraints.
+                    </p>
+
+                    <h5 class="role-heading">What I've done</h5>
+                    <ul class="experience-details">
+                        <li>Developing deep learning models for sleep onset and offset detection using physiological time-series signals (EEG, accelerometer, PPG), applying temporal segmentation and change-point detection to identify sleep/wake boundaries.</li>
+                        <li>Designed and trained CNN-LSTM hybrid architectures to capture local morphological patterns and long-range temporal dependencies in multi-channel biosignal data for sleep stage characterization.</li>
+                        <li>Built preprocessing pipelines for raw physiological recordings including artifact rejection, bandpass filtering, and epoch-level feature extraction; applied VMD-based signal decomposition to isolate sleep-relevant frequency components.</li>
+                        <li>Implemented and benchmarked multiple architectures (threshold baselines, XGBoost, LSTM, Transformer) for sleep onset/offset prediction using epoch-level accuracy, F1-score, and temporal boundary error metrics.</li>
+                        <li>Collaborated on end-to-end ML pipeline design from raw wearable sensor ingestion to model inference, targeting deployment constraints in consumer sleep-tracking hardware.</li>
+                    </ul>
+
+                    <div class="experience-skills">
+                        <span class="exp-tag">PyTorch</span>
+                        <span class="exp-tag">CNN-LSTM</span>
+                        <span class="exp-tag">Transformers</span>
+                        <span class="exp-tag">VMD</span>
+                        <span class="exp-tag">EEG / PPG</span>
+                        <span class="exp-tag">XGBoost</span>
+                        <span class="exp-tag">Time-Series ML</span>
+                    </div>
+                </article>
+
+                <aside class="achievements-panel">
+                    <h3 class="findings-title">Leadership & Achievements</h3>
+
+                    <div class="achievement-card">
+                        <div class="achievement-icon">
+                            <i class='bx bx-trophy'></i>
+                        </div>
+                        <div class="achievement-content">
+                            <h4>Novo Nordisk GBS Hackathon 2025</h4>
+                            <span class="achievement-meta">Team Lead · Sep – Oct 2025</span>
+                            <p>Led a team to deliver a working ML prototype under tight deadlines in a healthcare-adjacent domain; owned technical scoping, execution, and stakeholder communication.</p>
+                        </div>
+                    </div>
+
+                    <div class="achievement-card">
+                        <div class="achievement-icon">
+                            <i class='bx bx-certification'></i>
+                        </div>
+                        <div class="achievement-content">
+                            <h4>IEEE CIEES 2025 – Published Research</h4>
+                            <span class="achievement-meta">Peer-reviewed publication · 2025</span>
+                            <p>Published a paper on a large-scale NLP pipeline for public health signal analysis; processed 700+ noisy Reddit documents through a full ML workflow.</p>
+                            <ul class="achievement-points">
+                                <li>Benchmarked classical models (SVM, DT, NB, KNN, RF) against DistilBERT</li>
+                                <li>Applied BERTopic and TF-IDF semantic clustering with Zipf filtering</li>
+                                <li>Compared K-Means vs BERTopic and translated findings into a peer-reviewed publication</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="impact-grid">
+                        <div class="impact-stat">
+                            <span class="impact-value">4+</span>
+                            <span class="impact-label">Model architectures benchmarked</span>
+                        </div>
+                        <div class="impact-stat">
+                            <span class="impact-value">3</span>
+                            <span class="impact-label">Biosignal modalities (EEG, ACC, PPG)</span>
+                        </div>
+                        <div class="impact-stat">
+                            <span class="impact-value">IEEE</span>
+                            <span class="impact-label">Peer-reviewed publication</span>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
@@ -345,6 +446,36 @@
                 <!-- Experience Tab -->
                 <div id="experience-tab" class="tab-content">
                     <div class="experience-timeline">
+                        <!-- Temple -->
+                        <div class="timeline-item">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <div class="experience-header">
+                                    <div>
+                                        <h3>Deep Learning Engineer</h3>
+                                        <h4>Temple (Eternal)</h4>
+                                    </div>
+                                    <span class="duration">Mar 2025 – Present</span>
+                                </div>
+                                <p class="location">
+                                    <i class='bx bx-map'></i>
+                                    Gurugram, Haryana
+                                </p>
+                                <ul class="experience-details">
+                                    <li>Building sleep onset/offset detection models from EEG, accelerometer, and PPG signals</li>
+                                    <li>Designed CNN-LSTM hybrids and benchmarked LSTM, Transformer, and XGBoost baselines</li>
+                                    <li>Built biosignal preprocessing with artifact rejection, filtering, and VMD decomposition</li>
+                                    <li>Shaping end-to-end ML pipelines for wearable sleep-tracking hardware</li>
+                                </ul>
+                                <div class="experience-skills">
+                                    <span class="exp-tag">PyTorch</span>
+                                    <span class="exp-tag">CNN-LSTM</span>
+                                    <span class="exp-tag">VMD</span>
+                                    <span class="exp-tag">Biosignals</span>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- CodeClause Internship -->
                         <div class="timeline-item">
                             <div class="timeline-marker"></div>
