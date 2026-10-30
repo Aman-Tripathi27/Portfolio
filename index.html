@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Aman Tripathi · ML Engineer</title>
-  <meta name="description" content="Aman Tripathi is an ML engineer who takes models from messy data to production and builds the evaluations that prove they work, across sensors, text, molecules and LLM products.">
-  <meta name="theme-color" content="#f6f1e9">
-  <meta property="og:title" content="Aman Tripathi · ML Engineer">
-  <meta property="og:description" content="I build machine learning that holds up outside the notebook.">
+  <title>Aman Tripathi · ML for wearable signals</title>
+  <meta name="description" content="Aman Tripathi builds machine learning for wearable and physiological signals: PPG, accelerometer, EEG and continuous glucose. Shipped to a production sleep app; author of GlucoTrace.">
+  <meta name="theme-color" content="#f4f1ea" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0c0b" media="(prefers-color-scheme: dark)">
+  <meta property="og:title" content="Aman Tripathi · ML for wearable signals">
+  <meta property="og:description" content="PPG, accelerometer, EEG and CGM. Shipped to production, packaged on PyPI, published at IEEE.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://amantripathii.netlify.app/">
   <link rel="canonical" href="https://amantripathii.netlify.app/">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231e1b16'/%3E%3Cpath d='M4 18h6l2-6 4 12 3-9 2 3h7' fill='none' stroke='%23e4572e' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2317150f'/%3E%3Cpath d='M4 18h6l2-6 4 12 3-9 2 3h7' fill='none' stroke='%23d12a3f' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -22,7 +23,7 @@
 </head>
 <body>
 
-  <a class="sr-only" href="#journey">Skip to the journey</a>
+  <a class="sr-only" href="#work">Skip to work</a>
 
   <!-- ============ Nav ============ -->
   <nav class="nav" id="nav" aria-label="Main">
@@ -31,14 +32,14 @@
       Aman Tripathi
     </a>
     <ul class="nav__links">
-      <li><a href="#journey">Journey</a></li>
       <li><a href="#work">Work</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#papers">Papers</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="images/Resume.pdf" target="_blank" rel="noopener">Résumé</a></li>
     </ul>
-    <button class="nav__btn" id="pauseBtn" type="button" aria-pressed="false" title="Pause animations">
+    <button class="nav__btn" id="pauseBtn" type="button" aria-pressed="false" title="Pause signals">
       <svg viewBox="0 0 16 16" aria-hidden="true"><g class="i-pause"><rect x="4" y="3" width="2.6" height="10" rx="1" fill="currentColor"/><rect x="9.4" y="3" width="2.6" height="10" rx="1" fill="currentColor"/></g><path class="i-play" d="M5 3.2v9.6L12.6 8z" fill="currentColor" style="display:none"/></svg>
-      <span class="sr-only">Pause animations</span>
+      <span class="sr-only">Pause signals</span>
     </button>
     <button class="nav__btn" id="themeBtn" type="button" title="Switch theme">
       <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h3l1.5-4 3 8 2-5 1 1H15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -47,422 +48,454 @@
     <a class="nav__cta" href="#contact">Contact</a>
   </nav>
 
-  <!-- journey map: fills in as the reader moves through the chapters -->
-  <nav class="jmap" id="jmap" aria-label="Journey chapters">
-    <a href="#ch-data" style="--chap: var(--c-ppg)"><i></i><span>Data</span></a>
-    <a href="#ch-model" style="--chap: var(--c-vmd)"><i></i><span>Model</span></a>
-    <a href="#ch-eval" style="--chap: var(--c-eeg)"><i></i><span>Evaluate</span></a>
-    <a href="#ch-ship" style="--chap: var(--c-chat)"><i></i><span>Ship</span></a>
-  </nav>
-
   <main id="top">
 
-    <!-- ============ Opening ============ -->
-    <section class="open" aria-label="Introduction">
-      <div class="wash" style="width:52vw;height:52vw;right:-12vw;top:-18vw;background:var(--w-peach)"></div>
-      <div class="wash" style="width:40vw;height:40vw;left:-14vw;bottom:-16vw;background:var(--w-sky);animation-delay:-6s"></div>
-      <div class="wash" style="width:26vw;height:26vw;left:38vw;top:58%;background:var(--w-violet);animation-delay:-3s"></div>
-
-      <svg class="open__thread" viewBox="0 0 760 420" aria-hidden="true">
-        <path class="thread draw" pathLength="1" d="M10 250 C40 180 60 320 90 240 S130 120 160 260 S205 330 230 200 S270 90 300 230 S340 300 360 210 C380 150 400 200 420 205 C440 210 455 205 470 206 L500 206 L512 150 L526 268 L540 172 L552 214 L575 206 C610 200 640 206 680 120 C700 80 730 70 750 60"/>
-        <circle class="thread-end" cx="750" cy="60" r="5" fill="var(--accent)"/>
-      </svg>
-
-      <div class="wrap rise-group reveal">
-        <span class="chip chip--accent" style="--i:0"><span class="dot dot--live"></span> Open to ML roles · work from anywhere</span>
-        <h1 style="--i:1">I build machine learning that holds up <em>outside the notebook.</em></h1>
-        <p class="open__lede" style="--i:2">I'm Aman, an ML engineer. I take models from messy data to production, and build the evaluations
-          that prove they work, across sensors, text, molecules and LLM products.</p>
-        <div class="tags" style="--i:3">
-          <span class="tag">ML Engineer</span><span class="tag">Applied Scientist</span><span class="tag">AI / LLM Engineer</span><span class="tag">ML Evaluation</span>
+    <!-- ============ Hero: the PPG cleans itself as you scroll ============ -->
+    <section class="hero grid-paper" id="hero" aria-label="Introduction">
+      <div class="hero__stick">
+        <div class="wrap hero__text">
+          <div class="hero__eyebrow">
+            <span class="chip chip--accent"><span class="dot dot--live"></span> Open to roles · work from anywhere</span>
+            <span class="mono">ML for wearable signals</span>
+          </div>
+          <h1>Body signals are noisy. I make them <em>usable.</em></h1>
+          <p class="hero__lede">
+            I'm Aman Tripathi, a machine learning engineer for pulse, motion, brain and glucose signals.
+            I've shipped to a production sleep app. Scroll to watch my PPG cleaner work on a real run.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--solid" href="#work">See the work
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3.5 8.5 8 13l4.5-4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a class="btn" href="images/Resume.pdf" target="_blank" rel="noopener">Résumé
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
         </div>
-        <a class="open__cue" href="#journey" style="--i:4">
-          <svg viewBox="0 0 18 30" aria-hidden="true"><rect x="1" y="1" width="16" height="28" rx="8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle class="dot-move" cx="9" cy="9" r="2.2" fill="currentColor"/></svg>
-          Follow one model from messy data to production
-        </a>
+
+        <ol class="hero__stages" id="stages" aria-label="Cleaning stages">
+          <li data-stage="0"><span>01</span>Raw wrist PPG</li>
+          <li data-stage="1"><span>02</span>Band-pass 0.4–4 Hz</li>
+          <li data-stage="2"><span>03</span>Cancel IMU motion</li>
+          <li data-stage="3"><span>04</span>Beats found</li>
+        </ol>
+
+        <div class="hero__scope">
+          <canvas id="heroCanvas" role="img" aria-label="A wrist PPG recording during running. As you scroll, motion is filtered and cancelled using the accelerometer, and heart beats are detected."></canvas>
+        </div>
+
+        <div class="hero__readout">
+          <span class="mono" id="heroSource">WRIST · PhysioNet · s3 running · 10 s</span>
+          <span class="scroll-cue mono"><i></i>Scroll</span>
+          <span class="hero__f1"><span class="mono">Beat F1</span><b id="heroF1">0.70</b></span>
+        </div>
       </div>
     </section>
 
-    <!-- ============ The journey ============ -->
-    <div class="journey" id="journey">
-
-      <!-- 01 Data -->
-      <section class="chapter" id="ch-data" data-wash="peach" aria-labelledby="h-data">
-        <div class="chapter__stick">
-          <div class="chapter__text">
-            <div class="chapter__num"><b>01</b> Data</div>
-            <h2 id="h-data">It starts <em>messy.</em></h2>
-            <p>Real data never arrives clean. A pulse signal swamped by running, EEG shaken by every step, glucose
-              readings with gaps, orders typed in Hinglish, opinions buried in noisy threads. Before any model, I work out
-              what's signal, what's noise and what's simply missing.</p>
-            <div class="chapter__links">
-              <a href="work/wrist-ppg.html" style="--dot:var(--c-ppg)">Wrist PPG</a>
-              <a href="work/mobile-eeg.html" style="--dot:var(--c-eeg)">Mobile EEG</a>
-              <a href="work/glucotrace.html" style="--dot:var(--c-gluco)">GlucoTrace</a>
-              <a href="work/chat-to-pay.html" style="--dot:var(--c-chat)">Chat-to-Pay</a>
-            </div>
-          </div>
-
-          <div class="stage" aria-hidden="true">
-            <div class="obj o-ppg">
-              <div class="obj__label"><span>Pulse while running</span><span class="paint">cleaned</span></div>
-              <svg viewBox="0 0 300 64" preserveAspectRatio="none" style="height:64px"><path class="ln" id="ribbonPath" d="M0 32 L300 32"/></svg>
-            </div>
-            <div class="obj o-cgm">
-              <div class="obj__label"><span>Glucose day</span><span class="paint">gaps kept</span></div>
-              <svg viewBox="0 0 160 70" style="height:70px">
-                <defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="var(--c-gluco)" stroke-width="2" opacity=".35"/></pattern></defs>
-                <rect class="gap paint" x="52" y="4" width="18" height="62" rx="3"/>
-                <rect class="gap paint" x="112" y="4" width="12" height="62" rx="3"/>
-                <path class="ln" d="M2 48 C12 46 20 50 30 44 S44 18 50 22"/>
-                <path class="ln" d="M72 40 C80 46 92 52 100 44 S108 30 110 32"/>
-                <path class="ln" d="M126 46 C134 50 146 40 158 42"/>
-              </svg>
-            </div>
-            <div class="obj o-chat">
-              <div class="obj__label"><span>Order chat · Hinglish</span><span class="paint">parsed</span></div>
-              <p>Hi di, ye <mark>blue wali kurti</mark> available hai? <mark>M size</mark> me <mark>2</mark> chahiye, aur <mark>printed dupatta</mark> bhi <mark>1</mark> bhej do</p>
-            </div>
-            <div class="obj o-mol">
-              <div class="obj__label"><span>Molecule</span><span class="paint">as a graph</span></div>
-              <code>CC(=O)OC1=CC=CC=C1C(=O)O</code>
-              <svg viewBox="0 0 140 64" style="height:58px">
-                <g class="ink"><path class="ln" d="M40 12 L58 22 L58 42 L40 52 L22 42 L22 22 Z M58 22 L78 12 L96 22 M78 12 L78 0 M22 42 L6 52 M58 42 L76 52 L94 42"/></g>
-                <g class="paint" fill="var(--c-gnn)"><circle cx="40" cy="12" r="3.4"/><circle cx="58" cy="22" r="3.4"/><circle cx="58" cy="42" r="3.4"/><circle cx="40" cy="52" r="3.4"/><circle cx="22" cy="42" r="3.4"/><circle cx="22" cy="22" r="3.4"/><circle cx="78" cy="12" r="3.4"/><circle cx="96" cy="22" r="3.4"/><circle cx="6" cy="52" r="3.4"/><circle cx="76" cy="52" r="3.4"/><circle cx="94" cy="42" r="3.4"/></g>
-              </svg>
-            </div>
-            <div class="obj o-text">
-              <div class="obj__label"><span>Public comment · example</span><span class="paint">labelled</span></div>
-              <p>"The new hospital was announced two years ago and the site is still empty…"</p>
-              <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px" class="paint"><span class="pill">Sentiment: negative</span><span class="pill">Theme: healthcare</span></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 02 Model -->
-      <section class="chapter" id="ch-model" data-wash="sky" aria-labelledby="h-model">
-        <div class="chapter__stick">
-          <div class="chapter__text">
-            <div class="chapter__num"><b>02</b> Model</div>
-            <h2 id="h-model">Pick what the problem <em>needs.</em></h2>
-            <p>Not the biggest model, the right one. Sometimes that's a Transformer, sometimes a graph network or an LLM,
-              and sometimes no training at all. The choice comes from the data and the benchmark, not from fashion.</p>
-          </div>
-
-          <div class="stage">
-            <div class="deck">
-              <article class="mcard" style="--oc:var(--c-gluco)"><div class="mcard__for">for <b>GlucoTrace</b></div><h3>Transformer</h3><p>Learns the shape of a whole glucose day in 511k parameters.</p></article>
-              <article class="mcard" style="--oc:var(--c-temple)"><div class="mcard__for">for <b>Temple</b></div><h3>CNN-LSTM</h3><p>Convolutions read local signal shape; the LSTM carries the whole night.</p></article>
-              <article class="mcard" style="--oc:var(--c-gnn)"><div class="mcard__for">for <b>GNN-DDI</b></div><h3>Graph autoencoder</h3><p>Molecules are graphs, so the model learns on graphs.</p></article>
-              <article class="mcard" style="--oc:var(--c-chat)"><div class="mcard__for">for <b>Chat-to-Pay</b></div><h3>LLM, structured output</h3><p>Claude reads the chat and returns JSON. The app checks it and does the maths.</p></article>
-              <article class="mcard" style="--oc:var(--c-ppg)"><div class="mcard__for">for <b>Wrist PPG</b></div><h3>No training at all</h3><p>The watch's own motion sensors cancel the noise. 0.34 s per recording.</p></article>
-              <article class="mcard" style="--oc:var(--c-vmd)"><div class="mcard__for">for <b>VMD forecasting</b></div><h3>XGBoost</h3><p>Chosen by evidence: the best of 8 models on the benchmark.</p></article>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 03 Evaluate -->
-      <section class="chapter" id="ch-eval" data-wash="violet" aria-labelledby="h-eval">
-        <div class="chapter__stick">
-          <div class="chapter__text">
-            <div class="chapter__num"><b>03</b> Evaluate</div>
-            <h2 id="h-eval">Then I try to <em>prove it wrong.</em></h2>
-            <p>A score is only worth the test behind it. So I lock the test set before training, test on people the
-              model has never seen, and break things on purpose to see what still holds.</p>
-          </div>
-
-          <div class="stage">
-            <div class="evals">
-              <article class="ecard" style="--oc:var(--c-gluco)">
-                <span class="from">GlucoTrace</span>
-                <h3>Lock the test set first</h3>
-                <div class="viz" aria-hidden="true">
-                  <svg viewBox="0 0 200 70">
-                    <path class="lock-shackle" d="M22 30 V20 a14 14 0 0 1 28 0 V30" fill="none" stroke="var(--ink)" stroke-width="3"/>
-                    <rect x="14" y="30" width="44" height="34" rx="6" fill="var(--oc)"/>
-                    <circle cx="36" cy="45" r="4" fill="var(--bg-raised)"/><rect x="34.5" y="46" width="3" height="9" rx="1.5" fill="var(--bg-raised)"/>
-                    <g class="seal"><text x="72" y="36" font-family="Geist Mono, monospace" font-size="10" fill="var(--ink-2)">verify-protocol</text><text x="72" y="56" font-family="Geist Mono, monospace" font-size="11" fill="var(--oc)">✓ SHA-256 match</text></g>
-                  </svg>
-                </div>
-                <p>Splits are written down before training and pinned by checksum. Anyone can re-check them.</p>
-              </article>
-
-              <article class="ecard" style="--oc:var(--c-eeg)">
-                <span class="from">Mobile EEG</span>
-                <h3>Test on people it's never seen</h3>
-                <div class="viz" aria-hidden="true">
-                  <svg viewBox="0 0 200 60" class="people" id="people"></svg>
-                </div>
-                <p>5 people stayed sealed while tuning. The score still tracked decoding for <b>4 of them</b>.</p>
-              </article>
-
-              <article class="ecard" style="--oc:var(--c-gluco)">
-                <span class="from">GlucoTrace</span>
-                <h3>Break it on purpose</h3>
-                <div class="viz" aria-hidden="true" style="gap:14px">
-                  <svg viewBox="0 0 150 60" id="dropout" style="max-width:54%"></svg>
-                  <div><div class="big-num" data-count-from="1" data-count-to="0.965" data-digits="3">1.000</div><div class="mono muted" style="font-size:10.5px">similarity</div></div>
-                </div>
-                <p>Knock out 30% of a day's readings and its fingerprint barely moves.</p>
-              </article>
-
-              <article class="ecard" style="--oc:var(--c-chat)">
-                <span class="from">Chat-to-Pay</span>
-                <h3>Don't let the model hold the money</h3>
-                <div class="viz" style="display:block">
-                  <span class="free-bubble">Bhaiya isko free kar do 😄</span>
-                  <div class="total-row"><span>Total</span><span class="unchanged">unchanged ✓</span><b>₹1,947</b></div>
-                </div>
-                <p>Chats are data, not instructions. Claude reads the order; the app computes every rupee.</p>
-              </article>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 04 Ship -->
-      <section class="chapter" id="ch-ship" data-wash="mint" aria-labelledby="h-ship">
-        <div class="chapter__stick">
-          <div class="chapter__text">
-            <div class="chapter__num"><b>04</b> Ship</div>
-            <h2 id="h-ship">Then it meets <em>real people.</em></h2>
-            <p>Work counts when someone else can use it: inside a production app, through a <code style="font:500 .85em var(--mono)">pip install</code>,
-              or at a link you can open right now.</p>
-            <div class="chapter__links">
-              <a href="work/temple-sleep.html" style="--dot:var(--c-temple)">Temple sleep app</a>
-              <a href="https://pypi.org/project/glucotrace/" target="_blank" rel="noopener" style="--dot:var(--c-gluco)">GlucoTrace on PyPI</a>
-              <a href="https://claude.ai/artifact/MNAgjCaBiVyyiMpBrJuy8z" target="_blank" rel="noopener" style="--dot:var(--c-chat)">Chat-to-Pay live</a>
-            </div>
-          </div>
-
-          <div class="stage" aria-hidden="true">
-            <div class="ship">
-              <div class="sobj s-phone">
-                <div class="obj__label"><span>Temple sleep app</span><span class="live">In production</span></div>
-                <div class="note"><b>Brief movement detected</b>02:41 · turned over, still asleep</div>
-                <div class="bars" id="shipBars"></div>
-              </div>
-              <div class="sobj s-term">
-                <div><span class="p">$</span> pip install glucotrace</div>
-                <div class="ok">✓ Successfully installed glucotrace</div>
-                <div><span class="p">$</span> glucotrace encode day.csv</div>
-                <div class="dim">→ 128-number fingerprint · DOI 10.5281/zenodo.22935995</div>
-              </div>
-              <div class="sobj s-browser">
-                <div class="bar"><i></i><i></i><i></i><span>claude.ai · Chat-to-Pay</span></div>
-                <div class="body"><h4>Chat-to-Pay</h4><span class="live">Live</span></div>
-              </div>
-              <div class="sobj s-paper">
-                <div class="obj__label" style="justify-content:center"><span>IEEE · CIEES 2025</span></div>
-                <p>Benchmarking ML in Under-Resourced Contexts</p>
-              </div>
-              <div class="sobj s-prs">
-                <div class="obj__label"><span>NeuroKit2</span></div>
-                <span>#1205 HRV tuple input</span><span>#1206 RQA tests</span><span>#1207 RQA docs</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+    <!-- ============ Proof bar ============ -->
+    <div class="proof">
+      <div class="wrap proof__row">
+        <a class="proof__item" href="work/temple-sleep.html"><b>In production</b><span class="mono">Brief-movement detector · Temple</span></a>
+        <a class="proof__item" href="https://pypi.org/project/glucotrace/" target="_blank" rel="noopener"><b>PyPI + DOI</b><span class="mono">pip install glucotrace</span></a>
+        <a class="proof__item" href="https://ieeexplore.ieee.org/document/11300080" target="_blank" rel="noopener"><b>IEEE 2025</b><span class="mono">CIEES · peer-reviewed</span></a>
+        <a class="proof__item" href="https://github.com/neuropsychology/NeuroKit/pulls?q=author%3AAman-Tripathi27" target="_blank" rel="noopener"><b>NeuroKit2</b><span class="mono">3 PRs to the HRV module</span></a>
+      </div>
     </div>
+
+    <!-- ============ Signals ============ -->
+    <section class="section" id="signals">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <div>
+            <div class="section__label mono"><b>01</b> Signals</div>
+            <h2 class="section__title">Six signals, one <em>habit</em>.</h2>
+          </div>
+          <p class="section__intro">Light through skin, a wrist in motion, voltage on a scalp, glucose under it. Different sensors,
+            same job every time: get a signal you can trust, then model it. Every trace here is drawn live.</p>
+        </div>
+
+        <div class="signals reveal">
+          <div class="signal">
+            <div class="signal__top"><span class="signal__name">PPG</span><span class="signal__spec mono">Wrist · 256 Hz</span></div>
+            <canvas data-signal="ppg" aria-hidden="true"></canvas>
+            <p>Pulse from light. Motion cleaning on the wrist, and sleep detection from a temple-worn wearable.</p>
+          </div>
+          <div class="signal">
+            <div class="signal__top"><span class="signal__name">Accelerometer</span><span class="signal__spec mono">3-axis · IMU</span></div>
+            <canvas data-signal="imu" aria-hidden="true"></canvas>
+            <p>Brief-movement detection shipped to production, and the motion reference for PPG cleaning.</p>
+          </div>
+          <div class="signal">
+            <div class="signal__top"><span class="signal__name">EEG</span><span class="signal__spec mono">32 ch · mobile</span></div>
+            <canvas data-signal="eeg" aria-hidden="true"></canvas>
+            <p>Per-sensor quality every 2 s while people walk and jog, plus footstep-artifact removal.</p>
+          </div>
+          <div class="signal">
+            <div class="signal__top"><span class="signal__name">CGM</span><span class="signal__spec mono">5 min · 24 h</span></div>
+            <canvas data-signal="cgm" aria-hidden="true"></canvas>
+            <p>A 511k-parameter Transformer that turns a day of glucose into a 128-number fingerprint.</p>
+          </div>
+          <div class="signal">
+            <div class="signal__top"><span class="signal__name">Molecules</span><span class="signal__spec mono">SMILES → graph</span></div>
+            <canvas data-signal="mol" aria-hidden="true"></canvas>
+            <p>Graph autoencoders that predict drug–drug interactions from molecular structure.</p>
+          </div>
+          <div class="signal">
+            <div class="signal__top"><span class="signal__name">Language</span><span class="signal__spec mono">Reddit · low-resource</span></div>
+            <canvas data-signal="text" aria-hidden="true"></canvas>
+            <p>Sentiment and topic models for regional public discourse, published at IEEE CIEES.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- ============ Work ============ -->
     <section class="section" id="work">
       <div class="wrap">
         <div class="section__head reveal">
           <div>
-            <div class="section__label mono"><b>05</b> Selected work</div>
-            <h2 class="section__title">Seven projects, <em>one habit.</em></h2>
+            <div class="section__label mono"><b>02</b> Selected work</div>
+            <h2 class="section__title">Work that <em>moves</em>.</h2>
           </div>
-          <p class="section__intro">Each one goes from messy data to something you can use, with a test behind it.
-            Open a card for the full story.</p>
+          <p class="section__intro">Each preview runs on the project's own data or method. Open a card for the full
+            write-up: the question, the data, the method and the numbers.</p>
+        </div>
+
+        <div class="filters reveal" role="group" aria-label="Filter projects by signal">
+          <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter" type="button" data-filter="ppg" aria-pressed="false">PPG</button>
+          <button class="filter" type="button" data-filter="imu" aria-pressed="false">Accelerometer</button>
+          <button class="filter" type="button" data-filter="eeg" aria-pressed="false">EEG</button>
+          <button class="filter" type="button" data-filter="cgm" aria-pressed="false">CGM</button>
+          <button class="filter" type="button" data-filter="mol" aria-pressed="false">Molecules</button>
+          <button class="filter" type="button" data-filter="ts" aria-pressed="false">Time series</button>
+          <button class="filter" type="button" data-filter="product" aria-pressed="false">Products</button>
         </div>
 
         <div class="work" id="workGrid">
-          <a class="card card--wide reveal" href="work/glucotrace.html" data-accent style="--accent:var(--c-gluco)">
-            <div class="card__screen">
-              <div class="card__hud mono"><span>Query day · BIG IDEAs</span><span class="on">5 nearest days</span></div>
+          <!-- GlucoTrace -->
+          <a class="card card--wide reveal" href="work/glucotrace.html" data-tags="cgm ts">
+            <div class="card__screen grid-paper">
+              <div class="card__hud mono"><span>Query day · BIG IDEAs</span><span id="cgmSim" class="on">5 nearest days</span></div>
               <canvas data-preview="cgm" aria-hidden="true"></canvas>
             </div>
             <div class="card__body">
-              <div class="card__kicker mono"><span>Representation learning</span><span>Open source</span></div>
+              <div class="card__kicker mono"><span>Open source</span><span>2026</span><span>CGM</span></div>
               <h3>GlucoTrace</h3>
-              <p>Turns a day of glucose readings into 128 numbers, so days that look alike can be found and compared.
-                A small Transformer, on PyPI with a DOI.</p>
-              <span class="card__metric">Barely changes (0.965 similarity) with 30% of readings missing</span>
+              <p>Turns a day of continuous glucose data into a 128-number fingerprint, then finds the days that look most
+                like it. A small, readable Transformer trained on public data from three countries.</p>
+              <div class="card__chips"><span class="chip chip--accent">pip install glucotrace</span><span class="chip">511k params</span><span class="chip">DOI</span><span class="chip">109 tests</span></div>
             </div>
             <span class="card__go" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </a>
 
-          <a class="card reveal" href="work/mobile-eeg.html" data-accent style="--accent:var(--c-eeg)">
-            <div class="card__screen">
-              <div class="card__hud mono"><span>32 sensors</span><span class="on">0.0 m/s</span></div>
+          <!-- Mobile EEG -->
+          <a class="card reveal" href="work/mobile-eeg.html" data-tags="eeg imu">
+            <div class="card__screen grid-paper">
+              <div class="card__hud mono"><span>32 sensors</span><span class="on" id="eegSpeed">0.0 m/s</span></div>
               <canvas data-preview="eeg" aria-hidden="true"></canvas>
             </div>
             <div class="card__body">
-              <div class="card__kicker mono"><span>Signal quality</span><span>Research</span></div>
-              <h3>Mobile EEG quality</h3>
-              <p>Tells you which brain-signal sensors to trust while someone walks or jogs.</p>
-              <span class="card__metric">Tracked decoding for 10 of 10 people</span>
+              <div class="card__kicker mono"><span>Research</span><span>2026</span><span>EEG + IMU</span></div>
+              <h3>Mobile EEG signal quality</h3>
+              <p>Which EEG sensors can you trust while someone jogs? A per-sensor score built only from what a wearable cap has.</p>
+              <div class="card__chips"><span class="chip chip--accent">10 of 10 people</span><span class="chip">No training</span></div>
             </div>
             <span class="card__go" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </a>
 
-          <a class="card reveal" href="work/wrist-ppg.html" data-accent style="--accent:var(--c-ppg)">
-            <div class="card__screen">
-              <div class="card__hud mono"><span>Raw</span><span class="on">Real run · 10 s</span></div>
-              <canvas data-preview="ppg" aria-hidden="true"></canvas>
-            </div>
-            <div class="card__body">
-              <div class="card__kicker mono"><span>Signal processing</span><span>Open source</span></div>
-              <h3>Wrist PPG cleaning</h3>
-              <p>Uses a watch's own motion sensors to clean the pulse signal during exercise.</p>
-              <span class="card__metric">2.4× more heartbeats found while cycling</span>
-            </div>
-            <span class="card__go" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </a>
-
-          <a class="card card--wide reveal" href="work/temple-sleep.html" data-accent style="--accent:var(--c-temple)">
-            <div class="card__screen">
+          <!-- Temple -->
+          <a class="card card--wide reveal" href="work/temple-sleep.html" data-tags="ppg imu ts">
+            <div class="card__screen grid-paper">
               <div class="card__hud mono"><span>One night · illustrative</span><span class="on">Onset · Offset</span></div>
               <canvas data-preview="sleep" aria-hidden="true"></canvas>
             </div>
             <div class="card__body">
-              <div class="card__kicker mono"><span>Industry</span><span>Temple (Eternal)</span></div>
-              <h3>Sleep detection from the temple</h3>
-              <p>When did you fall asleep, and when did you wake? Answered from the PPG and accelerometer of a wearable
-                worn on the temple.</p>
-              <span class="card__metric">Brief-movement detector shipped to the production app</span>
+              <div class="card__kicker mono"><span>Industry</span><span>Temple (Eternal)</span><span>2026</span></div>
+              <h3>Sleep onset &amp; offset from the temple</h3>
+              <p>Sleep detection from a wearable worn on the temple, using PPG and accelerometer data, including a
+                brief-movement detector that now runs in the production app.</p>
+              <div class="card__chips"><span class="chip chip--accent">Shipped</span><span class="chip">CNN-LSTM</span><span class="chip">PPG + ACC</span></div>
             </div>
             <span class="card__go" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </a>
 
-          <a class="card reveal" href="work/chat-to-pay.html" data-accent style="--accent:var(--c-chat)">
-            <div class="card__screen" style="background:color-mix(in srgb, var(--accent) 9%, var(--bg-sunk))">
-              <div class="phone-scene" data-chat-scene aria-hidden="true">
+          <!-- Wrist PPG -->
+          <a class="card reveal" href="work/wrist-ppg.html" data-tags="ppg imu">
+            <div class="card__screen grid-paper">
+              <div class="card__hud mono"><span id="ppgMode">Raw</span><span class="on">Beats ±150 ms</span></div>
+              <canvas data-preview="ppg" aria-hidden="true"></canvas>
+            </div>
+            <div class="card__body">
+              <div class="card__kicker mono"><span>Signal processing</span><span>2026</span><span>PPG + IMU</span></div>
+              <h3>Wrist PPG motion cleaning</h3>
+              <p>The watch's own accelerometer and gyroscope cancel motion out of the pulse. Mean beat F1 0.432 → 0.610.</p>
+              <div class="card__chips"><span class="chip chip--accent">0.34 s per 5 min</span><span class="chip">Zero-phase</span></div>
+            </div>
+            <span class="card__go" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+
+          <!-- GNN DDI -->
+          <a class="card card--half reveal" href="https://gnndrugdiscovery.streamlit.app" target="_blank" rel="noopener" data-tags="mol">
+            <div class="card__screen grid-paper">
+              <div class="card__hud mono"><span>Drug A · Drug B</span><span class="on" id="molScore">Link score</span></div>
+              <canvas data-preview="mol" aria-hidden="true"></canvas>
+            </div>
+            <div class="card__body">
+              <div class="card__kicker mono"><span>Biomedical ML</span><span>2025</span><span>Live app</span></div>
+              <h3>Drug–drug interactions with GNNs</h3>
+              <p>RDKit turns SMILES into molecular graphs; a graph autoencoder in PyTorch Geometric predicts interactions between drug pairs it has never seen.</p>
+              <div class="card__chips"><span class="chip chip--accent">Live app ↗</span><span class="chip">PyTorch Geometric</span><span class="chip">DrugBank</span></div>
+            </div>
+            <span class="card__go" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+
+          <!-- VMD -->
+          <a class="card card--half reveal" href="https://github.com/Aman-Tripathi27/VMD_CNN" target="_blank" rel="noopener" data-tags="ts">
+            <div class="card__screen grid-paper">
+              <div class="card__hud mono"><span>Signal → 4 modes</span><span class="on">VMD</span></div>
+              <canvas data-preview="vmd" aria-hidden="true"></canvas>
+            </div>
+            <div class="card__body">
+              <div class="card__kicker mono"><span>Time series</span><span>2025</span><span>Forecasting</span></div>
+              <h3>VMD-CNN-Transformer forecasting</h3>
+              <p>Variational Mode Decomposition splits a non-stationary river-flow series into modes; 8 architectures are benchmarked on them. Best: XGBoost, RMSE 56.43, NSE 0.985.</p>
+              <div class="card__chips"><span class="chip chip--accent">8 models</span><span class="chip">50+ features</span><span class="chip">SHAP</span></div>
+            </div>
+            <span class="card__go" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </a>
+        </div>
+
+        <div class="subhead mono reveal">Also builds products</div>
+
+        <div class="work">
+          <a class="card card--wide reveal" href="https://chat-to-pay.vercel.app" target="_blank" rel="noopener" data-tags="product">
+            <div class="card__screen" style="background:var(--bg-sunk)">
+              <div class="phone-scene" id="chatScene" aria-hidden="true">
                 <div class="phone">
                   <div class="bubble">Hi di, ye <mark>blue wali kurti</mark> available hai?</div>
                   <div class="bubble me">Haan ji available hai 😊</div>
-                  <div class="bubble"><mark>M size</mark> me <mark>2</mark> chahiye. Aur <mark>printed dupatta</mark> bhi <mark>1</mark></div>
+                  <div class="bubble"><mark>M size</mark> me <mark>2</mark> chahiye. Aur wo <mark>printed dupatta</mark> bhi <mark>1</mark> bhej do</div>
+                  <div class="bubble"><mark>Kothrud, Pune 411038</mark></div>
                   <div class="bubble">COD hai kya?</div>
                 </div>
                 <div class="slip">
-                  <div class="row mono" style="font-size:10px"><span>ORDER 0046</span></div>
-                  <div class="row"><span>2× Kurti (M)</span><span>₹1,598</span></div>
-                  <div class="row"><span>1× Dupatta</span><span>₹349</span></div>
-                  <div class="row total"><span>Total</span><b class="num" data-chat-total>₹0</b></div>
-                  <div class="ok">✓ LINK READY</div>
+                  <div class="row mono" style="font-size:10px"><span>ORDER 0046</span><span>HINGLISH</span></div>
+                  <div class="row"><span>2× Blue kurti (M)</span><span>₹1,598</span></div>
+                  <div class="row"><span>1× Printed dupatta</span><span>₹349</span></div>
+                  <div class="row"><span>Delivery</span><span>Free</span></div>
+                  <div class="row total"><span>Total</span><b class="num" id="chatTotal">₹0</b></div>
+                  <div class="ok">✓ PAYMENT LINK READY</div>
                 </div>
               </div>
             </div>
             <div class="card__body">
-              <div class="card__kicker mono"><span>LLM product</span><span>Live</span></div>
+              <div class="card__kicker mono"><span>Product</span><span>2026</span><span>Next.js + Claude API</span></div>
               <h3>Chat-to-Pay</h3>
-              <p>Reads Hinglish WhatsApp orders with Claude and turns them into payment links for small sellers.</p>
-              <span class="card__metric">The app, not the model, computes the money</span>
+              <p>Small sellers in India take orders as Hinglish WhatsApp messages. Paste the chat, and Claude reads the order,
+                prices it from the shop's catalogue and drafts the reply with a payment link. The app does the maths, never the model.</p>
+              <div class="card__chips"><span class="chip chip--accent">Live app ↗</span><span class="chip">TypeScript</span><span class="chip">CI</span></div>
             </div>
             <span class="card__go" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </a>
 
-          <a class="card reveal" href="https://gnndrugdiscovery.streamlit.app" target="_blank" rel="noopener" data-accent style="--accent:var(--c-gnn)">
-            <div class="card__screen">
-              <div class="card__hud mono"><span>Drug A · Drug B</span><span class="on">Live app ↗</span></div>
-              <canvas data-preview="mol" aria-hidden="true"></canvas>
+          <div class="card reveal" data-tags="product" style="cursor:default">
+            <div class="card__body" style="padding-right:22px">
+              <div class="card__kicker mono"><span>Archive</span></div>
+              <h3>Earlier work</h3>
+              <div class="diffs" style="margin-top:6px">
+                <a class="diff" href="https://personalised-medicine-recommendation-system.streamlit.app" target="_blank" rel="noopener"><span class="num">2024</span><span>Medicine recommender</span><span class="num">App ↗</span></a>
+                <a class="diff" href="https://github.com/Aman-Tripathi27/Web-Scrapping" target="_blank" rel="noopener"><span class="num">2023</span><span>Web scraping</span><span class="num">Repo ↗</span></a>
+                <a class="diff" href="https://github.com/Aman-Tripathi27/Code-Clause" target="_blank" rel="noopener"><span class="num">2023</span><span>CodeClause internship</span><span class="num">Repo ↗</span></a>
+                <a class="diff" href="https://github.com/Aman-Tripathi27/Bharat-Intern" target="_blank" rel="noopener"><span class="num">2023</span><span>Bharat Intern</span><span class="num">Repo ↗</span></a>
+              </div>
+              <a class="chip" style="margin-top:auto;align-self:flex-start" href="https://github.com/Aman-Tripathi27" target="_blank" rel="noopener">All repositories on GitHub ↗</a>
             </div>
-            <div class="card__body">
-              <div class="card__kicker mono"><span>Graph ML</span><span>Biomedical</span></div>
-              <h3>Drug interactions with GNNs</h3>
-              <p>Predicts whether two drugs interact, from their molecular structure alone.</p>
-              <span class="card__metric">Generalises to drug pairs it has never seen</span>
-            </div>
-            <span class="card__go" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </a>
-
-          <a class="card reveal" href="https://github.com/Aman-Tripathi27/VMD_CNN" target="_blank" rel="noopener" data-accent style="--accent:var(--c-vmd)">
-            <div class="card__screen">
-              <div class="card__hud mono"><span>Signal → 4 modes</span><span class="on">Repo ↗</span></div>
-              <canvas data-preview="vmd" aria-hidden="true"></canvas>
-            </div>
-            <div class="card__body">
-              <div class="card__kicker mono"><span>Forecasting</span><span>Benchmark</span></div>
-              <h3>River-flow forecasting</h3>
-              <p>Splits a messy time series into simpler waves, then benchmarks 8 models to forecast it.</p>
-              <span class="card__metric">Best model: NSE 0.985</span>
-            </div>
-            <span class="card__go" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          </a>
-        </div>
-
-        <div class="links3 reveal">
-          <a class="lcard" href="https://ieeexplore.ieee.org/document/11300080" target="_blank" rel="noopener">
-            <span class="mono">Paper · IEEE CIEES 2025</span><b>Benchmarking ML in under-resourced contexts</b>
-            <span>Classical models vs. DistilBERT on 1,196 Reddit comments, with topic discovery.</span>
-          </a>
-          <a class="lcard" href="https://github.com/neuropsychology/NeuroKit/pulls?q=author%3AAman-Tripathi27" target="_blank" rel="noopener">
-            <span class="mono">Open source · NeuroKit2</span><b>3 pull requests to the HRV module</b>
-            <span>A tuple-input fix, RQA regression tests and RQA docs.</span>
-          </a>
-          <a class="lcard" href="https://doi.org/10.5281/zenodo.22935995" target="_blank" rel="noopener">
-            <span class="mono">Package · PyPI + Zenodo</span><b>pip install glucotrace</b>
-            <span>109 tests, CI on every push, MIT licence, citable DOI.</span>
-          </a>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ============ About ============ -->
+    <!-- ============ Experience ============ -->
+    <section class="section" id="experience">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <div>
+            <div class="section__label mono"><b>03</b> Experience</div>
+            <h2 class="section__title">Signals from <em>real</em> nights.</h2>
+          </div>
+          <p class="section__intro">Research datasets are clean compared with a consumer wearable on a sleeping person.
+            This is where I learned the difference.</p>
+        </div>
+
+        <div class="xp">
+          <article class="role reveal">
+            <div class="role__screen grid-paper">
+              <div class="card__hud mono"><span>Illustrative night · ACC + PPG</span><span class="on">Brief movements</span></div>
+              <canvas data-preview="sleep-xp" aria-hidden="true"></canvas>
+            </div>
+            <div class="role__body">
+              <div class="role__meta mono"><span>Mar – Jul 2026</span><span>Gurugram, India</span></div>
+              <h3>Deep Learning Engineer Intern</h3>
+              <h4>Temple (Eternal)</h4>
+              <div class="story">
+                <div>
+                  <span class="mono">The problem</span>
+                  <p>Temple's app tells people when they fell asleep and when they woke, using a wearable that sits on the
+                    temple, beside the eye, and only its <strong>PPG</strong> and <strong>accelerometer</strong>. It has to hold up on real nights, on real hardware.</p>
+                </div>
+                <div>
+                  <span class="mono">What shipped</span>
+                  <p>A <strong>brief-movement detector</strong> on accelerometer data that catches short movements during sleep.
+                    I built it with the product team and it runs in the production app. I also made the existing
+                    onset/offset detection more robust.</p>
+                </div>
+                <div>
+                  <span class="mono">What I built</span>
+                  <p>An ML path to onset and offset: <strong>CNN-LSTM</strong> hybrids benchmarked against threshold baselines,
+                    XGBoost, LSTM and Transformer models on epoch accuracy, F1 and boundary error, with the preprocessing
+                    behind them: artifact rejection, band-pass filtering and epoch features.</p>
+                </div>
+              </div>
+              <div class="card__chips" style="margin-top:24px"><a class="chip chip--accent" href="work/temple-sleep.html">Read the case study →</a></div>
+            </div>
+          </article>
+
+          <ol class="timeline reveal" aria-label="Timeline">
+            <li class="now"><span class="mono">2026 · now</span><h5>Open-source biosignal tools</h5><p>GlucoTrace, mobile EEG quality, wrist PPG cleaning, and PRs to NeuroKit2.</p></li>
+            <li><span class="mono">Mar – Jul 2026</span><h5>Temple (Eternal)</h5><p>Deep Learning Engineer Intern. Sleep detection from a temple-worn wearable's PPG and accelerometer.</p></li>
+            <li><span class="mono">Sep – Oct 2025</span><h5>Novo Nordisk GBS Hackathon</h5><p>Team lead. Took a healthcare ML prototype from scoping to a working demo under a tight deadline.</p></li>
+            <li><span class="mono">2025</span><h5>IEEE CIEES 2025</h5><p>Peer-reviewed paper on ML and NLP for public discourse in low-resource settings.</p></li>
+            <li><span class="mono">2024 – 2026</span><h5>M.Sc. Data Science</h5><p>Manipal Academy of Higher Education, Karnataka.</p></li>
+            <li><span class="mono">2021 – 2024</span><h5>B.Sc. CS, Statistics &amp; Mathematics</h5><p>Chandigarh University, Punjab.</p></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Papers & open source ============ -->
+    <section class="section" id="papers">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <div>
+            <div class="section__label mono"><b>04</b> Papers &amp; open source</div>
+            <h2 class="section__title">Published and <em>packaged</em>.</h2>
+          </div>
+          <p class="section__intro">Work other people can read, install and check for themselves.</p>
+        </div>
+
+        <div class="os">
+          <a class="paper reveal" href="https://ieeexplore.ieee.org/document/11300080" target="_blank" rel="noopener">
+            <div class="paper__venue"><span>IEEE · CIEES 2025 · Ruse, Bulgaria</span><span>Peer-reviewed</span></div>
+            <h3>Benchmarking Machine Learning Techniques in Under-Resourced Contexts: Analysis of Public Perceptions of Government Policies from South Karnataka Reddit Discourse</h3>
+            <div class="paper__authors">Aman Tripathi, with Varnica Sharma &amp; Kavitha Mahesh</div>
+            <div class="paper__abs">
+              <p style="margin:0"><b>Abstract.</b> We gauge public sentiment on government policies in South Karnataka from
+              1,196 Reddit comments, comparing SVM, Decision Tree, Naïve Bayes, KNN and Random Forest with DistilBERT
+              when training data is very scarce. K-Means clustering and BERTopic surface the themes people discuss most:
+              healthcare infrastructure, government accountability and gaps in implementation. K-Means produced clearly
+              separated, keyword-driven themes (94.6% accuracy), and the study sets the first benchmark for sentiment and
+              topic classification in this regional setting.</p>
+            </div>
+            <span class="paper__link">Read on IEEE Xplore ↗</span>
+          </a>
+
+          <div class="os__card reveal">
+            <div class="mono muted">Python package</div>
+            <h3>GlucoTrace on PyPI</h3>
+            <div class="term">pip install glucotrace</div>
+            <p>Fourteen commands: encode a day, compare two days, build an offline HTML report. Reads Dexcom Clarity and
+              LibreView exports, and verifies its own pre-registered splits by checksum.</p>
+            <div class="badges">
+              <a class="chip" href="https://pypi.org/project/glucotrace/" target="_blank" rel="noopener">PyPI ↗</a>
+              <a class="chip" href="https://doi.org/10.5281/zenodo.22935995" target="_blank" rel="noopener">DOI 10.5281/zenodo.22935995</a>
+              <span class="chip">MIT</span><span class="chip">109 tests</span>
+            </div>
+          </div>
+
+          <div class="os__card reveal">
+            <div class="mono muted">Open-source contributions</div>
+            <h3>NeuroKit2</h3>
+            <p>Pull requests to the HRV module of the Python toolbox for neurophysiological signal processing.</p>
+            <div class="diffs">
+              <a class="diff" href="https://github.com/neuropsychology/NeuroKit/pull/1205" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="3.5" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="4" cy="12.5" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="12" cy="12.5" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M4 5.3v5.4M12 10.7V7a2.5 2.5 0 0 0-2.5-2.5H7" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Fix HRV tuple input handling</span><span class="num">#1205</span></a>
+              <a class="diff" href="https://github.com/neuropsychology/NeuroKit/pull/1206" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="3.5" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="4" cy="12.5" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="12" cy="12.5" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M4 5.3v5.4M12 10.7V7a2.5 2.5 0 0 0-2.5-2.5H7" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Add HRV RQA regression tests</span><span class="num">#1206</span></a>
+              <a class="diff" href="https://github.com/neuropsychology/NeuroKit/pull/1207" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="4" cy="3.5" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="4" cy="12.5" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="12" cy="12.5" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M4 5.3v5.4M12 10.7V7a2.5 2.5 0 0 0-2.5-2.5H7" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Document HRV RQA availability</span><span class="num">#1207</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ About + FAQ ============ -->
     <section class="section" id="about">
       <div class="wrap">
         <div class="section__head reveal">
           <div>
-            <div class="section__label mono"><b>06</b> About</div>
-            <h2 class="section__title">Hello, I'm <em>Aman.</em></h2>
+            <div class="section__label mono"><b>05</b> About</div>
+            <h2 class="section__title">Hello, I'm <em>Aman</em>.</h2>
           </div>
         </div>
 
         <div class="about">
           <div class="about__text reveal">
-            <p>I'm an ML engineer who cares most about the parts that decide whether a model survives contact with
-              the real world: the data going in, and the test that says it works.</p>
-            <p>I've built sleep detection for a production wearable at Temple, released GlucoTrace as an open-source package,
-              published at IEEE, and shipped an LLM product. My background is computer science, statistics and
-              maths, then an M.Sc. in Data Science at Manipal.</p>
-            <p>I'm looking for a team where models have to hold up: ML engineering, applied science, LLM products or evaluation.</p>
+            <p>I build machine learning for the signals bodies give off, and I care most about the step everyone
+              skips: making the signal trustworthy before anything is trained on it.</p>
+            <p>I studied computer science, statistics and mathematics at Chandigarh University, then an M.Sc. in Data
+              Science at Manipal. I worked on sleep detection at Temple, and I release tools other researchers can install
+              and check: GlucoTrace on PyPI, open pipelines for mobile EEG and wrist PPG, and fixes for NeuroKit2.</p>
+            <p>I like problems where the signal is messy, the hardware is real, and the result has to be measured properly.</p>
+            <div class="facts">
+              <div><span class="mono">Based</span><p>India · works from anywhere</p></div>
+              <div><span class="mono">Focus</span><p>Wearables · biosignals · health ML</p></div>
+              <div><span class="mono">Core stack</span><p>Python, PyTorch, PyG, SciPy, scikit-learn</p></div>
+              <div><span class="mono">Also</span><p>Next.js, TypeScript, Claude API</p></div>
+            </div>
           </div>
 
-          <ol class="timeline reveal" aria-label="Timeline">
-            <li class="now"><span class="mono">2026 · now</span><h5>Open-source ML</h5><p>GlucoTrace, mobile EEG quality, wrist PPG cleaning, Chat-to-Pay, NeuroKit2.</p></li>
-            <li><span class="mono">Mar – Jul 2026</span><h5>Temple (Eternal)</h5><p>Deep Learning Engineer Intern. Sleep detection on a temple-worn wearable.</p></li>
-            <li><span class="mono">Sep – Oct 2025</span><h5>Novo Nordisk GBS Hackathon</h5><p>Team lead. A healthcare ML prototype from scoping to working demo.</p></li>
-            <li><span class="mono">2025</span><h5>IEEE CIEES 2025</h5><p>Peer-reviewed paper on ML and NLP in low-resource settings.</p></li>
-            <li><span class="mono">2024 – 2026</span><h5>M.Sc. Data Science</h5><p>Manipal Academy of Higher Education.</p></li>
-            <li><span class="mono">2021 – 2024</span><h5>B.Sc. CS, Statistics &amp; Mathematics</h5><p>Chandigarh University.</p></li>
-          </ol>
+          <div class="faq reveal">
+            <div class="mono muted" style="margin-bottom:6px">If you're hiring</div>
+            <details open>
+              <summary>Have you worked with real device data?</summary>
+              <p>Yes. Production PPG and accelerometer data at Temple, and public research recordings from PhysioNet and
+                OSF: wrist PPG with IMU, 32-channel treadmill EEG, and CGM from three countries.</p>
+            </details>
+            <details>
+              <summary>Can you ship, not just prototype?</summary>
+              <p>The brief-movement detector runs in Temple's production app. GlucoTrace is a pip package with CI,
+                109 tests and a DOI. Chat-to-Pay is a live product.</p>
+            </details>
+            <details>
+              <summary>Deep learning or classical signal processing?</summary>
+              <p>Whichever the problem needs. The PPG cleaner is pure DSP and needs no training, GlucoTrace is a
+                Transformer, and the drug-interaction model is a graph autoencoder.</p>
+            </details>
+            <details>
+              <summary>Where can you work?</summary>
+              <p>Anywhere. I'm based in India and happy to work remotely, relocate, or overlap with your time zone.</p>
+            </details>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ============ Contact ============ -->
     <section class="contact" id="contact">
-      <div class="wash" style="width:46vw;height:46vw;right:-10vw;top:-8vw;background:var(--w-mint)"></div>
-      <div class="wash" style="width:34vw;height:34vw;left:-8vw;bottom:-10vw;background:var(--w-peach);animation-delay:-5s"></div>
       <div class="wrap">
-        <div class="section__label mono"><b class="accent">07</b> Contact</div>
-        <h2>Let's build something that <em>holds up.</em></h2>
+        <div class="section__label mono"><b class="accent">06</b> Contact · Open to ML roles in wearables, health sensing and biosignals</div>
         <a class="contact__mail" href="mailto:amantripathi3273@gmail.com">amantripathi3273@gmail.com</a>
         <div class="contact__row">
           <a class="btn btn--solid" href="https://www.linkedin.com/in/aman-tripathi27/" target="_blank" rel="noopener">LinkedIn</a>
           <a class="btn" href="https://github.com/Aman-Tripathi27" target="_blank" rel="noopener">GitHub</a>
-          <a class="btn" href="images/Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+          <a class="btn" href="images/Resume.pdf" target="_blank" rel="noopener">Résumé (PDF)</a>
         </div>
         <footer class="footer mono">
           <span>© 2026 Aman Tripathi</span>
-          <span>Open to ML roles · work from anywhere</span>
+          <span>Data: WRIST &amp; BIG IDEAs (PhysioNet), Lee et al. 2021 (OSF)</span>
           <a href="#top">Back to top ↑</a>
         </footer>
       </div>
+      <canvas id="contactCanvas" aria-hidden="true"></canvas>
     </section>
   </main>
 

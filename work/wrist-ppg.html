@@ -13,17 +13,17 @@
   <link rel="stylesheet" href="../assets/css/site.css">
   <script>try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
 </head>
-<body data-accent style="--accent: var(--c-ppg)">
+<body>
   <nav class="nav" id="nav" aria-label="Main">
     <a class="nav__brand" href="../index.html" aria-label="Aman Tripathi, home">
       <svg viewBox="0 0 26 16" aria-hidden="true"><path d="M1 9h5l2-5 4 10 3-8 2 3h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Aman Tripathi
     </a>
     <ul class="nav__links">
-      <li><a href="../index.html#journey">Journey</a></li>
       <li><a href="../index.html#work">Work</a></li>
+      <li><a href="../index.html#experience">Experience</a></li>
+      <li><a href="../index.html#papers">Papers</a></li>
       <li><a href="../index.html#about">About</a></li>
-      <li><a href="../images/Resume.pdf" target="_blank" rel="noopener">Résumé</a></li>
     </ul>
     <button class="nav__btn" id="pauseBtn" type="button" aria-pressed="false" title="Pause signals">
       <svg viewBox="0 0 16 16" aria-hidden="true"><g class="i-pause"><rect x="4" y="3" width="2.6" height="10" rx="1" fill="currentColor"/><rect x="9.4" y="3" width="2.6" height="10" rx="1" fill="currentColor"/></g><path class="i-play" d="M5 3.2v9.6L12.6 8z" fill="currentColor" style="display:none"/></svg>
@@ -47,24 +47,10 @@
       </div>
     </header>
 
-    <section class="hero scrub grid-paper" data-ppg-scrub aria-label="Scroll-through demo of the cleaner">
-      <div class="hero__stick">
-        <div class="hero__text"><div class="section__label mono"><b>Live</b> Scroll to clean 10 seconds of a real run</div></div>
-        <ol class="hero__stages" aria-label="Cleaning stages">
-          <li data-stage><span>01</span>Raw wrist PPG</li>
-          <li data-stage><span>02</span>Band-pass 0.4–4 Hz</li>
-          <li data-stage><span>03</span>Cancel IMU motion</li>
-          <li data-stage><span>04</span>Beats found</li>
-        </ol>
-        <div class="hero__scope">
-          <canvas role="img" aria-label="A wrist PPG recording during running. As you scroll, motion is filtered and cancelled using the accelerometer, and heart beats are detected and matched to ECG beats."></canvas>
-        </div>
-        <div class="hero__readout">
-          <span class="mono" id="heroSource">WRIST · PhysioNet · s3 running · 10 s</span>
-          <span class="hero__f1"><span class="mono">Beat F1, this window</span><b data-f1>0.70</b></span>
-        </div>
-      </div>
-    </section>
+    <div class="cs-visual grid-paper">
+      <div class="card__hud mono"><span>Raw</span><span class="on">WRIST · s3 running · 10 s</span></div>
+      <canvas data-preview="ppg" role="img" aria-label="Ten seconds of real wrist PPG while running, alternating between the raw signal and the cleaned signal, with ECG reference beats below."></canvas>
+    </div>
 
     <div class="cs-layout">
       <aside class="spec" aria-label="Project facts">
@@ -81,15 +67,6 @@
       </aside>
 
       <article class="cs-body">
-        <section class="evalbox">
-          <h2>How I evaluated it</h2>
-          <ul>
-            <li><strong>Scored against the heart.</strong> Beat F1 against ECG reference beats, with a ±150 ms tolerance.</li>
-            <li><strong>Hold-out set aside first.</strong> Tuned on subjects s1–s6; s8 and s9 were held back before any setting was chosen.</li>
-            <li><strong>One change at a time.</strong> Every idea was tested alone, and the constants were checked for sensitivity: ±20% moves pooled F1 by at most 0.0008.</li>
-          </ul>
-        </section>
-
         <h2><span class="mono">01 · The question</span>Can the watch clean its own pulse?</h2>
         <p>Optical heart rate on the wrist works by shining light into the skin and watching how much comes back. When the
           arm swings, the sensor shifts against the skin, and the movement can be larger than the pulse itself.
@@ -154,7 +131,7 @@ cleaned = clean_ppg(record.p_signal, record.sig_name, record.fs)</pre>
 
     <nav class="cs-next" aria-label="More case studies">
       <a href="mobile-eeg.html"><span class="mono">← Previous</span><b>Mobile EEG signal quality</b></a>
-      <a href="chat-to-pay.html"><span class="mono">Next →</span><b>Chat-to-Pay</b></a>
+      <a href="temple-sleep.html"><span class="mono">Next →</span><b>Sleep onset &amp; offset</b></a>
     </nav>
   </main>
 
@@ -167,10 +144,8 @@ cleaned = clean_ppg(record.p_signal, record.sig_name, record.fs)</pre>
   <script type="module">
     import { initChrome } from '../assets/js/core.js';
     import { mountAll } from '../assets/js/previews.js';
-    import { mountPpgScrub } from '../assets/js/ppg-scrub.js';
     initChrome();
     mountAll();
-    mountPpgScrub(document.querySelector('[data-ppg-scrub]'));
   </script>
 </body>
 </html>

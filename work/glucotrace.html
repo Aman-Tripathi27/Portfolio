@@ -13,17 +13,17 @@
   <link rel="stylesheet" href="../assets/css/site.css">
   <script>try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
 </head>
-<body data-accent style="--accent: var(--c-gluco)">
+<body>
   <nav class="nav" id="nav" aria-label="Main">
     <a class="nav__brand" href="../index.html" aria-label="Aman Tripathi, home">
       <svg viewBox="0 0 26 16" aria-hidden="true"><path d="M1 9h5l2-5 4 10 3-8 2 3h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Aman Tripathi
     </a>
     <ul class="nav__links">
-      <li><a href="../index.html#journey">Journey</a></li>
       <li><a href="../index.html#work">Work</a></li>
+      <li><a href="../index.html#experience">Experience</a></li>
+      <li><a href="../index.html#papers">Papers</a></li>
       <li><a href="../index.html#about">About</a></li>
-      <li><a href="../images/Resume.pdf" target="_blank" rel="noopener">Résumé</a></li>
     </ul>
     <button class="nav__btn" id="pauseBtn" type="button" aria-pressed="false" title="Pause signals">
       <svg viewBox="0 0 16 16" aria-hidden="true"><g class="i-pause"><rect x="4" y="3" width="2.6" height="10" rx="1" fill="currentColor"/><rect x="9.4" y="3" width="2.6" height="10" rx="1" fill="currentColor"/></g><path class="i-play" d="M5 3.2v9.6L12.6 8z" fill="currentColor" style="display:none"/></svg>
@@ -68,15 +68,6 @@
       </aside>
 
       <article class="cs-body">
-        <section class="evalbox">
-          <h2>How I evaluated it</h2>
-          <ul>
-            <li><strong>Pre-registered.</strong> Thresholds, probes and candidate budgets were declared before training; the test partition is opened once.</li>
-            <li><strong>Leakage-resistant.</strong> Participant-disjoint splits are pinned by SHA-256, the loader refuses a stale split, and <code>glucotrace verify-protocol --all</code> re-checks everything.</li>
-            <li><strong>Stress-tested.</strong> With 30% of readings removed at random on new people, median cosine similarity stays at 0.965.</li>
-          </ul>
-        </section>
-
         <h2><span class="mono">01 · The question</span>What does a glucose day look like, as numbers?</h2>
         <p>A continuous glucose monitor records a reading every five minutes, which is 288 numbers a day. Researchers who want
           to ask "which days look like this one?" usually fall back on summary statistics like mean, time in range or variability,
