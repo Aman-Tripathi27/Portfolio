@@ -8,18 +8,33 @@ const store = {
   set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
 };
 
-// ---------- colours (read from CSS tokens, refreshed on theme change) ----------
-let pal = null;
-export function palette() {
-  if (pal) return pal;
-  const s = getComputedStyle(document.documentElement);
+// ---------- colours (read from CSS tokens per element, refreshed on theme change) ----------
+export function withAlpha(color, a) {
+  if (color.startsWith('#') && color.length === 7) {
+    const n = parseInt(color.slice(1), 16);
+    return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`;
+  }
+  const m = color.match(/rgba?\(([^)]+)\)/);
+  if (m) { const p = m[1].split(',').map((x) => x.trim()); return `rgba(${p[0]},${p[1]},${p[2]},${a})`; }
+  return color;
+}
+
+// Each canvas can sit inside a card with its own --accent, so colours are read per element.
+let palVersion = 0;
+const palCache = new WeakMap();
+export function palette(el = document.documentElement) {
+  const hit = palCache.get(el);
+  if (hit && hit.v === palVersion) return hit.p;
+  const s = getComputedStyle(el);
   const v = (n) => s.getPropertyValue(n).trim();
-  pal = {
+  const accent = v('--accent');
+  const p = {
     bg: v('--bg'), raised: v('--bg-raised'), ink: v('--ink'), ink2: v('--ink-2'), ink3: v('--ink-3'),
-    line: v('--line'), raw: v('--raw'), ghost: v('--ghost'), accent: v('--accent'), accentSoft: v('--accent-soft'),
+    line: v('--line'), raw: v('--raw'), ghost: v('--ghost'), accent, accentSoft: withAlpha(accent, 0.14),
     ok: v('--ok'), warn: v('--warn'), bad: v('--bad'),
   };
-  return pal;
+  palCache.set(el, { v: palVersion, p });
+  return p;
 }
 
 // ---------- maths ----------
@@ -102,16 +117,14 @@ function frame(now) {
 }
 requestAnimationFrame(frame);
 
-export function redrawAll() { pal = null; for (const it of items.values()) it.dirty = true; }
+export function redrawAll() { palVersion++; for (const it of items.values()) it.dirty = true; }
 let rz;
 addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(redrawAll, 80); });
-matchMedia('(prefers-color-scheme: dark)').addEventListener('change', redrawAll);
 
 // ---------- chrome: nav, theme, pause, reveal ----------
 function effectiveTheme() {
-  const t = document.documentElement.dataset.theme;
-  if (t) return t;
-  return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  // Paper is the default; Scope only when the visitor picks it
+  return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
 }
 
 export function initChrome() {

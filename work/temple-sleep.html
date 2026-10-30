@@ -13,17 +13,17 @@
   <link rel="stylesheet" href="../assets/css/site.css">
   <script>try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
 </head>
-<body>
+<body data-accent style="--accent: var(--c-temple)">
   <nav class="nav" id="nav" aria-label="Main">
     <a class="nav__brand" href="../index.html" aria-label="Aman Tripathi, home">
       <svg viewBox="0 0 26 16" aria-hidden="true"><path d="M1 9h5l2-5 4 10 3-8 2 3h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       Aman Tripathi
     </a>
     <ul class="nav__links">
+      <li><a href="../index.html#journey">Journey</a></li>
       <li><a href="../index.html#work">Work</a></li>
-      <li><a href="../index.html#experience">Experience</a></li>
-      <li><a href="../index.html#papers">Papers</a></li>
       <li><a href="../index.html#about">About</a></li>
+      <li><a href="../images/Resume.pdf" target="_blank" rel="noopener">Résumé</a></li>
     </ul>
     <button class="nav__btn" id="pauseBtn" type="button" aria-pressed="false" title="Pause signals">
       <svg viewBox="0 0 16 16" aria-hidden="true"><g class="i-pause"><rect x="4" y="3" width="2.6" height="10" rx="1" fill="currentColor"/><rect x="9.4" y="3" width="2.6" height="10" rx="1" fill="currentColor"/></g><path class="i-play" d="M5 3.2v9.6L12.6 8z" fill="currentColor" style="display:none"/></svg>
@@ -68,6 +68,15 @@
       </aside>
 
       <article class="cs-body">
+        <section class="evalbox">
+          <h2>How I evaluated it</h2>
+          <ul>
+            <li><strong>Epoch-level accuracy and F1</strong> across each night.</li>
+            <li><strong>Temporal boundary error:</strong> how many minutes the predicted onset or offset lands from the true one.</li>
+            <li><strong>Always against a baseline.</strong> Every learned model was compared with threshold rules like the production heuristic.</li>
+          </ul>
+        </section>
+
         <h2><span class="mono">01 · The problem</span>Real nights, real hardware</h2>
         <p>A sleep app lives or dies on two timestamps: when you fell asleep and when you woke up. Temple's app estimates
           them from a small wearable that sits on the <strong>temple</strong>, the side of the head beside the eye, using its
@@ -103,7 +112,7 @@
     </div>
 
     <nav class="cs-next" aria-label="More case studies">
-      <a href="wrist-ppg.html"><span class="mono">← Previous</span><b>Wrist PPG motion cleaning</b></a>
+      <a href="chat-to-pay.html"><span class="mono">← Previous</span><b>Chat-to-Pay</b></a>
       <a href="glucotrace.html"><span class="mono">Next →</span><b>GlucoTrace</b></a>
     </nav>
   </main>
