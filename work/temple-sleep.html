@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sleep onset &amp; offset at Temple · Aman Tripathi</title>
-  <meta name="description" content="Sleep onset and offset detection from wrist PPG and accelerometer at Temple (Eternal), including a brief-movement detector shipped to the production app.">
+  <meta name="description" content="Sleep onset and offset detection from a temple-worn wearable's PPG and accelerometer at Temple (Eternal), including a brief-movement detector shipped to the production app.">
   <link rel="canonical" href="https://amantripathii.netlify.app/work/temple-sleep.html">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2317150f'/%3E%3Cpath d='M4 18h6l2-6 4 12 3-9 2 3h7' fill='none' stroke='%23d12a3f' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,8 +39,8 @@
   <main class="wrap">
     <header class="cs-hero">
       <div class="crumbs mono"><a href="../index.html#work">Work</a><span>/</span><span>Industry · Temple (Eternal) · 2026</span></div>
-      <h1>Sleep onset &amp; offset <em>from the wrist</em></h1>
-      <p class="cs-answer">When did you fall asleep, and when did you wake? Answered from a wearable's PPG and accelerometer, on real consumer hardware, with a brief-movement detector now running in the production app.</p>
+      <h1>Sleep onset &amp; offset <em>from the temple</em></h1>
+      <p class="cs-answer">When did you fall asleep, and when did you wake? Answered from the PPG and accelerometer of a wearable worn on the temple, on real consumer hardware, with a brief-movement detector now running in the production app.</p>
       <div class="cs-links">
         <a class="btn btn--solid" href="../index.html#contact">Ask me about it</a>
         <a class="btn" href="../images/Resume.pdf" target="_blank" rel="noopener">Résumé ↗</a>
@@ -58,7 +58,8 @@
           <div><dt>Role</dt><dd>Deep Learning Engineer Intern</dd></div>
           <div><dt>Company</dt><dd>Temple (Eternal), Gurugram</dd></div>
           <div><dt>When</dt><dd>March – July 2026</dd></div>
-          <div><dt>Signals</dt><dd>Wrist PPG, accelerometer</dd></div>
+          <div><dt>Device</dt><dd>Wearable worn on the temple, beside the eye</dd></div>
+          <div><dt>Signals</dt><dd>PPG, accelerometer</dd></div>
           <div><dt>Shipped</dt><dd>Brief-movement detector, in the production app</dd></div>
           <div><dt>Models</dt><dd>CNN-LSTM, LSTM, Transformer, XGBoost, threshold baselines</dd></div>
           <div><dt>Metrics</dt><dd>Epoch accuracy, F1, temporal boundary error</dd></div>
@@ -69,13 +70,14 @@
       <article class="cs-body">
         <h2><span class="mono">01 · The problem</span>Real nights, real hardware</h2>
         <p>A sleep app lives or dies on two timestamps: when you fell asleep and when you woke up. Temple's app estimates
-          them from a wrist wearable, using the <strong>PPG</strong> sensor for heart signals and the <strong>accelerometer</strong>
-          for movement. Unlike a lab study, the data comes from consumer hardware on people's own wrists, in their own beds,
+          them from a small wearable that sits on the <strong>temple</strong>, the side of the head beside the eye, using its
+          <strong>PPG</strong> sensor for heart signals and its <strong>accelerometer</strong> for head movement. Unlike a lab
+          study, the data comes from consumer hardware on people's own heads, in their own beds,
           with all the variation that brings.</p>
         <p>The production system was heuristic. My job was to make it more robust and to explore where machine learning could take it.</p>
 
         <h2><span class="mono">02 · What shipped</span>A brief-movement detector</h2>
-        <p>Short movements during sleep, like turning over or shifting an arm, matter: they mark restless periods and can
+        <p>Short movements during sleep, like turning over or shifting the head on the pillow, matter: they mark restless periods and can
           be mistaken for waking. I built an algorithm on accelerometer data that <strong>captures these short in-sleep
           movements</strong>, and worked with the product team to ship it to the production app.</p>
         <p>Alongside it, I improved the robustness of the existing heuristic onset/offset detection on wearable PPG and
@@ -92,7 +94,7 @@
         </ol>
 
         <h2><span class="mono">04 · Where it led</span>From one product to open tools</h2>
-        <p>Working on real wrists showed me how much depends on the signal before any model sees it. That is what my
+        <p>Working with real devices on real people showed me how much depends on the signal before any model sees it. That is what my
           open-source work since has focused on: <a href="wrist-ppg.html">cleaning motion out of wrist PPG</a> with the IMU,
           <a href="mobile-eeg.html">scoring EEG quality while people move</a>, and
           <a href="glucotrace.html">representation learning for glucose</a>.</p>
