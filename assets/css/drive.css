@@ -170,3 +170,14 @@ body.booting .stop { transition: none !important; }
   body.is-3d .stop--intro h1 { font-size: clamp(40px, 5vw, 68px); text-shadow: none; }
   body.is-3d .stop--intro .lede { font-size: 16px; text-shadow: none; color: var(--ink-2); }
 }
+
+/* sound toggle */
+.hud__links .sound { display: inline-flex; align-items: center; gap: 6px; position: relative; }
+.sound svg { width: 17px; height: 17px; }
+.sound .waves { display: none; }
+.sound[aria-pressed="true"] { color: var(--accent); }
+.sound[aria-pressed="true"] .waves { display: inline; }
+.sound[aria-pressed="true"] .mute { display: none; }
+.sound.nudge::after { content: ""; position: absolute; top: 6px; right: 6px; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: nudge 1.8s ease-out infinite; }
+@keyframes nudge { 0% { box-shadow: 0 0 0 0 rgba(255, 90, 54, .55); } 80%, 100% { box-shadow: 0 0 0 9px rgba(255, 90, 54, 0); } }
+@media (max-width: 700px) { .sound span { display: none; } }

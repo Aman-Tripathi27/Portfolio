@@ -3,11 +3,22 @@
 
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { createSound } from './sound.js';
 
 const body = document.body;
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const stopEls = [...document.querySelectorAll('.stop')];
 const viewToggle = document.getElementById('viewToggle');
+const soundToggle = document.getElementById('soundToggle');
+const sound = createSound();
+
+async function setSound(onOff) {
+  const on = await sound.setOn(onOff);
+  soundToggle.setAttribute('aria-pressed', String(!!on));
+  soundToggle.title = on ? 'Turn sound off' : 'Turn sound on';
+  soundToggle.classList.remove('nudge');
+}
+soundToggle.addEventListener('click', () => setSound(!sound.on));
 stopEls.forEach((el) => el.style.setProperty('--c', el.dataset.color));
 
 // Stops sit at evenly spaced points along the road (fraction of its length).
@@ -28,6 +39,7 @@ function setListMode(on) {
   body.classList.toggle('list-mode', on);
   viewToggle.textContent = on ? 'Drive view' : 'List view';
   if (on) {
+    if (sound.on) setSound(false);
     body.classList.remove('is-3d');
     world?.pause();
     scrollTo(0, 0);
@@ -60,6 +72,7 @@ document.addEventListener('click', (e) => {
     return;
   }
   e.preventDefault();
+  sound.click();
   if (el.matches('[data-next]')) world.step(1);
   else if (el.matches('[data-prev]')) world.step(-1);
   else world.goTo(el.dataset.goto === 'last' ? LAST : +el.dataset.goto);
@@ -673,7 +686,7 @@ function buildWorld(data) {
     const b = document.createElement('button');
     b.type = 'button'; b.style.left = ((U[i] - U[0]) / span) * 100 + '%'; b.style.setProperty('--c', el.dataset.color);
     b.innerHTML = `<span>${i === 0 ? 'Start' : el.dataset.title}</span>`;
-    b.addEventListener('click', () => goTo(i));
+    b.addEventListener('click', () => { sound.click(); goTo(i); });
     track.appendChild(b); return b;
   });
   const marker = document.createElement('i'); marker.className = 'car'; track.appendChild(marker);
@@ -752,6 +765,7 @@ function buildWorld(data) {
     p += dp;
     if (Math.abs(target - p) < 0.00005) p = target;
     const speed = dp / Math.max(dt, 1e-4) * LEN;
+    sound.update(speed, dt);
 
     const pos = curve.getPointAt(p), tan = curve.getTangentAt(p), n = normalAt(p);
     car.position.copy(pos);
@@ -780,6 +794,7 @@ function buildWorld(data) {
     U.forEach((u, i) => { const c = 1 - Math.abs(p - u) / 0.032; if (c > closeness) { closeness = c; near = i; } });
     const showing = closeness > 0.35 ? near : -1;
     if (showing !== active) {
+      if (showing >= 0 && active !== -2) sound.chime(showing);
       active = showing;
       stopEls.forEach((el, i) => el.classList.toggle('active', i === active));
       dots.forEach((d, i) => d.classList.toggle('on', i === active));
