@@ -464,7 +464,7 @@ function buildWorld(data) {
     place(7, g, 11.8, 1);
   }
 
-  // 08 Papers: a giant paper and three pull-request cards
+  // 08 IEEE paper: the paper on an easel, with an award rosette and a stack of books
   {
     const g = new THREE.Group();
     g.add(pedestal(12, 5, '#fbeceb'));
@@ -478,21 +478,64 @@ function buildWorld(data) {
       for (let k = 0; k < 9; k++) { ctx.fillRect(52, 320 + k * 26, (k % 3 === 2 ? 150 : 190), 10); ctx.fillRect(270, 320 + k * 26, (k % 4 === 3 ? 120 : 190), 10); }
       ctx.fillStyle = '#d23c3c'; ctx.font = '500 20px "Geist Mono"'; ctx.fillText('PEER-REVIEWED', w / 2, 600);
     });
-    const paper = mesh(rbox(6.4, 8.6, 0.16, 0.06), '#ffffff'); paper.position.set(-1.8, 5.4, 0); paper.rotation.x = -0.12; g.add(paper);
+    // easel
+    [-1, 1].forEach((s) => { const leg = mesh(new THREE.BoxGeometry(0.3, 10, 0.3), '#9a6b4a'); leg.position.set(s * 2.6, 5.2, -0.6); leg.rotation.z = -s * 0.1; leg.rotation.x = 0.12; g.add(leg); });
+    const backLeg = mesh(new THREE.BoxGeometry(0.3, 9.6, 0.3), '#9a6b4a'); backLeg.position.set(0, 5, -2); backLeg.rotation.x = -0.25; g.add(backLeg);
+    const ledge = mesh(new THREE.BoxGeometry(6.4, 0.3, 0.8), '#9a6b4a'); ledge.position.set(0, 1.9, 0.1); g.add(ledge);
+    const paper = mesh(rbox(6.4, 8.6, 0.16, 0.06), '#ffffff'); paper.position.set(0, 6.3, 0); paper.rotation.x = -0.12; g.add(paper);
     const face = new THREE.Mesh(new THREE.PlaneGeometry(6.2, 8.4), new THREE.MeshStandardMaterial({ map: paperTex, roughness: 0.9 }));
     face.position.z = 0.09; paper.add(face);
-    ['#1205  HRV tuple fix', '#1206  RQA tests', '#1207  RQA docs'].forEach((txt, k) => {
-      const card = mesh(rbox(3.6, 1.5, 0.16, 0.1), '#7b5ce0'); card.position.set(4.2, 1.8 + k * 1.9, 0.4); card.rotation.z = (k - 1) * 0.06; g.add(card);
-      const t = new THREE.Mesh(new THREE.PlaneGeometry(3.3, 1.2), new THREE.MeshBasicMaterial({ transparent: true, map: canvasTex(440, 160, (ctx, w, h) => {
-        ctx.fillStyle = '#fff'; ctx.font = '500 38px "Geist Mono"'; ctx.textBaseline = 'middle'; ctx.fillText('⎇ ' + txt, 18, h / 2);
-      }) }));
-      t.position.z = 0.09; card.add(t);
-    });
-    animators.push((t) => { paper.rotation.y = Math.sin(t * 0.6) * 0.12; });
-    place(8, g, 10.6, -1);
+    // award rosette
+    const rosette = new THREE.Group(); rosette.position.set(4.6, 6.4, 0.6); g.add(rosette);
+    const petals = mesh(new THREE.CylinderGeometry(1.25, 1.25, 0.2, 16), '#d23c3c'); petals.rotation.x = Math.PI / 2; rosette.add(petals);
+    const disc = new THREE.Mesh(new THREE.CircleGeometry(0.9, 32), new THREE.MeshStandardMaterial({ map: canvasTex(256, 256, (ctx, w, h) => {
+      ctx.fillStyle = '#ffd76a'; ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = '#7a1d1d'; ctx.font = '700 64px "Geist"'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('IEEE', w / 2, h / 2 - 14);
+      ctx.font = '500 34px "Geist Mono"'; ctx.fillText('2025', w / 2, h / 2 + 40);
+    }) }));
+    disc.position.z = 0.12; rosette.add(disc);
+    [-0.35, 0.35].forEach((x) => { const tail = mesh(new THREE.BoxGeometry(0.55, 1.6, 0.06), '#b32d2d'); tail.position.set(x, -1.6, -0.05); tail.rotation.z = x * 0.5; rosette.add(tail); });
+    // books
+    ['#2c7dd6', '#e8921a', '#17a05d'].forEach((c, k) => { const b = mesh(rbox(2.6, 0.55, 1.8, 0.08), c); b.position.set(-4.4, 0.98 + k * 0.56, 0.4); b.rotation.y = (k - 1) * 0.18; g.add(b); });
+    animators.push((t) => { rosette.rotation.y = Math.sin(t * 1.2) * 0.4; rosette.position.y = 6.4 + Math.sin(t * 1.6) * 0.2; });
+    place(8, g, 11.4, -1);
   }
 
-  // 09 Contact: a mailbox with its flag up
+  // 09 Open source: a branch that merges back into main, and the pull requests
+  {
+    const g = new THREE.Group();
+    g.add(pedestal(13, 5, '#f1ebff'));
+    const v = (x, y) => new THREE.Vector3(x, y, 0);
+    const main = new THREE.CatmullRomCurve3([v(-3, 1), v(-3, 6), v(-3, 11)]);
+    const branch = new THREE.CatmullRomCurve3([v(-3, 2.6), v(-1.2, 4), v(0.6, 6), v(0.6, 7.6), v(-1.2, 9.2), v(-3, 10)]);
+    g.add(mesh(new THREE.TubeGeometry(main, 40, 0.28, 10), '#2b2d33'));
+    g.add(mesh(new THREE.TubeGeometry(branch, 80, 0.24, 10), '#8250df'));
+    const commit = (p, c, r = 0.55) => { const s = mesh(new THREE.SphereGeometry(r, 18, 12), mat(c, { flatShading: false, roughness: 0.4 })); s.position.copy(p); g.add(s); return s; };
+    [1.6, 4.4, 7.4].forEach((y) => commit(v(-3, y), '#2b2d33'));
+    const branchCommits = [0.3, 0.55, 0.78].map((u) => commit(branch.getPointAt(u), '#8250df'));
+    const merge = commit(v(-3, 10.2), '#23c98d', 0.8);
+    const prs = ['#1205  HRV tuple fix', '#1206  RQA tests', '#1207  RQA docs'].map((txt, k) => {
+      const card = mesh(rbox(4.2, 1.5, 0.18, 0.12), '#8250df'); card.position.set(3.6, 2.4 + k * 2.2, 0.4); card.rotation.z = (k - 1) * 0.05; g.add(card);
+      const t = new THREE.Mesh(new THREE.PlaneGeometry(3.9, 1.2), new THREE.MeshBasicMaterial({ transparent: true, map: canvasTex(520, 160, (ctx, w, h) => {
+        ctx.fillStyle = '#fff'; ctx.font = '500 34px "Geist Mono"'; ctx.textBaseline = 'middle'; ctx.fillText('⎇ ' + txt, 16, h / 2);
+      }) }));
+      t.position.z = 0.1; card.add(t);
+      return card;
+    });
+    const tag = new THREE.Mesh(new THREE.PlaneGeometry(4.2, 1.1), new THREE.MeshBasicMaterial({ transparent: true, map: canvasTex(520, 136, (ctx, w, h) => {
+      ctx.fillStyle = '#17181c'; ctx.beginPath(); ctx.roundRect(0, 0, w, h, 68); ctx.fill();
+      ctx.fillStyle = '#fff'; ctx.font = '600 52px "Geist"'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('NeuroKit2', w / 2, h / 2 + 2);
+    }) }));
+    tag.position.set(3.6, 9.4, 0.4); g.add(tag);
+    animators.push((t) => {
+      merge.scale.setScalar(1 + Math.sin(t * 3) * 0.08);
+      branchCommits.forEach((c, k) => c.scale.setScalar(1 + Math.max(0, Math.sin(t * 2 - k)) * 0.25));
+      prs.forEach((c, k) => { c.position.y = 2.4 + k * 2.2 + Math.sin(t * 1.4 + k) * 0.12; });
+    });
+    place(9, g, 11.2, 1);
+  }
+
+  // 10 Contact: a mailbox with its flag up
   {
     const g = new THREE.Group();
     g.add(pedestal(7, 5, '#ffe9e1'));
@@ -503,7 +546,7 @@ function buildWorld(data) {
     const flag = mesh(new THREE.BoxGeometry(0.1, 0.7, 1.1), '#ffc83d'); flag.position.set(1.4, 7.9, 1.1); g.add(flag);
     const letter = mesh(rbox(1.6, 0.06, 1.1, 0.03), '#ffffff'); letter.position.set(0, 7.5, 2.6); g.add(letter);
     animators.push((t) => { letter.position.y = 7.4 + Math.sin(t * 2) * 0.5; letter.rotation.z = Math.sin(t * 1.3) * 0.3; flag.rotation.x = Math.sin(t * 3) * 0.12; });
-    place(9, g, 9.4, 1);
+    place(10, g, 9.4, -1);
   }
 
   // ---------- gates at the start and the finish ----------
@@ -616,7 +659,9 @@ function buildWorld(data) {
   let puffIdx = 0;
 
   // ================================================================ driving
-  let p = U[0], target = U[0], t = 0, running = false, raf = 0, lastInput = 0;
+  // a link like #stop-paper starts the car at that stop
+  const hashStop = () => Math.max(0, stopEls.findIndex((el) => '#' + el.id === location.hash));
+  let p = U[hashStop()], target = p, t = 0, running = false, raf = 0, lastInput = 0;
   let smoothedLook = new THREE.Vector3(), first = true, active = -2;
   const clock = new THREE.Clock();
   const track = document.getElementById('track');
@@ -641,6 +686,7 @@ function buildWorld(data) {
     if (i >= 0 && i <= LAST) goTo(i);
   }
   const nudge = (d) => { target = clampU(target + d); lastInput = performance.now(); };
+  addEventListener('hashchange', () => goTo(hashStop()));
 
   // input: wheel / trackpad
   addEventListener('wheel', (e) => {
