@@ -750,6 +750,8 @@ function buildWorld(data) {
       .addScaledVector(n, narrow ? 0 : 3)
       .add(tmp.set(0, narrow ? 13 : 10, 0));
     look.copy(pos).addScaledVector(tan, 7).add(tmp.set(0, 1.5, 0));
+    // at the start, aim left of the car so it sits to the right of the intro card
+    if (near === 0 && !narrow) look.addScaledVector(n, -6 * Math.max(0, closeness));
     if (lm) {
       const rp = curve.getPointAt(U[near]);
       const toLm = new THREE.Vector3(lm.pos.x - rp.x, 0, lm.pos.z - rp.z).normalize();

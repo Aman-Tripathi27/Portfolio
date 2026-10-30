@@ -161,3 +161,12 @@ body.booting .stop { transition: none !important; }
   .track { left: 24px; }
 }
 .hud__brand, .hud__links a, .hud__links button { white-space: nowrap; }
+
+/* tablets and desktops: the intro sits on a frosted card so it never fights the scene */
+@media (min-width: 701px) {
+  body.is-3d .stop--intro { width: min(580px, calc(100vw - 44px)); padding: 24px 26px 26px; border-radius: 24px; background: var(--paper);
+    backdrop-filter: blur(14px) saturate(1.2); -webkit-backdrop-filter: blur(14px) saturate(1.2);
+    box-shadow: 0 30px 60px -30px rgba(20, 30, 40, .45); }
+  body.is-3d .stop--intro h1 { font-size: clamp(40px, 5vw, 68px); text-shadow: none; }
+  body.is-3d .stop--intro .lede { font-size: 16px; text-shadow: none; color: var(--ink-2); }
+}
