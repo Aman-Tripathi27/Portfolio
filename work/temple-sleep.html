@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sleep onset &amp; offset at Temple · Aman Tripathi</title>
+  <meta name="description" content="Sleep onset and offset detection from wrist PPG and accelerometer at Temple (Eternal), including a brief-movement detector shipped to the production app.">
+  <link rel="canonical" href="https://amantripathii.netlify.app/work/temple-sleep.html">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2317150f'/%3E%3Cpath d='M4 18h6l2-6 4 12 3-9 2 3h7' fill='none' stroke='%23d12a3f' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <script>try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+</head>
+<body>
+  <nav class="nav" id="nav" aria-label="Main">
+    <a class="nav__brand" href="../index.html" aria-label="Aman Tripathi, home">
+      <svg viewBox="0 0 26 16" aria-hidden="true"><path d="M1 9h5l2-5 4 10 3-8 2 3h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Aman Tripathi
+    </a>
+    <ul class="nav__links">
+      <li><a href="../index.html#work">Work</a></li>
+      <li><a href="../index.html#experience">Experience</a></li>
+      <li><a href="../index.html#papers">Papers</a></li>
+      <li><a href="../index.html#about">About</a></li>
+    </ul>
+    <button class="nav__btn" id="pauseBtn" type="button" aria-pressed="false" title="Pause signals">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><g class="i-pause"><rect x="4" y="3" width="2.6" height="10" rx="1" fill="currentColor"/><rect x="9.4" y="3" width="2.6" height="10" rx="1" fill="currentColor"/></g><path class="i-play" d="M5 3.2v9.6L12.6 8z" fill="currentColor" style="display:none"/></svg>
+      <span class="sr-only">Pause signals</span>
+    </button>
+    <button class="nav__btn" id="themeBtn" type="button" title="Switch theme">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h3l1.5-4 3 8 2-5 1 1H15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="theme-label" id="themeLabel">Paper</span>
+    </button>
+    <a class="nav__cta" href="../index.html#contact">Contact</a>
+  </nav>
+
+  <main class="wrap">
+    <header class="cs-hero">
+      <div class="crumbs mono"><a href="../index.html#work">Work</a><span>/</span><span>Industry · Temple (Eternal) · 2026</span></div>
+      <h1>Sleep onset &amp; offset <em>from the wrist</em></h1>
+      <p class="cs-answer">When did you fall asleep, and when did you wake? Answered from a wearable's PPG and accelerometer, on real consumer hardware, with a brief-movement detector now running in the production app.</p>
+      <div class="cs-links">
+        <a class="btn btn--solid" href="../index.html#contact">Ask me about it</a>
+        <a class="btn" href="../images/Resume.pdf" target="_blank" rel="noopener">Résumé ↗</a>
+      </div>
+    </header>
+
+    <div class="cs-visual grid-paper">
+      <div class="card__hud mono"><span>One night · illustrative, not company data</span><span class="on">Onset · brief movements · offset</span></div>
+      <canvas data-preview="sleep" role="img" aria-label="An illustrative night: heart rate from PPG falls after sleep onset and rises before offset, while accelerometer activity is high before onset and after offset, with a few brief movements during sleep highlighted."></canvas>
+    </div>
+
+    <div class="cs-layout">
+      <aside class="spec" aria-label="Role facts">
+        <dl>
+          <div><dt>Role</dt><dd>Deep Learning Engineer Intern</dd></div>
+          <div><dt>Company</dt><dd>Temple (Eternal), Gurugram</dd></div>
+          <div><dt>When</dt><dd>March – July 2026</dd></div>
+          <div><dt>Signals</dt><dd>Wrist PPG, accelerometer</dd></div>
+          <div><dt>Shipped</dt><dd>Brief-movement detector, in the production app</dd></div>
+          <div><dt>Models</dt><dd>CNN-LSTM, LSTM, Transformer, XGBoost, threshold baselines</dd></div>
+          <div><dt>Metrics</dt><dd>Epoch accuracy, F1, temporal boundary error</dd></div>
+          <div><dt>Stack</dt><dd>Python, PyTorch, SciPy</dd></div>
+        </dl>
+      </aside>
+
+      <article class="cs-body">
+        <h2><span class="mono">01 · The problem</span>Real nights, real hardware</h2>
+        <p>A sleep app lives or dies on two timestamps: when you fell asleep and when you woke up. Temple's app estimates
+          them from a wrist wearable, using the <strong>PPG</strong> sensor for heart signals and the <strong>accelerometer</strong>
+          for movement. Unlike a lab study, the data comes from consumer hardware on people's own wrists, in their own beds,
+          with all the variation that brings.</p>
+        <p>The production system was heuristic. My job was to make it more robust and to explore where machine learning could take it.</p>
+
+        <h2><span class="mono">02 · What shipped</span>A brief-movement detector</h2>
+        <p>Short movements during sleep, like turning over or shifting an arm, matter: they mark restless periods and can
+          be mistaken for waking. I built an algorithm on accelerometer data that <strong>captures these short in-sleep
+          movements</strong>, and worked with the product team to ship it to the production app.</p>
+        <p>Alongside it, I improved the robustness of the existing heuristic onset/offset detection on wearable PPG and
+          accelerometer signals.</p>
+
+        <h2><span class="mono">03 · The ML track</span>Benchmarking a learned detector</h2>
+        <p>With the team, I worked on an ML approach to onset and offset detection, framed as finding the sleep/wake
+          boundaries in a night of epoch-level features.</p>
+        <ol class="pipeline">
+          <li><b>Preprocessing</b>Pipelines for raw PPG and accelerometer recordings: artifact rejection, band-pass filtering and epoch-level feature extraction.</li>
+          <li><b>Baselines</b>Threshold rules like the production heuristic, and XGBoost on epoch features.</li>
+          <li><b>Sequence models</b><strong>CNN-LSTM hybrids</strong>, where convolutions capture local signal shape and the LSTM carries context across the night, compared against LSTM and Transformer models.</li>
+          <li><b>Evaluation</b>Epoch-level accuracy and F1, plus temporal boundary error: how many minutes the predicted onset or offset lands from the true one.</li>
+        </ol>
+
+        <h2><span class="mono">04 · Where it led</span>From one product to open tools</h2>
+        <p>Working on real wrists showed me how much depends on the signal before any model sees it. That is what my
+          open-source work since has focused on: <a href="wrist-ppg.html">cleaning motion out of wrist PPG</a> with the IMU,
+          <a href="mobile-eeg.html">scoring EEG quality while people move</a>, and
+          <a href="glucotrace.html">representation learning for glucose</a>.</p>
+        <p class="muted" style="font-size:14px">The night shown above is drawn for illustration. No Temple data, code or results appear on this site.</p>
+      </article>
+    </div>
+
+    <nav class="cs-next" aria-label="More case studies">
+      <a href="wrist-ppg.html"><span class="mono">← Previous</span><b>Wrist PPG motion cleaning</b></a>
+      <a href="glucotrace.html"><span class="mono">Next →</span><b>GlucoTrace</b></a>
+    </nav>
+  </main>
+
+  <footer class="wrap footer mono" style="margin-top:0">
+    <span>© 2026 Aman Tripathi</span>
+    <a href="../index.html">Back to home</a>
+    <a href="mailto:amantripathi3273@gmail.com">amantripathi3273@gmail.com</a>
+  </footer>
+
+  <script type="module">
+    import { initChrome } from '../assets/js/core.js';
+    import { mountAll } from '../assets/js/previews.js';
+    initChrome();
+    mountAll();
+  </script>
+</body>
+</html>

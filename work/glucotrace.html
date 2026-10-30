@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GlucoTrace · Aman Tripathi</title>
+  <meta name="description" content="GlucoTrace turns a day of continuous glucose monitor data into a 128-number fingerprint. A 511k-parameter Transformer with pre-registered evaluation, on PyPI with a DOI.">
+  <link rel="canonical" href="https://amantripathii.netlify.app/work/glucotrace.html">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2317150f'/%3E%3Cpath d='M4 18h6l2-6 4 12 3-9 2 3h7' fill='none' stroke='%23d12a3f' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <script>try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+</head>
+<body>
+  <nav class="nav" id="nav" aria-label="Main">
+    <a class="nav__brand" href="../index.html" aria-label="Aman Tripathi, home">
+      <svg viewBox="0 0 26 16" aria-hidden="true"><path d="M1 9h5l2-5 4 10 3-8 2 3h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Aman Tripathi
+    </a>
+    <ul class="nav__links">
+      <li><a href="../index.html#work">Work</a></li>
+      <li><a href="../index.html#experience">Experience</a></li>
+      <li><a href="../index.html#papers">Papers</a></li>
+      <li><a href="../index.html#about">About</a></li>
+    </ul>
+    <button class="nav__btn" id="pauseBtn" type="button" aria-pressed="false" title="Pause signals">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><g class="i-pause"><rect x="4" y="3" width="2.6" height="10" rx="1" fill="currentColor"/><rect x="9.4" y="3" width="2.6" height="10" rx="1" fill="currentColor"/></g><path class="i-play" d="M5 3.2v9.6L12.6 8z" fill="currentColor" style="display:none"/></svg>
+      <span class="sr-only">Pause signals</span>
+    </button>
+    <button class="nav__btn" id="themeBtn" type="button" title="Switch theme">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h3l1.5-4 3 8 2-5 1 1H15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="theme-label" id="themeLabel">Paper</span>
+    </button>
+    <a class="nav__cta" href="../index.html#contact">Contact</a>
+  </nav>
+
+  <main class="wrap">
+    <header class="cs-hero">
+      <div class="crumbs mono"><a href="../index.html#work">Work</a><span>/</span><span>Open source · 2026</span></div>
+      <h1>Gluco<em>Trace</em></h1>
+      <p class="cs-answer">Turn a day of continuous glucose data into a 128-number fingerprint, then compare it with, search for and visualise days that look like it.</p>
+      <div class="cs-links">
+        <a class="btn btn--solid" href="https://github.com/Aman-Tripathi27/GlucoTrace" target="_blank" rel="noopener">View the repo ↗</a>
+        <a class="btn" href="https://pypi.org/project/glucotrace/" target="_blank" rel="noopener">PyPI ↗</a>
+        <a class="btn" href="https://aman-tripathi27.github.io/GlucoTrace/" target="_blank" rel="noopener">Project site ↗</a>
+      </div>
+    </header>
+
+    <div class="cs-visual grid-paper">
+      <div class="card__hud mono"><span>Query day · BIG IDEAs, PhysioNet</span><span class="on">5 nearest days</span></div>
+      <canvas data-preview="cgm" role="img" aria-label="A 24-hour glucose curve is drawn, then its five most similar days from the dataset appear on top, with cosine similarities from 0.987 to 0.828."></canvas>
+    </div>
+
+    <div class="cs-layout">
+      <aside class="spec" aria-label="Project facts">
+        <dl>
+          <div><dt>Signal</dt><dd>Continuous glucose (CGM), 24-hour days</dd></div>
+          <div><dt>Data</dt><dd>Public data from three countries, incl. BIG IDEAs (PhysioNet) and Colas et al. (PLOS ONE)</dd></div>
+          <div><dt>Model</dt><dd>Transformer encoder, 511k parameters, 2 MB checkpoint</dd></div>
+          <div><dt>Output</dt><dd>128-number fingerprint per day</dd></div>
+          <div><dt>Evaluation</dt><dd>Pre-registered, participant-disjoint splits pinned by SHA-256</dd></div>
+          <div><dt>Quality</dt><dd>~5,000 lines of typed Python, 109 tests, CI on every push</dd></div>
+          <div><dt>Release</dt><dd>PyPI · MIT · <a href="https://doi.org/10.5281/zenodo.22935995" target="_blank" rel="noopener">Zenodo DOI</a></dd></div>
+          <div><dt>Status</dt><dd>Research software</dd></div>
+        </dl>
+      </aside>
+
+      <article class="cs-body">
+        <h2><span class="mono">01 · The question</span>What does a glucose day look like, as numbers?</h2>
+        <p>A continuous glucose monitor records a reading every five minutes, which is 288 numbers a day. Researchers who want
+          to ask "which days look like this one?" usually fall back on summary statistics like mean, time in range or variability,
+          and those throw away the <strong>shape</strong> of the day: when the spikes come, how fast they fall, how flat the night is.</p>
+        <p>GlucoTrace learns a compact representation of that shape. Two days with similar curves get similar fingerprints,
+          so days can be compared, searched and clustered with ordinary vector maths.</p>
+
+        <h2><span class="mono">02 · How it works</span>From export file to fingerprint</h2>
+        <ol class="pipeline">
+          <li><b>Import</b>A plain <code>timestamp,glucose</code> CSV, a Dexcom Clarity export or a FreeStyle Libre LibreView export. Time zones are respected, Low/High readings are handled explicitly, and files whose values contradict the declared unit are rejected.</li>
+          <li><b>Canonical day</b>Each 24-hour window carries an explicit observation mask and gap age. Missing readings stay missing; nothing is interpolated.</li>
+          <li><b>Encode</b>A small Transformer reads the day and returns 128 numbers. The released checkpoint ignores clock time, so fingerprints describe the curve itself.</li>
+          <li><b>Use it</b>Compare two days by cosine similarity, find the nearest days in a dataset, or build an offline HTML report.</li>
+        </ol>
+
+        <figure class="figure">
+          <img src="../assets/img/glucotrace-report.jpg" alt="The GlucoTrace HTML report: a query glucose day overlaid with its five most similar days, and a table of similarities." loading="lazy" width="1200" height="1186">
+          <figcaption>Output of <code>glucotrace report</code> for a public BIG IDEAs day. The top three matches are other days from the same participant.</figcaption>
+        </figure>
+
+        <h2><span class="mono">03 · Results</span>Stable when readings go missing</h2>
+        <div class="stats">
+          <div><b>0.965</b><span>Median cosine similarity after removing 30% of readings at random, on new people</span></div>
+          <div><b>128</b><span>Numbers per day, from 288 raw readings</span></div>
+          <div><b>14</b><span>CLI commands, from <code>encode</code> to <code>verify-protocol</code></span></div>
+        </div>
+
+        <h2><span class="mono">04 · Built to be checked</span>Evaluation you can verify</h2>
+        <ul>
+          <li><strong>Pre-registered.</strong> Thresholds, probes and candidate budgets were written down before training, and the test partition is opened once.</li>
+          <li><strong>Leakage-resistant by construction.</strong> Participant-level splits are tied to checksummed manifests, and the loader refuses a stale split.</li>
+          <li><strong>Verifiable by anyone.</strong> <code>glucotrace verify-protocol --all</code> checks every published manifest and split against the SHA-256 values in the declaration documents. The tests run the same check on every push.</li>
+          <li><strong>Small and hackable.</strong> CPU training in minutes; the whole package is about 5,000 lines of typed Python.</li>
+        </ul>
+
+        <h2><span class="mono">05 · Run it</span>Four commands</h2>
+<pre class="code"><span class="p">$</span> pip install glucotrace
+<span class="p">$</span> glucotrace download-model                         <span class="c"># 2 MB, SHA-256 verified</span>
+<span class="p">$</span> glucotrace encode my-day.csv --output fingerprint.json
+<span class="p">$</span> glucotrace compare monday.csv tuesday.csv          <span class="c"># cosine similarity</span>
+<span class="p">$</span> glucotrace report my-day.csv --manifest manifest.json --output report.html</pre>
+      </article>
+    </div>
+
+    <nav class="cs-next" aria-label="More case studies">
+      <a href="temple-sleep.html"><span class="mono">← Previous</span><b>Sleep onset &amp; offset</b></a>
+      <a href="mobile-eeg.html"><span class="mono">Next →</span><b>Mobile EEG signal quality</b></a>
+    </nav>
+  </main>
+
+  <footer class="wrap footer mono" style="margin-top:0">
+    <span>© 2026 Aman Tripathi</span>
+    <span>Curves: BIG IDEAs, PhysioNet (ODC-By 1.0)</span>
+    <a href="mailto:amantripathi3273@gmail.com">amantripathi3273@gmail.com</a>
+  </footer>
+
+  <script type="module">
+    import { initChrome } from '../assets/js/core.js';
+    import { mountAll } from '../assets/js/previews.js';
+    initChrome();
+    mountAll();
+  </script>
+</body>
+</html>

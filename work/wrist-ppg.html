@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wrist PPG motion cleaning · Aman Tripathi</title>
+  <meta name="description" content="Cleaning motion out of wrist PPG with the watch's own accelerometer and gyroscope. Mean beat F1 0.432 to 0.610, no training, 0.34 s per 5-minute record.">
+  <link rel="canonical" href="https://amantripathii.netlify.app/work/wrist-ppg.html">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2317150f'/%3E%3Cpath d='M4 18h6l2-6 4 12 3-9 2 3h7' fill='none' stroke='%23d12a3f' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <script>try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+</head>
+<body>
+  <nav class="nav" id="nav" aria-label="Main">
+    <a class="nav__brand" href="../index.html" aria-label="Aman Tripathi, home">
+      <svg viewBox="0 0 26 16" aria-hidden="true"><path d="M1 9h5l2-5 4 10 3-8 2 3h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Aman Tripathi
+    </a>
+    <ul class="nav__links">
+      <li><a href="../index.html#work">Work</a></li>
+      <li><a href="../index.html#experience">Experience</a></li>
+      <li><a href="../index.html#papers">Papers</a></li>
+      <li><a href="../index.html#about">About</a></li>
+    </ul>
+    <button class="nav__btn" id="pauseBtn" type="button" aria-pressed="false" title="Pause signals">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><g class="i-pause"><rect x="4" y="3" width="2.6" height="10" rx="1" fill="currentColor"/><rect x="9.4" y="3" width="2.6" height="10" rx="1" fill="currentColor"/></g><path class="i-play" d="M5 3.2v9.6L12.6 8z" fill="currentColor" style="display:none"/></svg>
+      <span class="sr-only">Pause signals</span>
+    </button>
+    <button class="nav__btn" id="themeBtn" type="button" title="Switch theme">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h3l1.5-4 3 8 2-5 1 1H15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="theme-label" id="themeLabel">Paper</span>
+    </button>
+    <a class="nav__cta" href="../index.html#contact">Contact</a>
+  </nav>
+
+  <main class="wrap">
+    <header class="cs-hero">
+      <div class="crumbs mono"><a href="../index.html#work">Work</a><span>/</span><span>Signal processing · 2026</span></div>
+      <h1>Wrist PPG <em>motion</em> cleaning</h1>
+      <p class="cs-answer">The watch's own accelerometer and gyroscope predict the motion in the pulse signal, and that prediction is subtracted. No training, and a 5-minute recording takes 0.34 s.</p>
+      <div class="cs-links">
+        <a class="btn btn--solid" href="https://github.com/Aman-Tripathi27/ppg-motion-artifact-cleaning" target="_blank" rel="noopener">View the repo ↗</a>
+        <a class="btn" href="https://github.com/Aman-Tripathi27/ppg-motion-artifact-cleaning/blob/main/method.md" target="_blank" rel="noopener">Read method.md ↗</a>
+      </div>
+    </header>
+
+    <div class="cs-visual grid-paper">
+      <div class="card__hud mono"><span>Raw</span><span class="on">WRIST · s3 running · 10 s</span></div>
+      <canvas data-preview="ppg" role="img" aria-label="Ten seconds of real wrist PPG while running, alternating between the raw signal and the cleaned signal, with ECG reference beats below."></canvas>
+    </div>
+
+    <div class="cs-layout">
+      <aside class="spec" aria-label="Project facts">
+        <dl>
+          <div><dt>Signal</dt><dd>Wrist PPG, 256 Hz</dd></div>
+          <div><dt>Reference</dt><dd>Low-noise and wide-range accelerometers, gyroscope</dd></div>
+          <div><dt>Data</dt><dd><a href="https://physionet.org/content/wrist/1.0.0/" target="_blank" rel="noopener">WRIST</a>, PhysioNet: walk, run, low and high-resistance bike</dd></div>
+          <div><dt>Method</dt><dd>IMU-referenced adaptive noise cancellation, zero-phase filters</dd></div>
+          <div><dt>Training</dt><dd>None. Deterministic, no network access</dd></div>
+          <div><dt>Score</dt><dd>Beat F1, peaks within ±150 ms of ECG beats</dd></div>
+          <div><dt>Hold-out</dt><dd>Subjects s8 and s9, set aside before tuning</dd></div>
+          <div><dt>Runtime</dt><dd>0.34 s per 5-min record, laptop CPU</dd></div>
+        </dl>
+      </aside>
+
+      <article class="cs-body">
+        <h2><span class="mono">01 · The question</span>Can the watch clean its own pulse?</h2>
+        <p>Optical heart rate on the wrist works by shining light into the skin and watching how much comes back. When the
+          arm swings, the sensor shifts against the skin, and the movement can be larger than the pulse itself.
+          The same watch also carries an accelerometer and a gyroscope that measure that movement directly.</p>
+        <p>This project uses them as a reference: <strong>predict the motion part of the PPG from the IMU, then subtract
+          it</strong>, keeping the output a real waveform from the recorded PPG, not a set of beat templates.</p>
+
+        <h2><span class="mono">02 · Method</span>Five steps, all zero-phase</h2>
+        <ol class="pipeline">
+          <li><b>Repair</b>Non-finite samples and ADC rails (a value stuck for 0.1 s or more) are bridged on the original time grid.</li>
+          <li><b>Cardiac band</b>PPG and IMU are band-passed to 0.4–4 Hz with a third-order Butterworth, run forwards and backwards.</li>
+          <li><b>Adaptive noise cancellation</b>In overlapping 8-second blocks, a ridge-regularised 16-tap FIR model per IMU axis predicts the motion in the PPG. A block's prediction is subtracted only if it holds up on held-out 1-second chunks of the same block.</li>
+          <li><b>Output band</b>The result is band-passed to 1.4–4 Hz to remove the remaining low-frequency motion.</li>
+          <li><b>Two-peak correction</b>A pulse-rate track, with IMU-heavy frequencies down-weighted, finds places where one beat has split into two bumps and smooths the smaller one away.</li>
+        </ol>
+        <p>Zero-phase filtering matters because beats are scored within ±150 ms. A causal filter would delay every peak;
+          here the median peak offset is −12 ms and no constant shift improves F1.</p>
+
+        <h2><span class="mono">03 · Results</span>Up to 2.4× better beat detection</h2>
+        <div class="stats">
+          <div><b>0.610</b><span>Mean beat F1 across development subjects, from 0.432 raw</span></div>
+          <div><b>0.706</b><span>High-resistance cycling, from 0.295 raw</span></div>
+          <div><b>0.34 s</b><span>To clean a 5-minute recording on a laptop</span></div>
+        </div>
+
+        <div class="legend"><span><i style="background:var(--ghost)"></i>Raw PPG</span><span><i style="background:var(--accent)"></i>Cleaned</span></div>
+        <div class="bars" role="img" aria-label="Mean beat F1 by activity, raw versus cleaned">
+          <div class="bar-row" title="Running: raw 0.572, cleaned 0.666"><span>Run</span><div class="bar-track"><span class="b-raw" style="width:57.2%"></span><span class="b-new" style="width:66.6%"></span></div><span class="num">0.666</span></div>
+          <div class="bar-row" title="Bike, low resistance: raw 0.401, cleaned 0.643"><span>Bike low</span><div class="bar-track"><span class="b-raw" style="width:40.1%"></span><span class="b-new" style="width:64.3%"></span></div><span class="num">0.643</span></div>
+          <div class="bar-row" title="Bike, high resistance: raw 0.295, cleaned 0.706"><span>Bike high</span><div class="bar-track"><span class="b-raw" style="width:29.5%"></span><span class="b-new" style="width:70.6%"></span></div><span class="num">0.706</span></div>
+          <div class="bar-row" title="All development subjects: raw 0.432, cleaned 0.610"><span>All</span><div class="bar-track"><span class="b-raw" style="width:43.2%"></span><span class="b-new" style="width:61%"></span></div><span class="num">0.610</span></div>
+        </div>
+
+        <div class="table-scroll">
+          <table class="table">
+            <thead><tr><th>Mean F1 (±150 ms)</th><th class="num">Run</th><th class="num">Bike low</th><th class="num">Bike high</th><th class="num">All dev.</th></tr></thead>
+            <tbody>
+              <tr><td>Raw PPG</td><td class="num">0.572</td><td class="num">0.401</td><td class="num">0.295</td><td class="num">0.432</td></tr>
+              <tr><td>This cleaner</td><td class="num">0.666</td><td class="num">0.643</td><td class="num">0.706</td><td class="num">0.610</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2><span class="mono">04 · Decisions</span>Why it's built this way</h2>
+        <ul>
+          <li><strong>The output band is the biggest single gain.</strong> Most motion energy sits below the pulse band; the 1.4–4 Hz band alone takes raw PPG from 0.432 to 0.590 mean F1.</li>
+          <li><strong>Cancellation with safeguards.</strong> During running the IMU predicts arm motion well, and switching cancellation off costs one running subject 18 F1 points. A held-out check and a PPG–IMU coherence gate stop uncertain fits from being subtracted.</li>
+          <li><strong>Insensitive constants.</strong> Changing the two-peak limits by ±20% moves pooled F1 by at most 0.0008, and leave-one-subject-out tuning did not beat the defaults.</li>
+          <li><strong>Robust inputs.</strong> Missing or reordered IMU channels, NaN gaps, flat sensors and ADC rails are all handled, and the output is always finite and the same length as the input.</li>
+        </ul>
+
+        <h2><span class="mono">05 · Run it</span>One command</h2>
+<pre class="code"><span class="c"># clean one WRIST record, write the cleaned PPG</span>
+<span class="p">$</span> pip install -r requirements.txt
+<span class="p">$</span> python run_inference.py wrist/1.0.0/s1_walk cleaned_s1_walk.npy
+
+<span class="c"># or from Python</span>
+from run_inference import clean_ppg
+cleaned = clean_ppg(record.p_signal, record.sig_name, record.fs)</pre>
+      </article>
+    </div>
+
+    <nav class="cs-next" aria-label="More case studies">
+      <a href="mobile-eeg.html"><span class="mono">← Previous</span><b>Mobile EEG signal quality</b></a>
+      <a href="temple-sleep.html"><span class="mono">Next →</span><b>Sleep onset &amp; offset</b></a>
+    </nav>
+  </main>
+
+  <footer class="wrap footer mono" style="margin-top:0">
+    <span>© 2026 Aman Tripathi</span>
+    <span>Signal shown: WRIST dataset, PhysioNet, record s3_run</span>
+    <a href="mailto:amantripathi3273@gmail.com">amantripathi3273@gmail.com</a>
+  </footer>
+
+  <script type="module">
+    import { initChrome } from '../assets/js/core.js';
+    import { mountAll } from '../assets/js/previews.js';
+    initChrome();
+    mountAll();
+  </script>
+</body>
+</html>

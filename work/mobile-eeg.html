@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mobile EEG signal quality · Aman Tripathi</title>
+  <meta name="description" content="A rules-only, per-sensor quality score for EEG recorded while people walk and jog, using only 32 scalp sensors and one head motion sensor.">
+  <link rel="canonical" href="https://amantripathii.netlify.app/work/mobile-eeg.html">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2317150f'/%3E%3Cpath d='M4 18h6l2-6 4 12 3-9 2 3h7' fill='none' stroke='%23d12a3f' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <script>try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+</head>
+<body>
+  <nav class="nav" id="nav" aria-label="Main">
+    <a class="nav__brand" href="../index.html" aria-label="Aman Tripathi, home">
+      <svg viewBox="0 0 26 16" aria-hidden="true"><path d="M1 9h5l2-5 4 10 3-8 2 3h8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Aman Tripathi
+    </a>
+    <ul class="nav__links">
+      <li><a href="../index.html#work">Work</a></li>
+      <li><a href="../index.html#experience">Experience</a></li>
+      <li><a href="../index.html#papers">Papers</a></li>
+      <li><a href="../index.html#about">About</a></li>
+    </ul>
+    <button class="nav__btn" id="pauseBtn" type="button" aria-pressed="false" title="Pause signals">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><g class="i-pause"><rect x="4" y="3" width="2.6" height="10" rx="1" fill="currentColor"/><rect x="9.4" y="3" width="2.6" height="10" rx="1" fill="currentColor"/></g><path class="i-play" d="M5 3.2v9.6L12.6 8z" fill="currentColor" style="display:none"/></svg>
+      <span class="sr-only">Pause signals</span>
+    </button>
+    <button class="nav__btn" id="themeBtn" type="button" title="Switch theme">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h3l1.5-4 3 8 2-5 1 1H15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="theme-label" id="themeLabel">Paper</span>
+    </button>
+    <a class="nav__cta" href="../index.html#contact">Contact</a>
+  </nav>
+
+  <main class="wrap">
+    <header class="cs-hero">
+      <div class="crumbs mono"><a href="../index.html#work">Work</a><span>/</span><span>Research · 2026</span></div>
+      <h1>Mobile EEG signal <em>quality</em></h1>
+      <p class="cs-answer">A score that says, every 2 seconds, which EEG sensors to trust while someone walks or jogs, built only from what a wearable cap would have.</p>
+      <div class="cs-links">
+        <a class="btn btn--solid" href="https://github.com/Aman-Tripathi27/mobile-eeg-signal-quality" target="_blank" rel="noopener">View the repo ↗</a>
+        <a class="btn" href="https://github.com/Aman-Tripathi27/mobile-eeg-signal-quality/tree/main/reports" target="_blank" rel="noopener">Read the reports ↗</a>
+      </div>
+    </header>
+
+    <div class="cs-visual grid-paper">
+      <div class="card__hud mono"><span>32 scalp sensors · mean of 10 people</span><span class="on">0.0 m/s</span></div>
+      <canvas data-preview="eeg" role="img" aria-label="A top-down map of 32 EEG sensors. As treadmill speed rises from standing to jogging, more sensors turn from green to amber and red, showing more motion artifact."></canvas>
+    </div>
+
+    <div class="cs-layout">
+      <aside class="spec" aria-label="Project facts">
+        <dl>
+          <div><dt>Signal</dt><dd>32-channel scalp EEG + one head IMU (accelerometer and gyroscope)</dd></div>
+          <div><dt>Data</dt><dd>Lee et al. 2021 ambulatory EEG (OSF, CC0); PhysioNet motion-artifact EEG</dd></div>
+          <div><dt>Speeds</dt><dd>Standing, 0.8, 1.6 and 2.0 m/s on a treadmill</dd></div>
+          <div><dt>Window</dt><dd>Every sensor, every 2 s</dd></div>
+          <div><dt>Training</dt><dd>None. A decoder is used only as a judge</dd></div>
+          <div><dt>Hold-out</dt><dd>sub-16 to sub-20, never opened while tuning</dd></div>
+          <div><dt>Stack</dt><dd>Python, NumPy, SciPy</dd></div>
+        </dl>
+      </aside>
+
+      <article class="cs-body">
+        <h2><span class="mono">01 · The question</span>Which sensors can you trust on the move?</h2>
+        <p>EEG out of the lab is the obvious next step for wearables, and the obvious problem: every step shakes the cap,
+          the cables and the skin contact. Before anything is decoded from a moving person's brain signal, someone has to say
+          which sensors are worth listening to, sensor by sensor, moment by moment.</p>
+        <p>The setup is deliberately limited to what a real wearable cap would have: <strong>32 scalp sensors and one head
+          motion sensor</strong>. Eye sensors are used only as an answer key for blink detection, never as an input.</p>
+
+        <h2><span class="mono">02 · The score</span>Nine checks, each with a reason</h2>
+        <p>Every sensor gets a 0–1 "worry" from each check every 2 seconds, with yellow and red lines, computed on the
+          decoder's own analysis band. The checks combine into one usability score.</p>
+        <div class="table-scroll">
+          <table class="table">
+            <thead><tr><th>Check</th><th>Flags a sensor when it is…</th></tr></thead>
+            <tbody>
+              <tr><td>Flat</td><td>frozen</td></tr>
+              <tr><td>Clipped</td><td>stuck at the amplifier's ceiling</td></tr>
+              <tr><td>Amplitude z</td><td>much bigger or smaller than the other sensors</td></tr>
+              <tr><td>Neighbour correlation</td><td>unlike all of its neighbours</td></tr>
+              <tr><td>Pop ratio</td><td>jumping suddenly</td></tr>
+              <tr><td>Motion R²</td><td>predictable from the head motion sensor</td></tr>
+              <tr><td>Blink</td><td>carrying a blink, found with a scalp-only detector</td></tr>
+              <tr><td>Muscle edge z</td><td>buzzier than the others at the top of the band</td></tr>
+              <tr><td>Mains hum</td><td>humming, counted only if the band includes 50/60 Hz</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Room-level problems are reported once per recording instead of once per sensor, and mains frequency is detected
+          automatically. The dataset loader also fixes three issues in the raw files: IMU headers pointing at the wrong file,
+          <strong>13–25 ms of clock drift</strong> between EEG and IMU (realigned on shared event markers), and undocumented event codes.</p>
+
+        <h2><span class="mono">03 · Results</span>The score tracks decoding</h2>
+        <div class="stats">
+          <div><b>10 / 10</b><span>People where the score tracks decoding performance across speeds</span></div>
+          <div><b>0.5%</b><span>Hum flags in high-hum recordings, down from 95% of sensor-windows</span></div>
+          <div><b>~90%</b><span>Of real blinks found by the scalp-only detector, ~90% of detections real</span></div>
+        </div>
+        <ul>
+          <li><strong>Hold-out:</strong> on five people never opened while tuning, the score tracks decoding for 4 of 5.</li>
+          <li><strong>Footstep removal:</strong> while jogging, step-template subtraction plus motion regression improves decoding in
+            <strong>10 of 12</strong> people (p = 0.03). Heel strikes are found from the head IMU, after Gwin et al. 2010.</li>
+          <li><strong>Push-type artifacts:</strong> the accelerometer detects them with an AUC of 0.76 on PhysioNet's motion-artifact recordings.</li>
+        </ul>
+
+        <figure class="figure">
+          <img src="../assets/img/eeg-fig2_speed_effects.png" alt="Three panels across treadmill speeds: the share of EEG predictable from head motion rises from 0 to about 0.3, the brain-response strength at Pz falls from about 0.8 to 0.15, and decoding AUC falls from 0.94 to 0.78." loading="lazy" width="1495" height="455">
+          <figcaption>Faster movement means more motion in the signal, a weaker brain response and worse decoding. Grey lines are individual people; blue is the mean of 10.</figcaption>
+        </figure>
+
+        <figure class="figure">
+          <img src="../assets/img/eeg-fig6_blinks_scalp_vs_eye.png" alt="Twenty seconds of forehead EEG with blinks marked by the scalp-only detector, above the eye-sensor answer key; all five blinks line up." loading="lazy" width="1300" height="585">
+          <figcaption>The scalp-only blink detector (top) against the answer key from the eye sensors (bottom). The eye sensors are never an input.</figcaption>
+        </figure>
+
+        <h2><span class="mono">04 · What it taught me</span>Quality is defined by its use</h2>
+        <ul>
+          <li><strong>Quality has to be defined for a use.</strong> Problems the decoder filters out anyway, like hum and high-frequency muscle, should not lower the score.</li>
+          <li><strong>Problems that hit every sensor are environment problems</strong>, and belong in one report per recording.</li>
+          <li><strong>Every number is reproducible.</strong> One script per experiment regenerates its figures and tables.</li>
+        </ul>
+
+        <h2><span class="mono">05 · Run it</span>From download to score</h2>
+<pre class="code"><span class="p">$</span> pip install -r requirements.txt
+<span class="p">$</span> python tools/download_lee.py sub-01 sub-02 sub-03
+<span class="p">$</span> python tools/check_lee.py   <span class="c"># sanity-check the download</span></pre>
+      </article>
+    </div>
+
+    <nav class="cs-next" aria-label="More case studies">
+      <a href="glucotrace.html"><span class="mono">← Previous</span><b>GlucoTrace</b></a>
+      <a href="wrist-ppg.html"><span class="mono">Next →</span><b>Wrist PPG motion cleaning</b></a>
+    </nav>
+  </main>
+
+  <footer class="wrap footer mono" style="margin-top:0">
+    <span>© 2026 Aman Tripathi</span>
+    <span>Data: Lee et al. 2021, OSF r7s9b (CC0)</span>
+    <a href="mailto:amantripathi3273@gmail.com">amantripathi3273@gmail.com</a>
+  </footer>
+
+  <script type="module">
+    import { initChrome } from '../assets/js/core.js';
+    import { mountAll } from '../assets/js/previews.js';
+    initChrome();
+    mountAll();
+  </script>
+</body>
+</html>
