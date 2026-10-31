@@ -129,7 +129,7 @@ body:not(.is-3d) .stop--intro::before { display: none; }
   .hud { top: 10px; left: 10px; right: 10px; }
   .hud__brand { padding: 9px 13px; font-size: 14.5px; }
   .hud__links a[href$=".pdf"] { display: none; }
-  body.is-3d .stop { left: 10px; right: 10px; width: auto; bottom: 84px; padding: 18px 18px; border-radius: 20px; max-height: 52dvh; }
+  body.is-3d .stop { left: 10px; right: 10px; width: auto; bottom: 84px; padding: 18px 18px; border-radius: 20px; max-height: 45dvh; }
   body.is-3d .stop h2 { font-size: 28px; }
   body.is-3d .stop p { font-size: 14.5px; }
   body.is-3d .stop--intro { left: 16px; right: 16px; top: 108px; bottom: auto; transform: translateY(10px); max-height: none; }
@@ -150,10 +150,9 @@ body.booting .stop { transition: none !important; }
 
 @media (max-width: 700px) {
   body.is-3d .hint.only-3d { display: none !important; }
-  body.is-3d .stop--intro { padding: 20px 20px 22px; border-radius: 22px; background: var(--paper);
-    backdrop-filter: blur(14px) saturate(1.2); -webkit-backdrop-filter: blur(14px) saturate(1.2);
-    box-shadow: 0 30px 60px -30px rgba(20, 30, 40, .45); }
-  body.is-3d .stop--intro { top: 76px; padding: 16px 18px 18px; }
+  body.is-3d .stop--intro { padding: 20px 20px 22px; border-radius: 22px; }
+  /* below the HUD and the chat button */
+  body.is-3d .stop--intro { top: 116px; padding: 16px 18px 18px; }
   body.is-3d .stop--intro h1 { font-size: 38px; text-shadow: none; margin-top: 12px; }
   body.is-3d .stop--intro .lede { font-size: 14.5px; margin-top: 10px; text-shadow: none; color: var(--ink-2); }
   body.is-3d .stop--intro .actions { margin-top: 14px; }
@@ -164,9 +163,7 @@ body.booting .stop { transition: none !important; }
 
 /* tablets and desktops: the intro sits on a frosted card so it never fights the scene */
 @media (min-width: 701px) {
-  body.is-3d .stop--intro { width: min(580px, calc(100vw - 44px)); padding: 24px 26px 26px; border-radius: 24px; background: var(--paper);
-    backdrop-filter: blur(14px) saturate(1.2); -webkit-backdrop-filter: blur(14px) saturate(1.2);
-    box-shadow: 0 30px 60px -30px rgba(20, 30, 40, .45); }
+  body.is-3d .stop--intro { width: min(580px, calc(100vw - 44px)); padding: 24px 26px 26px; border-radius: 24px; }
   body.is-3d .stop--intro h1 { font-size: clamp(40px, 5vw, 68px); text-shadow: none; }
   body.is-3d .stop--intro .lede { font-size: 16px; text-shadow: none; color: var(--ink-2); }
 }
@@ -184,17 +181,17 @@ body.booting .stop { transition: none !important; }
 
 /* ==========================================================================
    Liquid glass
-   Translucent surfaces with a lit rim and a sheen that follows the pointer
-   (--gx/--gy, set in drive.js). Chromium browsers also refract the world
-   behind small controls through the #lg-refract SVG filter (html.refract).
+   Clear surfaces with a lit rim and a sheen that follows the pointer
+   (--gx/--gy, set in drive.js). Chromium browsers also bend the scene at
+   each surface's edge through the #lg-refract lens filter (html.refract).
    ========================================================================== */
 .hud__brand, .hud__links, .stepper button, .hint, .stop, .btn, .chip, kbd, .track {
   --gx: 22%; --gy: 0%;
   --sheen: radial-gradient(130% 90% at var(--gx) var(--gy), rgba(255,255,255,.62), rgba(255,255,255,0) 52%);
   --glass: var(--sheen), linear-gradient(165deg, rgba(255,255,255,.36), rgba(255,255,255,.1) 58%, rgba(255,255,255,.24));
-  --glass-strong: var(--sheen), linear-gradient(165deg, rgba(255,255,255,.7), rgba(255,255,255,.46) 60%, rgba(255,255,255,.56));
+  --glass-strong: var(--sheen), linear-gradient(165deg, rgba(255,255,255,.58), rgba(255,255,255,.3) 55%, rgba(255,255,255,.44));
   --glass-dark: radial-gradient(130% 90% at var(--gx) var(--gy), rgba(255,255,255,.3), rgba(255,255,255,0) 50%), linear-gradient(165deg, rgba(34,36,42,.86), rgba(12,13,16,.74));
-  --glass-edge: inset 0 1px 0 rgba(255,255,255,.92), inset 0 -1px 1px rgba(255,255,255,.3), inset 0 0 0 1px rgba(255,255,255,.42), inset 0 0 22px rgba(255,255,255,.18);
+  --glass-edge: inset 1.5px 1.5px 0 -.5px rgba(255,255,255,.95), inset -1px -1px 0 -.5px rgba(255,255,255,.55), inset 0 0 0 1px rgba(255,255,255,.35), inset 0 0 18px rgba(255,255,255,.22), inset 0 -10px 24px -14px rgba(255,255,255,.5);
   --glass-drop: 0 12px 34px -14px rgba(18,38,58,.42), 0 2px 8px -3px rgba(18,38,58,.18);
   --glass-blur: blur(14px) saturate(1.8) brightness(1.05);
 }
@@ -211,10 +208,10 @@ body.booting .stop { transition: none !important; }
 }
 .hint { color: var(--ink); }
 
-/* the cards stay more opaque so text reads cleanly over the scene */
-body.is-3d .stop {
+/* the cards keep a little more frost than the controls so text reads cleanly over the scene */
+body.is-3d .stop, body.is-3d .stop--intro {
   background: var(--glass-strong);
-  backdrop-filter: blur(24px) saturate(1.7) brightness(1.06); -webkit-backdrop-filter: blur(24px) saturate(1.7) brightness(1.06);
+  backdrop-filter: blur(10px) saturate(1.9) brightness(1.05); -webkit-backdrop-filter: blur(10px) saturate(1.9) brightness(1.05);
   box-shadow: var(--glass-edge), 0 30px 60px -30px rgba(18, 38, 58, .5);
 }
 
@@ -244,7 +241,10 @@ body.is-3d .stop {
 
 /* real refraction where the browser supports SVG filters in backdrop-filter */
 html.refract .hud__brand, html.refract .hud__links, html.refract .stepper button:not([data-next]), html.refract .hint, html.refract .track::before {
-  backdrop-filter: url(#lg-refract) blur(7px) saturate(1.9) brightness(1.06);
+  backdrop-filter: url(#lg-refract) blur(3px) saturate(1.9) brightness(1.06);
+}
+html.refract body.is-3d .stop, html.refract .chat {
+  backdrop-filter: url(#lg-refract) blur(9px) saturate(1.9) brightness(1.05);
 }
 
 /* "Try it" controls in the stop cards */
@@ -274,7 +274,7 @@ html.refract .hud__brand, html.refract .hud__links, html.refract .stepper button
 .chat-fab, .chat {
   --gx: 22%; --gy: 0%;
   --sheen: radial-gradient(130% 90% at var(--gx) var(--gy), rgba(255,255,255,.62), rgba(255,255,255,0) 52%);
-  --glass-edge: inset 0 1px 0 rgba(255,255,255,.92), inset 0 -1px 1px rgba(255,255,255,.3), inset 0 0 0 1px rgba(255,255,255,.42), inset 0 0 22px rgba(255,255,255,.18);
+  --glass-edge: inset 1.5px 1.5px 0 -.5px rgba(255,255,255,.95), inset -1px -1px 0 -.5px rgba(255,255,255,.55), inset 0 0 0 1px rgba(255,255,255,.35), inset 0 0 18px rgba(255,255,255,.22), inset 0 -10px 24px -14px rgba(255,255,255,.5);
 }
 .chat-fab {
   position: fixed; z-index: 35; right: 22px; bottom: 84px;
@@ -294,8 +294,8 @@ body:not(.is-3d) .chat-fab { bottom: 22px; }
 .chat {
   position: fixed; z-index: 40; right: 22px; bottom: 84px; width: min(390px, calc(100vw - 44px)); height: min(560px, calc(100dvh - 170px));
   display: flex; flex-direction: column; border-radius: 24px; overflow: hidden;
-  background: var(--sheen), linear-gradient(165deg, rgba(255,255,255,.74), rgba(255,255,255,.52) 60%, rgba(255,255,255,.62));
-  backdrop-filter: blur(26px) saturate(1.7) brightness(1.05); -webkit-backdrop-filter: blur(26px) saturate(1.7) brightness(1.05);
+  background: var(--sheen), linear-gradient(165deg, rgba(255,255,255,.6), rgba(255,255,255,.34) 55%, rgba(255,255,255,.48));
+  backdrop-filter: blur(11px) saturate(1.9) brightness(1.05); -webkit-backdrop-filter: blur(11px) saturate(1.9) brightness(1.05);
   box-shadow: var(--glass-edge), 0 30px 70px -30px rgba(18, 38, 58, .55);
   animation: chat-in .45s var(--spring);
 }

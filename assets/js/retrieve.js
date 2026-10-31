@@ -32,7 +32,8 @@ const tokens = (text) => text.toLowerCase()
 const docs = KB.map((e) => {
   const tf = new Map();
   const add = (text, weight) => tokens(text).forEach((t) => tf.set(t, (tf.get(t) || 0) + weight));
-  add(e.keys, 3); add(e.q.join(' '), 2); add(e.a, 1);
+  add(e.keys, 3); add(e.q.join(' '), 2);
+  if (!e.listing) add(e.a, 1);   // a listing names every project; indexing it would steal questions about each one
   let len = 0; tf.forEach((n) => { len += n; });
   return { e, tf, len };
 });
@@ -58,8 +59,11 @@ function oneEdit(a, b) {
 }
 const fix = (t) => (df.has(t) || t.length < 5 ? t : vocab.find((v) => v.length >= 4 && oneEdit(t, v)) || t);
 
-function rank(query) {
-  const q = [...new Set(tokens(query).map(fix))].filter((t) => df.has(t));
+// words that say "a project" without saying which: they only decide the answer when nothing more specific matches
+const GENERIC = new Set(['project', 'projects', 'built', 'build', 'portfolio', 'done', 'made', 'ml', 'machine', 'learning', 'best', 'latest', 'side', 'personal', 'list', 'explain'].map(stem));
+const known = (query) => [...new Set(tokens(query).map(fix))].filter((t) => df.has(t) || GENERIC.has(t));
+
+function rank(q) {
   return docs.map((d) => {
     let score = 0;
     for (const t of q) {
@@ -87,7 +91,9 @@ export function answer(question) {
   if (TASK.test(q) && !/\b(aman|he|his|him)\b/i.test(q)) return { text: fallback, stops: [] };
   if (/\bwhere\b.*\bfrom\b/i.test(q)) return pick(KB.find((e) => e.id === 'remote'));
 
-  const best = rank(q)[0];
+  const words = known(q), specific = words.filter((t) => !GENERIC.has(t));
+  let best = specific.length ? rank(specific)[0] : null;
+  if ((!best || best.score < MIN_SCORE) && words.length > specific.length) best = { e: KB.find((e) => e.listing), score: Infinity };
   if (!tokens(q).length && /\bexperience\b/i.test(q)) return pick(KB.find((e) => e.id === 'temple'));
   if (!tokens(q).length && /\b(aman|he|him|his|yourself)\b/i.test(q)) return pick(KB.find((e) => e.id === 'about'));
   if (!best || best.score < MIN_SCORE) return { text: fallback, stops: [] };

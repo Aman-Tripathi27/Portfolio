@@ -16,13 +16,16 @@ const form = document.getElementById('chatForm');
 const input = document.getElementById('chatInput');
 let busy = false;
 
+// on touch screens the keyboard would cover the suggestions, so the input is focused only when tapped
+const focusInput = () => { if (!matchMedia('(pointer: coarse)').matches) input.focus({ preventScroll: true }); };
+
 function setOpen(on) {
   panel.hidden = !on;
   fab.setAttribute('aria-expanded', String(on));
   document.body.classList.toggle('chat-open', on);
   if (on) {
     if (!log.childElementCount) addMessage('assistant', "Hi! I can answer questions about Aman's work: his projects, experience and skills. What would you like to know?");
-    input.focus();
+    focusInput();
   }
 }
 fab.addEventListener('click', () => setOpen(panel.hidden));
@@ -66,6 +69,7 @@ function ask(question) {
     typing.remove();
     addMessage('assistant', text, stops);
     busy = false;
+    focusInput();
   }, 380 + Math.min(text.length, 400));
 }
 

@@ -924,11 +924,17 @@ function buildWorld(data) {
     if (e.key === 'End') goTo(LAST);
   });
 
+  // on phones the card covers the lower part of the screen: the camera frames the landmark in the clear
+  // area above it, stepping back as far as that area needs, and shifts the picture up to centre it there
+  const HUD = 64;
+  let cardTop = innerHeight, measuredAt = -1, viewOff = 0;
+
   function resize() {
     const w = innerWidth, h = innerHeight;
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
     camera.fov = w / h < 0.8 ? 58 : 42;
+    if (viewOff) camera.setViewOffset(w, h, 0, viewOff, w, h);
     camera.updateProjectionMatrix();
   }
   addEventListener('resize', resize);
@@ -1008,13 +1014,22 @@ function buildWorld(data) {
       const toLm = new THREE.Vector3(lm.pos.x - rp.x, 0, lm.pos.z - rp.z).normalize();
       const right = new THREE.Vector3().crossVectors(toLm, new THREE.Vector3(0, 1, 0)).normalize();
       const centre = new THREE.Vector3(lm.pos.x, lm.height * 0.48, lm.pos.z);
-      const view = rp.clone().addScaledVector(toLm, narrow ? -20 : -15).addScaledVector(curve.getTangentAt(U[near]), -6)
-        .add(new THREE.Vector3(0, narrow ? 10 : 9, 0));
+      if (narrow && t - measuredAt > 0.25) { cardTop = stopEls[near].getBoundingClientRect().top; measuredAt = t; }
+      const clear = Math.max(0.2, (cardTop - HUD) / innerHeight);
+      const back = narrow ? Math.max(1, Math.min(2.1, 0.5 / clear)) : 1;
+      const view = rp.clone().addScaledVector(toLm, narrow ? -20 * back : -15).addScaledVector(curve.getTangentAt(U[near]), -6)
+        .add(new THREE.Vector3(0, narrow ? 10 * back : 9, 0));
       // shift the aim left on wide screens so the landmark sits clear of the card
       const shift = narrow ? 0 : Math.max(0, Math.min(8, (camera.aspect - 0.85) * 9));
-      const aim = centre.clone().addScaledVector(right, -shift).add(new THREE.Vector3(0, narrow ? -5.5 : 0, 0));
+      const aim = centre.clone().addScaledVector(right, -shift);
       desired.lerp(view, w);
       look.lerp(aim, w);
+    }
+    const offTarget = narrow && lm ? (innerHeight / 2 - (HUD + Math.min(cardTop, innerHeight)) / 2) * w : 0;
+    const nextOff = viewOff + (offTarget - viewOff) * (1 - Math.exp(-dt * 4));
+    if (Math.abs(nextOff - viewOff) > 0.3 || (viewOff && !offTarget && Math.abs(nextOff) < 0.5)) {
+      viewOff = Math.abs(nextOff) < 0.5 && !offTarget ? 0 : nextOff;
+      if (viewOff) camera.setViewOffset(innerWidth, innerHeight, 0, viewOff, innerWidth, innerHeight); else camera.clearViewOffset();
     }
     if (first) { camera.position.copy(desired); smoothedLook.copy(look); first = false; }
     camera.position.lerp(desired, 1 - Math.exp(-dt * 3));
