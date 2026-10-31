@@ -12,13 +12,30 @@ const viewToggle = document.getElementById('viewToggle');
 const soundToggle = document.getElementById('soundToggle');
 const sound = createSound();
 
-async function setSound(onOff) {
-  const on = await sound.setOn(onOff);
-  soundToggle.setAttribute('aria-pressed', String(!!on));
+// Sound is on by default. Browsers only allow audio after a click, tap or key press, so it starts
+// on the visitor's first one. Muting is remembered for their next visit.
+const soundPref = {
+  get() { try { return localStorage.getItem('sound'); } catch (e) { return null; } },
+  set(v) { try { localStorage.setItem('sound', v); } catch (e) {} },
+};
+let soundWanted = soundPref.get() !== 'off';
+
+function showSound(on) {
+  soundToggle.setAttribute('aria-pressed', String(on));
   soundToggle.title = on ? 'Turn sound off' : 'Turn sound on';
-  soundToggle.classList.remove('nudge');
 }
-soundToggle.addEventListener('click', () => setSound(!sound.on));
+async function setSound(onOff, remember = true) {
+  if (remember) { soundWanted = onOff; soundPref.set(onOff ? 'on' : 'off'); }
+  showSound(onOff);
+  await sound.setOn(onOff);
+}
+showSound(soundWanted);
+soundToggle.addEventListener('click', () => setSound(!soundWanted));
+const startSoundOnGesture = (e) => {
+  if (e.target.closest?.('#soundToggle')) return;
+  if (soundWanted && !sound.on && body.classList.contains('is-3d')) setSound(true, false);
+};
+['pointerdown', 'keydown', 'touchend'].forEach((type) => addEventListener(type, startSoundOnGesture, { capture: true }));
 stopEls.forEach((el) => el.style.setProperty('--c', el.dataset.color));
 
 // Stops sit at evenly spaced points along the road (fraction of its length).
@@ -39,7 +56,7 @@ function setListMode(on) {
   body.classList.toggle('list-mode', on);
   viewToggle.textContent = on ? 'Drive view' : 'List view';
   if (on) {
-    if (sound.on) setSound(false);
+    if (sound.on) setSound(false, false);
     body.classList.remove('is-3d');
     world?.pause();
     scrollTo(0, 0);
