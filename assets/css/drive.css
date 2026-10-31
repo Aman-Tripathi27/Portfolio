@@ -274,6 +274,7 @@ html.refract .hud__brand, html.refract .hud__links, html.refract .stepper button
 .chat-fab:hover { transform: translateY(-2px); }
 .chat-fab svg { width: 18px; height: 18px; }
 body.chat-open .chat-fab { opacity: 0; pointer-events: none; }
+.chat-fab[hidden] { display: none; }
 body:not(.is-3d) .chat-fab { bottom: 22px; }
 
 .chat {

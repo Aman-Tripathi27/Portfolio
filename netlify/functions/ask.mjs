@@ -92,10 +92,12 @@ const json = (body, status = 200) =>
 let client;
 
 export default async (req) => {
+  // the page asks this first and only shows the chat button once a key is set
+  if (req.method === "GET") return json({ ready: !!process.env.ANTHROPIC_API_KEY });
   if (req.method !== "POST") return json({ error: "Use POST." }, 405);
   const origin = req.headers.get("origin");
   if (origin && !ALLOWED_ORIGINS.some((re) => re.test(origin))) return json({ error: "Not allowed." }, 403);
-  if (!process.env.ANTHROPIC_API_KEY) return json({ error: "The assistant isn't set up yet." }, 503);
+  if (!process.env.ANTHROPIC_API_KEY) return json({ error: FALLBACK }, 503);
 
   let body;
   try { body = await req.json(); } catch { return json({ error: "Bad request." }, 400); }
@@ -126,7 +128,7 @@ export default async (req) => {
     return json({ reply: reply || FALLBACK });
   } catch (error) {
     if (error instanceof Anthropic.RateLimitError) return json({ error: "Lots of questions right now. Try again in a minute." }, 429);
-    if (error instanceof Anthropic.AuthenticationError) return json({ error: "The assistant isn't set up yet." }, 503);
+    if (error instanceof Anthropic.AuthenticationError) return json({ error: FALLBACK }, 503);
     if (error instanceof Anthropic.APIError) return json({ error: FALLBACK }, 502);
     return json({ error: FALLBACK }, 500);
   }

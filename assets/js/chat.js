@@ -27,6 +27,12 @@ function setOpen(on) {
   }
 }
 fab.addEventListener('click', () => setOpen(panel.hidden));
+
+// the button stays hidden unless the server says the assistant is set up
+fetch('/api/ask')
+  .then((res) => (res.ok ? res.json() : {}))
+  .then((data) => { if (data.ready) fab.hidden = false; })
+  .catch(() => {});
 panel.querySelector('.chat__close').addEventListener('click', () => { setOpen(false); fab.focus(); });
 addEventListener('keydown', (e) => { if (e.key === 'Escape' && !panel.hidden) { setOpen(false); fab.focus(); } });
 
@@ -74,7 +80,7 @@ async function ask(question) {
       addMessage('assistant', data.reply);
     } else {
       history.pop();
-      addMessage('assistant', res.status === 404 ? UNAVAILABLE : data.error || UNAVAILABLE, 'msg--error');
+      addMessage('assistant', res.status === 429 && data.error ? data.error : UNAVAILABLE, 'msg--error');
     }
   } catch (e) {
     typing.remove();
