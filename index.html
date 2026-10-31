@@ -85,6 +85,7 @@
         <li><b>CNN-LSTM</b> benchmarked against XGBoost, LSTM and Transformer models</li>
         <li><b>Scored</b> on epoch F1 and onset/offset boundary error</li>
       </ul>
+      <div class="try only-3d"><button class="btn btn--try" type="button" data-act="1">Simulate a brief movement</button><span>or click the bed</span></div>
       <div class="actions"><a class="btn btn--solid" href="work/temple-sleep.html">Read the case study →</a></div>
     </section>
 
@@ -98,6 +99,7 @@
         <li><b>Pre-registered</b> evaluation, splits pinned by checksum</li>
         <li><b>pip install glucotrace</b> · DOI · 109 tests</li>
       </ul>
+      <div class="try only-3d"><button class="btn btn--try" type="button" data-act="2">Show the nearest match (1/3)</button><span>or click the curve</span></div>
       <div class="actions"><a class="btn btn--solid" href="work/glucotrace.html">Read the case study →</a><a class="btn" href="https://pypi.org/project/glucotrace/" target="_blank" rel="noopener">PyPI ↗</a></div>
     </section>
 
@@ -111,6 +113,7 @@
         <li><b>4 of 5</b> on people sealed away while tuning</li>
         <li><b>95% → 0.5%</b> false hum flags after the fix</li>
       </ul>
+      <div class="try only-3d"><label class="speed">Treadmill speed <input type="range" min="0" max="3" step="1" value="0" data-act="3"> <output>standing</output></label></div>
       <div class="actions"><a class="btn btn--solid" href="work/mobile-eeg.html">Read the case study →</a></div>
     </section>
 
@@ -124,6 +127,7 @@
         <li><b>0.432 → 0.610</b> mean beat F1 across activities</li>
         <li><b>0.34 s</b> per 5-minute recording, no training</li>
       </ul>
+      <div class="try only-3d"><button class="btn btn--try" type="button" data-act="4">Show the raw signal</button><span>or click the watch</span></div>
       <div class="actions"><a class="btn btn--solid" href="work/wrist-ppg.html">Read the case study →</a></div>
     </section>
 
@@ -137,6 +141,7 @@
         <li><b>Chats are data,</b> so "make it free" can't change an order</li>
         <li><b>Next.js 16</b> · TypeScript · Claude API</li>
       </ul>
+      <div class="try only-3d"><button class="btn btn--try" type="button" data-act="5">Try a prompt injection</button><span>or click the phone</span></div>
       <div class="actions"><a class="btn btn--solid" href="https://claude.ai/artifact/MNAgjCaBiVyyiMpBrJuy8z" target="_blank" rel="noopener">Open the live app ↗</a><a class="btn" href="https://github.com/Aman-Tripathi27/chat-to-pay" target="_blank" rel="noopener">Repo ↗</a></div>
     </section>
 
@@ -150,6 +155,7 @@
         <li><b>DrugBank</b> molecules, ROC-AUC and average precision</li>
         <li><b>Live app</b> on Streamlit</li>
       </ul>
+      <div class="try only-3d"><button class="btn btn--try" type="button" data-act="6">Spin the molecules</button><span>or click them</span></div>
       <div class="actions"><a class="btn btn--solid" href="https://gnndrugdiscovery.streamlit.app" target="_blank" rel="noopener">Open the live app ↗</a></div>
     </section>
 
@@ -163,6 +169,7 @@
         <li><b>NSE 0.985</b> for the best model, XGBoost</li>
         <li><b>50+ features</b> and Diebold–Mariano tests</li>
       </ul>
+      <div class="try only-3d"><button class="btn btn--try" type="button" data-act="7">Merge the modes</button><span>or click the waves</span></div>
       <div class="actions"><a class="btn btn--solid" href="https://github.com/Aman-Tripathi27/VMD_CNN" target="_blank" rel="noopener">View the repo ↗</a></div>
     </section>
 
@@ -208,6 +215,29 @@
     </section>
   </main>
 
+  <!-- Ask about Aman: an AI assistant that answers from his work (netlify/functions/ask.mjs) -->
+  <button class="chat-fab" id="chatFab" type="button" aria-expanded="false" aria-controls="chat">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 4.5h12a1.5 1.5 0 0 1 1.5 1.5v7a1.5 1.5 0 0 1-1.5 1.5H9l-3.5 3v-3H4A1.5 1.5 0 0 1 2.5 13V6A1.5 1.5 0 0 1 4 4.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6.5 9.5h.01M10 9.5h.01M13.5 9.5h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    <span>Ask about Aman</span>
+  </button>
+  <section class="chat" id="chat" hidden aria-label="Ask about Aman">
+    <header class="chat__head">
+      <div><b>Ask about Aman</b><small>AI assistant · answers only from his work</small></div>
+      <button type="button" class="chat__close" aria-label="Close the assistant">×</button>
+    </header>
+    <div class="chat__log" id="chatLog" aria-live="polite"></div>
+    <div class="chat__chips" id="chatChips">
+      <button type="button">Has he shipped ML to production?</button>
+      <button type="button">What has he built with LLMs?</button>
+      <button type="button">How does he evaluate models?</button>
+      <button type="button">Is he open to remote roles?</button>
+    </div>
+    <form class="chat__form" id="chatForm" autocomplete="off">
+      <input id="chatInput" type="text" maxlength="500" placeholder="Ask anything about his work…" aria-label="Your question">
+      <button type="submit" aria-label="Send">↑</button>
+    </form>
+  </section>
+
   <div class="stepper only-3d" aria-hidden="true">
     <button type="button" data-prev title="Previous stop">←</button>
     <button type="button" data-next title="Next stop">→</button>
@@ -217,5 +247,6 @@
   <div class="hint only-3d" id="hint"><kbd>scroll</kbd> <kbd>swipe</kbd> or <kbd>→</kbd> to keep driving</div>
 
   <script type="module" src="assets/js/drive.js"></script>
+  <script type="module" src="assets/js/chat.js"></script>
 </body>
 </html>

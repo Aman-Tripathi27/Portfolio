@@ -1,0 +1,9 @@
+{
+  "name": "aman-tripathi-portfolio",
+  "private": true,
+  "type": "module",
+  "description": "Static portfolio site plus one Netlify Function (netlify/functions/ask.mjs) for the Ask about Aman chat.",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.3.0"
+  }
+}
