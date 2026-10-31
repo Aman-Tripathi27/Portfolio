@@ -12,8 +12,10 @@ const viewToggle = document.getElementById('viewToggle');
 const soundToggle = document.getElementById('soundToggle');
 const sound = createSound();
 
-// Sound is on by default. Browsers only allow audio after a click, tap or key press, so it starts
-// on the visitor's first one. Muting is remembered for their next visit.
+// Sound is on by default and we try to start it on any input: swipes, scrolls, taps, keys.
+// Browsers only let it actually play after a tap, click or key press (a touch swipe counts,
+// a mouse-wheel or trackpad scroll does not), so it begins at the first input they allow.
+// Muting is remembered for the visitor's next visit.
 const soundPref = {
   get() { try { return localStorage.getItem('sound'); } catch (e) { return null; } },
   set(v) { try { localStorage.setItem('sound', v); } catch (e) {} },
@@ -31,11 +33,16 @@ async function setSound(onOff, remember = true) {
 }
 showSound(soundWanted);
 soundToggle.addEventListener('click', () => setSound(!soundWanted));
+let lastSoundTry = 0;
 const startSoundOnGesture = (e) => {
   if (e.target.closest?.('#soundToggle')) return;
-  if (soundWanted && !sound.on && body.classList.contains('is-3d')) setSound(true, false);
+  if (!soundWanted || sound.running || !body.classList.contains('is-3d')) return;
+  const now = performance.now();
+  if (e.type === 'wheel' || e.type === 'touchmove') { if (now - lastSoundTry < 400) return; lastSoundTry = now; }
+  setSound(true, false);
 };
-['pointerdown', 'keydown', 'touchend'].forEach((type) => addEventListener(type, startSoundOnGesture, { capture: true }));
+['pointerdown', 'pointerup', 'mousedown', 'keydown', 'touchstart', 'touchend', 'touchmove', 'wheel']
+  .forEach((type) => addEventListener(type, startSoundOnGesture, { capture: true, passive: true }));
 stopEls.forEach((el) => el.style.setProperty('--c', el.dataset.color));
 
 // Stops sit at evenly spaced points along the road (fraction of its length).

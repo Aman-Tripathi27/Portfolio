@@ -73,6 +73,7 @@ export function createSound() {
 
   return {
     get on() { return on; },
+    get running() { return !!ctx && ctx.state === 'running'; },
 
     async setOn(value) {
       if (value && !ctx && !init()) return false;
