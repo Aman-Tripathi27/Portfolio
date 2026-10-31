@@ -529,3 +529,21 @@ pre.code .p { color: var(--accent); }
   .hero { height: auto; }
   .hero__stick { position: relative; height: auto; min-height: 100svh; }
 }
+
+/* liquid glass nav, matching the home page */
+.nav.solid {
+  border-color: transparent;
+  background: linear-gradient(165deg, rgba(255,255,255,.42), rgba(255,255,255,.14) 60%, rgba(255,255,255,.26));
+  backdrop-filter: blur(16px) saturate(1.8) brightness(1.04); -webkit-backdrop-filter: blur(16px) saturate(1.8) brightness(1.04);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.9), inset 0 0 0 1px rgba(255,255,255,.38), 0 12px 32px -16px rgba(0,0,0,.35);
+}
+:root[data-theme="dark"] .nav.solid {
+  background: linear-gradient(165deg, rgba(255,255,255,.13), rgba(255,255,255,.04) 60%, rgba(255,255,255,.08));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.2), inset 0 0 0 1px rgba(255,255,255,.08), 0 12px 32px -16px rgba(0,0,0,.7);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .nav.solid {
+    background: linear-gradient(165deg, rgba(255,255,255,.13), rgba(255,255,255,.04) 60%, rgba(255,255,255,.08));
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.2), inset 0 0 0 1px rgba(255,255,255,.08), 0 12px 32px -16px rgba(0,0,0,.7);
+  }
+}

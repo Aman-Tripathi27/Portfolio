@@ -45,6 +45,18 @@ const startSoundOnGesture = (e) => {
   .forEach((type) => addEventListener(type, startSoundOnGesture, { capture: true, passive: true }));
 stopEls.forEach((el) => el.style.setProperty('--c', el.dataset.color));
 
+// Liquid glass: refraction where the browser supports SVG filters in backdrop-filter (Chromium),
+// and a sheen on each glass surface that follows the pointer.
+if (navigator.userAgentData?.brands?.some((b) => b.brand === 'Chromium')) document.documentElement.classList.add('refract');
+const GLASS = '.hud__brand, .hud__links, .stepper button, .hint, .stop, .btn, .chip, .track';
+addEventListener('pointermove', (e) => {
+  const el = e.target.closest?.(GLASS);
+  if (!el) return;
+  const r = el.getBoundingClientRect();
+  el.style.setProperty('--gx', (((e.clientX - r.left) / r.width) * 100).toFixed(1) + '%');
+  el.style.setProperty('--gy', (((e.clientY - r.top) / r.height) * 100).toFixed(1) + '%');
+}, { passive: true });
+
 // Stops sit at evenly spaced points along the road (fraction of its length).
 const U = stopEls.map((_, i) => 0.035 + i * (0.93 / (stopEls.length - 1)));
 const LAST = U.length - 1;
@@ -223,8 +235,14 @@ function buildWorld(data) {
   // ---------- labels that always face the camera ----------
   const label = (num, title, color) => {
     const tex = canvasTex(640, 150, (ctx, w, h) => {
-      ctx.fillStyle = 'rgba(255,255,255,0.94)';
-      ctx.beginPath(); ctx.roundRect(6, 10, w - 12, h - 26, 64); ctx.fill();
+      // glass pill: translucent body, bright rim and a highlight across the top
+      const body = ctx.createLinearGradient(0, 10, 0, h - 16);
+      body.addColorStop(0, 'rgba(255,255,255,0.86)'); body.addColorStop(0.55, 'rgba(255,255,255,0.58)'); body.addColorStop(1, 'rgba(255,255,255,0.7)');
+      ctx.fillStyle = body; ctx.beginPath(); ctx.roundRect(6, 10, w - 12, h - 26, 64); ctx.fill();
+      const shine = ctx.createLinearGradient(0, 12, 0, h / 2);
+      shine.addColorStop(0, 'rgba(255,255,255,0.9)'); shine.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.fillStyle = shine; ctx.beginPath(); ctx.roundRect(22, 14, w - 44, (h - 26) / 2, 48); ctx.fill();
+      ctx.strokeStyle = 'rgba(255,255,255,0.95)'; ctx.lineWidth = 3; ctx.beginPath(); ctx.roundRect(7.5, 11.5, w - 15, h - 29, 63); ctx.stroke();
       ctx.fillStyle = color; ctx.beginPath(); ctx.arc(70, h / 2 - 8, 40, 0, Math.PI * 2); ctx.fill();
       ctx.fillStyle = '#fff'; ctx.font = '500 34px "Geist Mono"'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
       ctx.fillText(num, 70, h / 2 - 7);
