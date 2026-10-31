@@ -248,13 +248,27 @@ html.refract .hud__brand, html.refract .hud__links, html.refract .stepper button
 }
 
 /* "Try it" controls in the stop cards */
-.try { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(23,24,28,.08); }
-.try span { font-size: 12.5px; color: var(--ink-3); }
-.btn--try { padding: 9px 14px; font-size: 13.5px; }
-.btn--try::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 25%, transparent); }
-.speed { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; width: 100%; font-size: 13.5px; color: var(--ink-2); }
-.speed input { flex: 1; min-width: 140px; accent-color: var(--c); }
-.speed output { font: 500 12px/1 var(--mono); padding: 6px 10px; border-radius: 999px; background: color-mix(in srgb, var(--c) 14%, transparent); color: var(--ink); min-width: 84px; text-align: center; }
+.lab { margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(23,24,28,.08); }
+.lab__head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 9px; }
+.lab__head b { font-size: 13.5px; font-weight: 600; }
+.lab__head small { font: 500 10.5px/1.2 var(--mono); letter-spacing: .04em; text-transform: uppercase; color: var(--ink-3); text-align: right; }
+.seg { display: flex; flex-wrap: wrap; gap: 5px; }
+.seg button { flex: 1 1 auto; border: 0; border-radius: 999px; padding: 7px 11px; font: 500 12.5px/1.2 var(--sans); color: var(--ink-2); background: rgba(23,24,28,.06); cursor: pointer; transition: background .2s, color .2s, box-shadow .2s; }
+.seg button:hover { background: rgba(23,24,28,.1); color: var(--ink); }
+.seg button[aria-pressed="true"] { color: #fff; background: var(--c); box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 4px 12px -6px var(--c); }
+.seg button:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
+.seg .seg__flag { flex: 0 0 auto; background: transparent; box-shadow: inset 0 0 0 1.5px rgba(23,24,28,.14); }
+.seg .seg__flag::before { content: "○ "; }
+.seg .seg__flag[aria-pressed="true"] { color: var(--ink); background: color-mix(in srgb, var(--c) 16%, transparent); box-shadow: inset 0 0 0 1.5px var(--c); }
+.seg .seg__flag[aria-pressed="true"]::before { content: "● "; color: var(--c); }
+.lab__plot { display: block; width: 100%; height: 96px; margin-top: 12px; }
+.lab__read { margin-top: 10px; font-size: 13.5px; line-height: 1.5; color: var(--ink-2); min-height: 3em; }
+.lab__read b { color: var(--ink); }
+.lab__read code { font: 500 11.5px var(--mono); padding: 1px 5px; border-radius: 5px; background: rgba(23,24,28,.06); word-break: break-all; }
+.lab__bubble { display: inline-block; margin-bottom: 8px; padding: 7px 12px; border-radius: 14px 14px 14px 4px; background: #fff; color: var(--ink); box-shadow: 0 2px 8px -4px rgba(0,0,0,.25); font-size: 13px; }
+.receipt { margin-bottom: 8px; padding: 9px 12px; border-radius: 12px; background: rgba(255,255,255,.7); font: 400 13px/1.6 var(--sans); }
+.receipt div { display: flex; justify-content: space-between; gap: 12px; }
+.receipt__total { margin-top: 4px; padding-top: 4px; border-top: 1px dashed rgba(23,24,28,.15); font-weight: 600; color: var(--ink); }
 
 /* ---------- Ask about Aman ---------- */
 .chat-fab, .chat {

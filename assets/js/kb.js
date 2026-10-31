@@ -24,7 +24,7 @@ export const KB = [
     id: 'remote',
     keys: 'remote relocate relocation location located based where live country india time zone timezone onsite hybrid move abroad wfh office international hometown nationality',
     q: ['Is he open to remote roles?', 'Where is he based?', 'Can he relocate?'],
-    a: 'Yes. Aman is based in **India** and is happy to work **remotely, relocate, or overlap with any time zone**.',
+    a: 'Aman is based in **India**. He is happy to work **remotely, relocate, or overlap with any time zone**.',
     stops: ['contact'],
   },
   {
@@ -104,7 +104,7 @@ export const KB = [
     id: 'evals',
     keys: 'evaluate evaluation evaluating eval evals metric metrics benchmark benchmarking test testing validation validate leakage split splits held hold out holdout rigorous rigor preregistered pre registered significance statistics',
     q: ['How does he evaluate models?'],
-    a: "Carefully, and before looking at results. In GlucoTrace the evaluation was **pre-registered**, the splits keep each person on one side and are locked by checksums, and the test set was opened once. In the EEG and PPG work he **set people aside before tuning** and checked on them at the end. He also uses significance tests such as Diebold–Mariano.",
+    a: "He decides how a model will be judged before he looks at the results. In GlucoTrace the evaluation was **pre-registered**, the splits keep each person on one side and are locked by checksums, and the test set was opened once. In the EEG and PPG work he **set people aside before tuning** and checked on them at the end. He also uses significance tests such as Diebold–Mariano.",
     stops: ['gluco', 'eeg'],
   },
   {
@@ -174,14 +174,14 @@ export const KB = [
     id: 'why',
     keys: 'why hire strength strengths standout unique special different value bring',
     q: ['Why should we hire him?'],
-    a: "He has taken work all the way to production, he builds the evaluation before trusting a result, and he's comfortable across very different data: sensor signals, text, molecules and LLM products. His numbers are reported on held-out people, not just training data.",
+    a: "He has taken work all the way to production, he builds the evaluation before trusting a result, and he's comfortable across very different data: sensor signals, text, molecules and LLM products. He reports results on data that was set aside before tuning, not on the data he tuned on.",
     stops: ['temple', 'gluco'],
   },
   {
     id: 'site',
     keys: 'website site built made 3d car drive road three threejs',
     q: ['How was this site made?'],
-    a: "This site is a 3D drive built with three.js: each stop on the road is one of Aman's projects. Click a landmark to try a small demo.",
+    a: "This site is a 3D drive built with three.js: each stop on the road is one of Aman's projects. Each project card has a small hands-on demo, and the landmark beside the road follows it.",
     stops: [],
   },
   {

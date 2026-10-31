@@ -85,7 +85,12 @@
         <li><b>CNN-LSTM</b> benchmarked against XGBoost, LSTM and Transformer models</li>
         <li><b>Scored</b> on epoch F1 and onset/offset boundary error</li>
       </ul>
-      <div class="try only-3d"><button class="btn btn--try" type="button" data-act="1">Simulate a brief movement</button><span>or click the bed</span></div>
+      <div class="lab" data-lab="temple">
+        <div class="lab__head"><b>Try the detector</b><small>Illustration, not company data</small></div>
+        <div class="seg" role="group" aria-label="Try the detector"><button type="button" data-v="still" aria-pressed="true">Lies still</button><button type="button" data-v="brief" aria-pressed="false">Rolls over</button><button type="button" data-v="up" aria-pressed="false">Gets up</button></div>
+        <canvas class="lab__plot" aria-hidden="true"></canvas>
+        <div class="lab__read" aria-live="polite"></div>
+      </div>
       <div class="actions"><a class="btn btn--solid" href="work/temple-sleep.html">Read the case study →</a></div>
     </section>
 
@@ -99,7 +104,12 @@
         <li><b>Pre-registered</b> evaluation, splits pinned by checksum</li>
         <li><b>pip install glucotrace</b> · DOI · 109 tests</li>
       </ul>
-      <div class="try only-3d"><button class="btn btn--try" type="button" data-act="2">Show the nearest match (1/3)</button><span>or click the curve</span></div>
+      <div class="lab" data-lab="gluco">
+        <div class="lab__head"><b>Search for similar days</b><small>Real days · BIG IDEAs</small></div>
+        <div class="seg" role="group" aria-label="Search for similar days"><button type="button" data-v="1" aria-pressed="true">Match 1</button><button type="button" data-v="2" aria-pressed="false">Match 2</button><button type="button" data-v="3" aria-pressed="false">Match 3</button><button type="button" class="seg__flag" data-flag="drop" aria-pressed="false">Remove 30%</button></div>
+        <canvas class="lab__plot" aria-hidden="true"></canvas>
+        <div class="lab__read" aria-live="polite"></div>
+      </div>
       <div class="actions"><a class="btn btn--solid" href="work/glucotrace.html">Read the case study →</a><a class="btn" href="https://pypi.org/project/glucotrace/" target="_blank" rel="noopener">PyPI ↗</a></div>
     </section>
 
@@ -107,27 +117,37 @@
       <div class="stop__kicker"><b>03</b>Research · Evaluation</div>
       <h2>Mobile EEG signal quality</h2>
       <p>Which brain-signal sensors can you trust while someone walks or jogs? A per-sensor score built only from what
-        a wearable cap would have. The head lights up with my real results as treadmill speed rises.</p>
+        a wearable cap would have. The head shows my real results at each treadmill speed.</p>
       <ul class="facts">
         <li><b>10 / 10</b> people where the score tracked decoding</li>
         <li><b>4 of 5</b> on people sealed away while tuning</li>
         <li><b>95% → 0.5%</b> false hum flags after the fix</li>
       </ul>
-      <div class="try only-3d"><label class="speed">Treadmill speed <input type="range" min="0" max="3" step="1" value="0" data-act="3"> <output>standing</output></label></div>
+      <div class="lab" data-lab="eeg">
+        <div class="lab__head"><b>Set the treadmill speed</b><small>Real results · 10 people</small></div>
+        <div class="seg" role="group" aria-label="Set the treadmill speed"><button type="button" data-v="0" aria-pressed="true">Standing</button><button type="button" data-v="1" aria-pressed="false">Slow walk</button><button type="button" data-v="2" aria-pressed="false">Fast walk</button><button type="button" data-v="3" aria-pressed="false">Jogging</button></div>
+        <canvas class="lab__plot" aria-hidden="true"></canvas>
+        <div class="lab__read" aria-live="polite"></div>
+      </div>
       <div class="actions"><a class="btn btn--solid" href="work/mobile-eeg.html">Read the case study →</a></div>
     </section>
 
     <section class="stop" id="stop-ppg" data-color="#ef5b45" data-title="Wrist PPG">
       <div class="stop__kicker"><b>04</b>Signal processing</div>
       <h2>Wrist PPG motion cleaning</h2>
-      <p>A watch's own accelerometer and gyroscope cancel motion out of the pulse signal. The watch face shows the real
-        cleaned pulse from a running recording.</p>
+      <p>A watch's own accelerometer and gyroscope cancel motion out of the pulse signal. The watch face follows each
+        step below, on a real running recording.</p>
       <ul class="facts">
         <li><b>2.4×</b> more heartbeats found while cycling</li>
         <li><b>0.432 → 0.610</b> mean beat F1 across activities</li>
         <li><b>0.34 s</b> per 5-minute recording, no training</li>
       </ul>
-      <div class="try only-3d"><button class="btn btn--try" type="button" data-act="4">Show the raw signal</button><span>or click the watch</span></div>
+      <div class="lab" data-lab="ppg">
+        <div class="lab__head"><b>Step through the cleaning</b><small>Real recording · running</small></div>
+        <div class="seg" role="group" aria-label="Step through the cleaning"><button type="button" data-v="raw" aria-pressed="true">Raw</button><button type="button" data-v="band" aria-pressed="false">Band-pass</button><button type="button" data-v="motion" aria-pressed="false">Motion estimate</button><button type="button" data-v="clean" aria-pressed="false">Cleaned</button></div>
+        <canvas class="lab__plot" aria-hidden="true"></canvas>
+        <div class="lab__read" aria-live="polite"></div>
+      </div>
       <div class="actions"><a class="btn btn--solid" href="work/wrist-ppg.html">Read the case study →</a></div>
     </section>
 
@@ -141,7 +161,11 @@
         <li><b>Chats are data,</b> so "make it free" can't change an order</li>
         <li><b>Next.js 16</b> · TypeScript · Claude API</li>
       </ul>
-      <div class="try only-3d"><button class="btn btn--try" type="button" data-act="5">Try a prompt injection</button><span>or click the phone</span></div>
+      <div class="lab" data-lab="chat">
+        <div class="lab__head"><b>Next customer message</b><small>Priced by the app</small></div>
+        <div class="seg" role="group" aria-label="Next customer message"><button type="button" data-v="base" aria-pressed="true">Original order</button><button type="button" data-v="more" aria-pressed="false">+1 dupatta</button><button type="button" data-v="size" aria-pressed="false">Size L</button><button type="button" data-v="free" aria-pressed="false">"Make it free"</button></div>
+        <div class="lab__read" aria-live="polite"></div>
+      </div>
       <div class="actions"><a class="btn btn--solid" href="https://claude.ai/artifact/MNAgjCaBiVyyiMpBrJuy8z" target="_blank" rel="noopener">Open the live app ↗</a><a class="btn" href="https://github.com/Aman-Tripathi27/chat-to-pay" target="_blank" rel="noopener">Repo ↗</a></div>
     </section>
 
@@ -155,7 +179,11 @@
         <li><b>DrugBank</b> molecules, ROC-AUC and average precision</li>
         <li><b>Live app</b> on Streamlit</li>
       </ul>
-      <div class="try only-3d"><button class="btn btn--try" type="button" data-act="6">Spin the molecules</button><span>or click them</span></div>
+      <div class="lab" data-lab="gnn">
+        <div class="lab__head"><b>How the model works</b><small>Step by step</small></div>
+        <div class="seg" role="group" aria-label="How the model works"><button type="button" data-v="mol" aria-pressed="true">1 · Molecule</button><button type="button" data-v="graph" aria-pressed="false">2 · Graph</button><button type="button" data-v="embed" aria-pressed="false">3 · Embedding</button><button type="button" data-v="predict" aria-pressed="false">4 · Prediction</button></div>
+        <div class="lab__read" aria-live="polite"></div>
+      </div>
       <div class="actions"><a class="btn btn--solid" href="https://gnndrugdiscovery.streamlit.app" target="_blank" rel="noopener">Open the live app ↗</a></div>
     </section>
 
@@ -169,7 +197,11 @@
         <li><b>NSE 0.985</b> for the best model, XGBoost</li>
         <li><b>50+ features</b> and Diebold–Mariano tests</li>
       </ul>
-      <div class="try only-3d"><button class="btn btn--try" type="button" data-act="7">Merge the modes</button><span>or click the waves</span></div>
+      <div class="lab" data-lab="vmd">
+        <div class="lab__head"><b>Decompose the river flow</b><small>VMD</small></div>
+        <div class="seg" role="group" aria-label="Decompose the river flow"><button type="button" data-v="signal" aria-pressed="false">River flow</button><button type="button" data-v="modes" aria-pressed="true">Split into modes</button></div>
+        <div class="lab__read" aria-live="polite"></div>
+      </div>
       <div class="actions"><a class="btn btn--solid" href="https://github.com/Aman-Tripathi27/VMD_CNN" target="_blank" rel="noopener">View the repo ↗</a></div>
     </section>
 
