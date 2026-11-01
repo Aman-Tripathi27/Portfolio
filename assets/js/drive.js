@@ -911,21 +911,26 @@ function buildWorld(data) {
   addEventListener('touchmove', (e) => {
     if (!touching) return;
     const x = e.touches[0].clientX, y = e.touches[0].clientY;
-    nudge(((ty - y) + (tx - x)) * 0.00032); tx = x; ty = y;
+    nudge((ty - y) * 0.00032);
+    lane = Math.max(-LANE, Math.min(LANE, lane + (x - tx) * 0.02));
+    tx = x; ty = y;
   }, { passive: true });
   addEventListener('touchend', () => { touching = false; });
 
-  // input: hold W / ↑ to drive forward and S / ↓ to reverse; the other keys jump stop to stop
+  // input: hold W / ↑ to drive forward, S / ↓ to reverse and A / D or ← / → to steer across the road;
+  // Space and Page Up / Down jump stop to stop
   const DRIVE = { w: 1, arrowup: 1, s: -1, arrowdown: -1 };
+  const STEER = { a: -1, arrowleft: -1, d: 1, arrowright: 1 };
   const held = new Set();
-  let throttle = 0;
+  let throttle = 0, lane = 0, laneV = 0;
+  const LANE = 2.6;   // the road is 8 wide and the car 2.5, so this keeps all four wheels on the tarmac
   addEventListener('keydown', (e) => {
     if (!running || e.metaKey || e.ctrlKey || e.altKey || e.target.closest?.('input, textarea')) return;
     const k = e.key.toLowerCase();
-    if (DRIVE[k]) { e.preventDefault(); held.add(k); return; }
+    if (DRIVE[k] || STEER[k]) { e.preventDefault(); held.add(k); return; }
     if (e.repeat) return;
-    if (['arrowright', 'd', 'pagedown', ' '].includes(k)) { e.preventDefault(); step(1); }
-    if (['arrowleft', 'a', 'pageup'].includes(k)) { e.preventDefault(); step(-1); }
+    if (['pagedown', ' '].includes(k)) { e.preventDefault(); step(1); }
+    if (k === 'pageup') { e.preventDefault(); step(-1); }
     if (k === 'home') goTo(0);
     if (k === 'end') goTo(LAST);
   });
@@ -957,8 +962,11 @@ function buildWorld(data) {
 
     // held drive keys: the throttle eases up and down, and the target stays just ahead of the car,
     // so letting go slows it to a stop within a short distance
-    let dir = 0; held.forEach((k) => { dir += DRIVE[k]; });
+    let dir = 0, steer = 0; held.forEach((k) => { dir += DRIVE[k] || 0; steer += STEER[k] || 0; });
     dir = Math.sign(dir);
+    laneV += (Math.sign(steer) * 6 - laneV) * Math.min(1, dt * 6);
+    lane += laneV * dt;
+    if (Math.abs(lane) > LANE) { lane = Math.sign(lane) * LANE; laneV = 0; }
     throttle += (dir - throttle) * Math.min(1, dt * 2.5);
     if (dir) {
       target = clampU(Math.max(p - 0.03, Math.min(p + 0.03, target + throttle * 0.08 * dt)));
@@ -982,8 +990,9 @@ function buildWorld(data) {
     sound.update(speed, dt);
 
     const pos = curve.getPointAt(p), tan = curve.getTangentAt(p), n = normalAt(p);
-    car.position.copy(pos);
-    car.lookAt(tmp.copy(pos).add(tan));
+    // the car sits off the centre line by the steering offset, and its nose points the way it's drifting
+    car.position.copy(pos).addScaledVector(n, lane);
+    car.lookAt(tmp.copy(car.position).add(tan).addScaledVector(n, Math.max(-0.5, Math.min(0.5, laneV * 0.09 * (speed < -0.5 ? -1 : 1)))));
     wheels.forEach((w) => { w.rotation.x += (dp * LEN) / 0.52; });
     const ahead = curve.getTangentAt(Math.min(1, p + 0.006));
     const turn = tan.x * ahead.z - tan.z * ahead.x;
@@ -994,7 +1003,7 @@ function buildWorld(data) {
     // dust
     if (Math.abs(speed) > 6 && Math.random() < Math.min(0.5, Math.abs(speed) / 70)) {
       const m = puffs[puffIdx++ % puffs.length];
-      m.position.copy(pos).addScaledVector(tan, -2.2 * Math.sign(speed)).addScaledVector(n, (Math.random() - 0.5) * 2.4); m.position.y = 0.3;
+      m.position.copy(car.position).addScaledVector(tan, -2.2 * Math.sign(speed)).addScaledVector(n, (Math.random() - 0.5) * 2.4); m.position.y = 0.3;
       m.userData.life = 1; m.scale.setScalar(0.6);
     }
     puffs.forEach((m) => {
