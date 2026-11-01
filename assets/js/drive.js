@@ -915,14 +915,22 @@ function buildWorld(data) {
   }, { passive: true });
   addEventListener('touchend', () => { touching = false; });
 
-  // input: keys jump stop to stop
+  // input: hold W / ↑ to drive forward and S / ↓ to reverse; the other keys jump stop to stop
+  const DRIVE = { w: 1, arrowup: 1, s: -1, arrowdown: -1 };
+  const held = new Set();
+  let throttle = 0;
   addEventListener('keydown', (e) => {
-    if (!running || e.target.closest?.('input, textarea')) return;
-    if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); step(1); }
-    if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); step(-1); }
-    if (e.key === 'Home') goTo(0);
-    if (e.key === 'End') goTo(LAST);
+    if (!running || e.metaKey || e.ctrlKey || e.altKey || e.target.closest?.('input, textarea')) return;
+    const k = e.key.toLowerCase();
+    if (DRIVE[k]) { e.preventDefault(); held.add(k); return; }
+    if (e.repeat) return;
+    if (['arrowright', 'd', 'pagedown', ' '].includes(k)) { e.preventDefault(); step(1); }
+    if (['arrowleft', 'a', 'pageup'].includes(k)) { e.preventDefault(); step(-1); }
+    if (k === 'home') goTo(0);
+    if (k === 'end') goTo(LAST);
   });
+  addEventListener('keyup', (e) => held.delete(e.key.toLowerCase()));
+  addEventListener('blur', () => held.clear());
 
   // on phones the card covers the lower part of the screen: the camera frames the landmark in the clear
   // area above it, stepping back as far as that area needs, and shifts the picture up to centre it there
@@ -946,6 +954,16 @@ function buildWorld(data) {
     raf = requestAnimationFrame(frame);
     const dt = Math.min(clock.getDelta(), 0.05);
     t += dt;
+
+    // held drive keys: the throttle eases up and down, and the target stays just ahead of the car,
+    // so letting go slows it to a stop within a short distance
+    let dir = 0; held.forEach((k) => { dir += DRIVE[k]; });
+    dir = Math.sign(dir);
+    throttle += (dir - throttle) * Math.min(1, dt * 2.5);
+    if (dir) {
+      target = clampU(Math.max(p - 0.03, Math.min(p + 0.03, target + throttle * 0.08 * dt)));
+      lastInput = performance.now();
+    }
 
     // settle onto the nearest stop once the reader stops scrolling
     if (performance.now() - lastInput > 420) {
