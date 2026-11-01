@@ -135,9 +135,10 @@ export const KB = [
   },
   {
     id: 'oss',
-    keys: 'open source opensource github contribution contributions contribute pull request requests pr prs neurokit2 neurokit repo repos repository code',
-    q: ['Does he contribute to open source?'],
-    a: "Yes. He has **3 pull requests to NeuroKit2's** heart-rate-variability module (a bug fix, regression tests and docs), and publishes his own projects openly, including GlucoTrace on PyPI. See his [GitHub](https://github.com/Aman-Tripathi27).",
+    keys: 'open source opensource github contribution contributions contribute pull request requests pr prs merged neurokit2 neurokit repo repos repository code rsp rvt respiration breathing breath',
+    q: ['Does he contribute to open source?', 'What did he contribute to NeuroKit2?'],
+    a: "Yes. He has **4 merged pull requests in NeuroKit2**, a widely used Python toolbox for physiological signals: a respiration fix so `rsp_rvt()` finds every breath at any sampling rate, a heart-rate-variability input fix, regression tests and docs. He also publishes his own projects openly, including GlucoTrace on PyPI. See his [GitHub](https://github.com/Aman-Tripathi27).",
+    more: "The newest one, [#1233](https://github.com/neuropsychology/NeuroKit/pull/1233), makes `rsp_rvt()` pass the sampling rate to its breath detection. On 100 Hz breathing data it now finds **28 of 28 breaths, up from 10**, with results at 1000 Hz unchanged, and it adds a regression test at 100 Hz.",
     stops: ['oss'],
   },
   {

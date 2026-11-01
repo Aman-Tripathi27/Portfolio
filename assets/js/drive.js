@@ -661,8 +661,8 @@ function buildWorld(data) {
     [1.6, 4.4, 7.4].forEach((y) => commit(v(-3, y), '#2b2d33'));
     const branchCommits = [0.3, 0.55, 0.78].map((u) => commit(branch.getPointAt(u), '#8250df'));
     const merge = commit(v(-3, 10.2), '#23c98d', 0.8);
-    const prs = ['#1205  HRV tuple fix', '#1206  RQA tests', '#1207  RQA docs'].map((txt, k) => {
-      const card = mesh(rbox(4.2, 1.5, 0.18, 0.12), '#8250df'); card.position.set(3.6, 2.4 + k * 2.2, 0.4); card.rotation.z = (k - 1) * 0.05; g.add(card);
+    const prs = ['#1205  HRV tuple fix', '#1206  RQA tests', '#1207  RQA docs', '#1233  RSP rate fix'].map((txt, k) => {
+      const card = mesh(rbox(4.2, 1.5, 0.18, 0.12), '#8250df'); card.position.set(3.6, 2.2 + k * 2, 0.4); card.rotation.z = (k - 1.5) * 0.05; g.add(card);
       const t = new THREE.Mesh(new THREE.PlaneGeometry(3.9, 1.2), new THREE.MeshBasicMaterial({ transparent: true, map: canvasTex(520, 160, (ctx, w, h) => {
         ctx.fillStyle = '#fff'; ctx.font = '500 34px "Geist Mono"'; ctx.textBaseline = 'middle'; ctx.fillText('⎇ ' + txt, 16, h / 2);
       }) }));
@@ -673,13 +673,13 @@ function buildWorld(data) {
       ctx.fillStyle = '#17181c'; ctx.beginPath(); ctx.roundRect(0, 0, w, h, 68); ctx.fill();
       ctx.fillStyle = '#fff'; ctx.font = '600 52px "Geist"'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('NeuroKit2', w / 2, h / 2 + 2);
     }) }));
-    tag.position.set(3.6, 9.4, 0.4); g.add(tag);
+    tag.position.set(3.6, 10.3, 0.4); g.add(tag);
     let hopAt = -10;
     animators.push((t) => {
       const hp = Math.max(0, 1 - (t - hopAt) / 1.4);
       merge.scale.setScalar(1 + Math.sin(t * 3) * 0.08 + hp * 0.5);
       branchCommits.forEach((c, k) => c.scale.setScalar(1 + Math.max(0, Math.sin(t * 2 - k)) * 0.25));
-      prs.forEach((c, k) => { c.position.y = 2.4 + k * 2.2 + Math.sin(t * 1.4 + k) * 0.12 + Math.abs(Math.sin((t - hopAt) * 8 - k)) * hp * 0.9; });
+      prs.forEach((c, k) => { c.position.y = 2.2 + k * 2 + Math.sin(t * 1.4 + k) * 0.12 + Math.abs(Math.sin((t - hopAt) * 8 - k)) * hp * 0.9; });
     });
     place(9, g, 11.2, 1);
     landmarks[9].poke = () => { hopAt = t; };

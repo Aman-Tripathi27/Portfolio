@@ -265,6 +265,7 @@ html.refract body.is-3d .stop, html.refract .chat {
 .lab__read { margin-top: 10px; font-size: 13.5px; line-height: 1.5; color: var(--ink-2); min-height: 3em; }
 .lab__read b { color: var(--ink); }
 .lab__read code { font: 500 11.5px var(--mono); padding: 1px 5px; border-radius: 5px; background: rgba(23,24,28,.06); word-break: break-all; }
+.facts code { font: 500 .92em var(--mono); padding: 1px 5px; border-radius: 5px; background: rgba(23,24,28,.06); }
 .lab__bubble { display: inline-block; margin-bottom: 8px; padding: 7px 12px; border-radius: 14px 14px 14px 4px; background: #fff; color: var(--ink); box-shadow: 0 2px 8px -4px rgba(0,0,0,.25); font-size: 13px; }
 .receipt { margin-bottom: 8px; padding: 9px 12px; border-radius: 12px; background: rgba(255,255,255,.7); font: 400 13px/1.6 var(--sans); }
 .receipt div { display: flex; justify-content: space-between; gap: 12px; }
