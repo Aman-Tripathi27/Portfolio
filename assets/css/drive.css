@@ -288,6 +288,41 @@ html.refract body.is-3d .stop, html.refract .chat {
 }
 .chat-fab:hover { transform: translateY(-2px); }
 .chat-fab svg { width: 18px; height: 18px; }
+/* a soft ring that keeps inviting a click until the chat has been opened once */
+.chat-fab::after { content: ''; position: absolute; inset: 0; border-radius: inherit; box-shadow: 0 0 0 0 rgba(255, 90, 54, .55); animation: fab-ring 2.6s ease-out infinite; pointer-events: none; }
+.chat-fab.seen::after { animation: none; }
+@keyframes fab-ring { 0% { box-shadow: 0 0 0 0 rgba(255, 90, 54, .5); } 70%, 100% { box-shadow: 0 0 0 14px rgba(255, 90, 54, 0); } }
+.chat-fab__live { position: absolute; top: -2px; right: -2px; width: 11px; height: 11px; border-radius: 50%; background: #23c98d; box-shadow: 0 0 0 2px #fff; }
+
+/* the speech bubble that pops out of the button */
+.chat-peek {
+  position: fixed; z-index: 36; right: 22px; bottom: 140px; width: min(290px, calc(100vw - 20px));
+  padding: 13px 14px 14px; border-radius: 20px 20px 6px 20px;
+  background: linear-gradient(165deg, rgba(255,255,255,.86), rgba(255,255,255,.66));
+  backdrop-filter: blur(14px) saturate(1.8); -webkit-backdrop-filter: blur(14px) saturate(1.8);
+  box-shadow: inset 1.5px 1.5px 0 -.5px rgba(255,255,255,.95), inset 0 0 0 1px rgba(255,255,255,.4), 0 22px 50px -22px rgba(18, 38, 58, .55);
+  transform-origin: 100% 100%; transform: translateY(10px) scale(.6); opacity: 0;
+  transition: transform .45s var(--spring), opacity .2s;
+}
+.chat-peek.in { transform: none; opacity: 1; }
+.chat-peek[hidden] { display: none; }
+.chat-peek::after { content: ''; position: absolute; right: 26px; bottom: -7px; width: 14px; height: 14px; transform: rotate(45deg); border-radius: 0 0 4px 0; background: rgba(255,255,255,.7); }
+body.chat-open .chat-peek { display: none; }
+.chat-peek__close { position: absolute; top: 8px; right: 8px; width: 26px; height: 26px; border: 0; border-radius: 50%; background: transparent; color: var(--ink-3); font-size: 17px; line-height: 1; cursor: pointer; }
+.chat-peek__close:hover { background: rgba(23,24,28,.06); color: var(--ink); }
+.chat-peek__who { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: var(--ink-3); }
+.chat-peek__who i { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; font: 600 12px var(--sans); font-style: normal; color: #fff; background: linear-gradient(165deg, #ff6e48, #e84828); }
+.chat-peek__text { margin: 8px 30px 10px 0; font-size: 14.5px; line-height: 1.45; color: var(--ink); min-height: 20px; }
+.chat-peek__typing { display: inline-flex; gap: 4px; padding-top: 6px; }
+.chat-peek__typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--ink-3); animation: typing 1s infinite ease-in-out; }
+.chat-peek__typing i:nth-child(2) { animation-delay: .15s; } .chat-peek__typing i:nth-child(3) { animation-delay: .3s; }
+.chat-peek__qs { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.chat-peek__qs:empty { display: none; }
+.chat-peek__qs button { border: 0; border-radius: 14px; padding: 8px 12px; font: 600 13px/1.3 var(--sans); text-align: left; cursor: pointer; color: #c23d1d; background: rgba(255, 90, 54, .1); box-shadow: inset 0 0 0 1px rgba(255, 90, 54, .22); animation: peek-q .4s var(--spring) both; transition: background .2s; }
+.chat-peek__qs button:nth-child(2) { animation-delay: .08s; }
+.chat-peek__qs button:hover { background: rgba(255, 90, 54, .18); }
+@keyframes peek-q { from { opacity: 0; transform: translateY(6px); } }
+body:not(.is-3d) .chat-peek { bottom: 78px; }
 body.chat-open .chat-fab { opacity: 0; pointer-events: none; }
 .chat-fab[hidden] { display: none; }
 body:not(.is-3d) .chat-fab { bottom: 22px; }
@@ -332,6 +367,14 @@ body:not(.is-3d) .chat-fab { bottom: 22px; }
 @media (max-width: 700px) {
   .chat-fab { top: 66px; bottom: auto; right: 10px; padding: 10px; }
   .chat-fab span { display: none; }
+  /* on phones the button sits at the top, so the bubble hangs below it */
+  .chat-peek { top: 118px; bottom: auto; right: 10px; width: min(260px, calc(100vw - 20px)); border-radius: 20px 6px 20px 20px; transform-origin: 100% 0; transform: translateY(-10px) scale(.6); }
+  .chat-peek.in { transform: none; }
+  .chat-peek::after { top: -7px; bottom: auto; right: 14px; border-radius: 4px 0 0 0; background: rgba(255,255,255,.86); }
+  .chat-peek__text { font-size: 14px; margin-bottom: 8px; }
+  .chat-peek__qs button { font-size: 12.5px; padding: 7px 11px; }
+  body:not(.is-3d) .chat-peek { top: auto; bottom: 70px; border-radius: 20px 20px 6px 20px; }
+  body:not(.is-3d) .chat-peek::after { top: auto; bottom: -7px; border-radius: 0 0 4px 0; }
   body:not(.is-3d) .chat-fab { top: auto; bottom: 18px; }
   .chat { left: 10px; right: 10px; bottom: 10px; width: auto; height: min(72dvh, 600px); }
 }

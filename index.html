@@ -253,7 +253,14 @@
   <button class="chat-fab" id="chatFab" type="button" aria-expanded="false" aria-controls="chat">
     <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 4.5h12a1.5 1.5 0 0 1 1.5 1.5v7a1.5 1.5 0 0 1-1.5 1.5H9l-3.5 3v-3H4A1.5 1.5 0 0 1 2.5 13V6A1.5 1.5 0 0 1 4 4.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6.5 9.5h.01M10 9.5h.01M13.5 9.5h.01" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
     <span>Ask about Aman</span>
+    <i class="chat-fab__live" aria-hidden="true"></i>
   </button>
+  <div class="chat-peek" id="chatPeek" hidden>
+    <button type="button" class="chat-peek__close" aria-label="Hide suggestions">×</button>
+    <div class="chat-peek__who"><i aria-hidden="true">A</i>Aman's assistant</div>
+    <p class="chat-peek__text" id="chatPeekText" aria-live="polite"></p>
+    <div class="chat-peek__qs" id="chatPeekQs"></div>
+  </div>
   <section class="chat" id="chat" hidden aria-label="Ask about Aman">
     <header class="chat__head">
       <div><b>Ask about Aman</b><small>Instant answers from his work</small></div>

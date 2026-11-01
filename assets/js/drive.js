@@ -1013,6 +1013,7 @@ function buildWorld(data) {
       stopEls.forEach((el, i) => el.classList.toggle('active', i === active));
       dots.forEach((d, i) => d.classList.toggle('on', i === active));
       hint.classList.toggle('hide', active !== -1);
+      if (active >= 0) document.dispatchEvent(new CustomEvent('stopchange', { detail: { id: stopEls[active].id } }));
     }
 
     // chase camera between stops; at a stop it steps back across the road and frames the

@@ -24,6 +24,7 @@ function setOpen(on) {
   fab.setAttribute('aria-expanded', String(on));
   document.body.classList.toggle('chat-open', on);
   if (on) {
+    fab.classList.add('seen');
     if (!log.childElementCount) addMessage('assistant', "Hi! I can answer questions about Aman's work: his projects, experience and skills. What would you like to know?");
     focusInput();
   }
@@ -89,3 +90,73 @@ chips.addEventListener('click', (e) => {
 log.addEventListener('click', (e) => {
   if (e.target.closest('.msg__stop') && matchMedia('(max-width: 700px)').matches) setOpen(false);
 });
+
+// a speech bubble pops out of the button with two questions about the stop the car is at.
+// Each stop's bubble shows once, hides itself after a while, and × turns the bubbles off for the visit.
+const PEEKS = {
+  'stop-start': ["Hi! I'm Aman's assistant. Ask me anything about his work.", ['What has he built?', 'Has he shipped ML to production?']],
+  'stop-temple': ['Curious what he built at Temple?', ['What did he do at Temple?', 'Did his work ship to production?']],
+  'stop-gluco': ['Want the story behind GlucoTrace?', ['What is GlucoTrace?', 'How does GlucoTrace handle missing data?']],
+  'stop-eeg': ['Questions about the EEG score?', ['How does the EEG quality score work?', 'Did the EEG score work while jogging?']],
+  'stop-ppg': ['How does a watch read a heartbeat on a run?', ['How does the PPG cleaning work?', 'What did the PPG project find?']],
+  'stop-chat': ['Want to know how Chat-to-Pay works?', ['What is Chat-to-Pay?', 'What has he built with LLMs?']],
+  'stop-gnn': ['Curious about the drug-interaction model?', ['What does the GNN predict?', 'How was the GNN evaluated?']],
+  'stop-vmd': ['Questions about the river-flow forecasts?', ['How does the forecasting work?', 'What is VMD?']],
+  'stop-paper': ['Want a quick summary of the paper?', ['What is his IEEE paper about?', 'Where was it published?']],
+  'stop-oss': ['Ask about his open-source work.', ['What did he contribute to NeuroKit2?', 'Is GlucoTrace open source?']],
+  'stop-contact': ['Thinking of reaching out?', ['How can I contact him?', 'Is he open to remote roles?']],
+};
+const peek = document.getElementById('chatPeek');
+const peekText = document.getElementById('chatPeekText');
+const peekQs = document.getElementById('chatPeekQs');
+const shown = new Set();
+let peeksOff = false, peekTimer = 0, hideTimer = 0, here = 'stop-start';
+try { peeksOff = sessionStorage.getItem('peeksOff') === '1'; } catch { /* storage blocked: bubbles stay on */ }
+
+function hidePeek() {
+  clearTimeout(peekTimer); clearTimeout(hideTimer);
+  peek.classList.remove('in');
+  hideTimer = setTimeout(() => { peek.hidden = true; }, 250);
+}
+
+function showPeek(id) {
+  const p = PEEKS[id];
+  if (!p || peeksOff || shown.has(id) || !panel.hidden) return;
+  // on phones the intro card fills the top of the screen, so the bubbles start at the first project
+  if (id === 'stop-start' && document.body.classList.contains('is-3d') && matchMedia('(max-width: 700px)').matches) return;
+  shown.add(id);
+  clearTimeout(hideTimer);
+  peek.hidden = false;
+  peekText.innerHTML = '<span class="chat-peek__typing"><i></i><i></i><i></i></span>';
+  peekQs.innerHTML = '';
+  requestAnimationFrame(() => peek.classList.add('in'));
+  // a moment of "typing" first, so the bubble reads like someone saying hello
+  peekTimer = setTimeout(() => {
+    peekText.textContent = p[0];
+    peekQs.innerHTML = p[1].map((q) => `<button type="button">${escapeHtml(q)}</button>`).join('');
+    peekTimer = setTimeout(hidePeek, 12000);
+  }, 750);
+}
+
+// wait until the car has stayed at a stop for a moment, so driving past doesn't flash bubbles
+document.addEventListener('stopchange', (e) => {
+  here = e.detail.id;
+  clearTimeout(peekTimer);
+  if (!peek.hidden) hidePeek();
+  peekTimer = setTimeout(() => { if (here === e.detail.id) showPeek(here); }, 1400);
+});
+setTimeout(() => showPeek(here), 2500);
+
+peekQs.addEventListener('click', (e) => {
+  const q = e.target.closest('button');
+  if (!q) return;
+  hidePeek();
+  setOpen(true);
+  ask(q.textContent);
+});
+peek.querySelector('.chat-peek__close').addEventListener('click', () => {
+  peeksOff = true;
+  try { sessionStorage.setItem('peeksOff', '1'); } catch { /* fine for this page view */ }
+  hidePeek();
+});
+fab.addEventListener('click', hidePeek);
