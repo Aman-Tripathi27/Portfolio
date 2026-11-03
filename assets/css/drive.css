@@ -78,6 +78,10 @@ body:not(.is-3d) .hud { position: sticky; top: 14px; margin: 14px; }
 .btn:hover { transform: translateY(-2px); background: #fff; }
 .btn--solid { background: var(--c); border-color: var(--c); color: #fff; }
 .btn--solid:hover { background: var(--c); filter: brightness(1.06); }
+.btn--icon { justify-content: center; width: 44px; height: 44px; padding: 0; }
+.btn--icon svg { width: 19px; height: 19px; }
+.btn--github { color: #17181c; }
+.btn--linkedin { color: #0a66c2; }
 .keys { font-size: 13px; color: var(--ink-3); margin-left: 6px; }
 kbd { font: 500 11.5px/1 var(--mono); padding: 4px 7px; border-radius: 6px; background: rgba(255,255,255,.8); border: 1px solid var(--line); color: var(--ink-2); }
 .mail { display: inline-block; margin-top: 14px; font: 400 clamp(24px, 2.4vw, 32px)/1.1 var(--serif); color: var(--ink); text-decoration-color: var(--c); text-underline-offset: 5px; word-break: break-word; }
