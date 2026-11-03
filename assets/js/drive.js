@@ -155,7 +155,10 @@ async function startWorld() {
 function buildWorld(data) {
   const canvas = document.getElementById('world');
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
-  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.75));
+  // resolution: at most 1.75× and about 3.2 million pixels, lowered further if frames run slow (see quality below)
+  let maxPR = 1.75;
+  const pixelRatio = () => Math.min(devicePixelRatio || 1, maxPR, Math.sqrt(3.2e6 / (innerWidth * innerHeight)));
+  renderer.setPixelRatio(pixelRatio());
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -944,6 +947,7 @@ function buildWorld(data) {
 
   function resize() {
     const w = innerWidth, h = innerHeight;
+    renderer.setPixelRatio(pixelRatio());
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
     camera.fov = w / h < 0.8 ? 58 : 42;
@@ -955,10 +959,36 @@ function buildWorld(data) {
 
   const tmp = new THREE.Vector3(), desired = new THREE.Vector3(), look = new THREE.Vector3();
 
+  // quality: when frames keep running slower than 28 a second, step down one notch at a time
+  // (battery savers cap animation at 30 a second on purpose, so that alone doesn't count as slow):
+  // fewer pixels first, then the glass refraction (costly in Chromium), then a smaller shadow map
+  const DOWNGRADES = [
+    () => { maxPR = 1.5; },
+    () => document.documentElement.classList.remove('refract'),
+    () => { maxPR = 1.25; },
+    () => { maxPR = 1; },
+    () => { sun.shadow.mapSize.set(1024, 1024); sun.shadow.map?.dispose(); sun.shadow.map = null; },
+    () => { maxPR = 0.8; },
+  ];
+  let slowFor = 0, downgrades = 0;
+  function watchSpeed(raw) {
+    if (t < 3 || raw > 0.25 || downgrades >= DOWNGRADES.length) return;   // skip start-up and tab switches
+    slowFor = raw > 1 / 28 ? slowFor + raw : Math.max(0, slowFor - raw * 0.5);
+    if (slowFor < 2) return;
+    slowFor = 0;
+    DOWNGRADES[downgrades++]();
+    resize();
+  }
+
+  // compile every shader and upload every texture now, so new landmarks don't stutter as they come into view
+  renderer.compile(scene, camera);
+  scene.traverse((o) => { if (o.material?.map) renderer.initTexture(o.material.map); });
+
   function frame() {
     raf = requestAnimationFrame(frame);
-    const dt = Math.min(clock.getDelta(), 0.05);
+    const raw = clock.getDelta(), dt = Math.min(raw, 0.05);
     t += dt;
+    watchSpeed(raw);
 
     // held drive keys: the throttle eases up and down, and the target stays just ahead of the car,
     // so letting go slows it to a stop within a short distance
