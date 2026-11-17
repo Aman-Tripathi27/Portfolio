@@ -142,6 +142,14 @@ export const KB = [
     stops: ['oss'],
   },
   {
+    id: 'faint',
+    keys: 'faint signal faintsignal lesson course teach teaching tutorial learn interactive bci brain computer interface interfaces speller p300 ica blink blinks alpha cerebral cortex physionet launch launched',
+    q: ['What is The Faint Signal?', 'Has he built anything to teach EEG?', 'What is his BCI website?'],
+    a: "**The Faint Signal** ([faintsignal.in](https://faintsignal.in)) is an interactive lesson on EEG and brain-computer interfaces that Aman built on a real PhysioNet recording. Visitors measure how faint the signal is, close the eyes to watch the alpha rhythm bloom, see a blink bury it, clean it with filters and ICA, and spell with a working P300 BCI demo.",
+    more: "It also has a **Cleaning Lab** that scores 8 blink-removal methods side by side, a library of books and papers, a shared discussion space with Google sign-in, and **Cerebral Cortex**, an AI guide that answers questions from the site's own pages and cites each passage. It runs on Cloudflare.",
+    stops: ['faint'],
+  },
+  {
     id: 'skills',
     keys: 'skill skills stack tool tools language languages python sql typescript javascript pytorch tensorflow scikit sklearn framework frameworks tech technology technologies know aws sagemaker cloud hugging face streamlit git',
     q: ['What are his skills?', 'Does he know Python?'],
@@ -174,7 +182,7 @@ export const KB = [
     listing: true,
     keys: 'project projects built build portfolio done made',
     q: ['What projects has he built?'],
-    a: "Here's what he has built:\n• **GlucoTrace**: turns a day of glucose-monitor data into a fingerprint to find similar days (on PyPI)\n• **Mobile EEG signal quality**: which brain sensors to trust while someone walks or jogs\n• **Wrist PPG cleaning**: removes running motion from smartwatch heart signals\n• **Chat-to-Pay**: an LLM app that turns WhatsApp chats into priced orders\n• **Drug-interaction GNN**: predicts which drugs interact\n• **River-flow forecasting**: VMD plus 8 models, best NSE 0.985\nPlus a brief-movement detector shipped at **Temple** and a peer-reviewed **IEEE paper**. Ask about any of them for details.",
+    a: "Here's what he has built:\n• **GlucoTrace**: turns a day of glucose-monitor data into a fingerprint to find similar days (on PyPI)\n• **Mobile EEG signal quality**: which brain sensors to trust while someone walks or jogs\n• **Wrist PPG cleaning**: removes running motion from smartwatch heart signals\n• **Chat-to-Pay**: an LLM app that turns WhatsApp chats into priced orders\n• **Drug-interaction GNN**: predicts which drugs interact\n• **River-flow forecasting**: VMD plus 8 models, best NSE 0.985\n• **The Faint Signal**: an interactive EEG and BCI lesson at faintsignal.in\nPlus a brief-movement detector shipped at **Temple** and a peer-reviewed **IEEE paper**. Ask about any of them for details.",
     stops: ['gluco', 'chat'],
   },
   {

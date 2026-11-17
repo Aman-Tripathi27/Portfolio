@@ -321,7 +321,57 @@ function buildWorld(data) {
     landmarks[1].apply = ({ value }) => { awakeTarget = value === 'up' ? 1 : 0; if (value === 'brief') wiggleAt = t; };
   }
 
-  // 02 GlucoTrace: a real glucose day as a sculpture, plus a pip package
+  // 02 The Faint Signal: a dark screen with a live brain trace, like the site; clicking it blinks
+  {
+    const g = new THREE.Group();
+    g.add(pedestal(13, 5, '#e3e7ff'));
+    [-4.6, 4.6].forEach((x) => { const leg = mesh(rbox(0.5, 3.4, 0.5, 0.2), '#2b2d33'); leg.position.set(x, 2.2, -0.2); g.add(leg); });
+    const bezel = mesh(rbox(12.6, 7.4, 0.6, 0.35), '#101216'); bezel.position.y = 7.4; g.add(bezel);
+    // drawn at 1024 × 576 and stored at three quarters of that, to keep each texture upload small
+    const tex = canvasTex(768, 432, () => {});
+    const screen = new THREE.Mesh(new THREE.PlaneGeometry(12, 6.75), new THREE.MeshBasicMaterial({ map: tex }));
+    screen.position.set(0, 7.4, 0.32); g.add(screen);
+    const { ctx } = tex.userData, w = 1024, h = 576;
+    ctx.setTransform(0.75, 0, 0, 0.75, 0, 0);
+    const N = 220, trace = new Float32Array(N);
+    let phase = 0, blinkAt = -10, drawnAt = -1;
+    // brain-like wiggle: a 10-cycle alpha rhythm, slower drifts and a little noise
+    const eeg = (s) => Math.sin(s * 2.1) * 0.5 + Math.sin(s * 0.7 + 1) * 0.35 + Math.sin(s * 5.3) * 0.18 + (Math.random() - 0.5) * 0.35;
+    for (let k = 0; k < N; k++) trace[k] = eeg(k * 0.35);
+    const draw = (t) => {
+      ctx.fillStyle = '#07080b'; ctx.fillRect(0, 0, w, h);
+      const glow = ctx.createRadialGradient(w * 0.5, h * 0.55, 20, w * 0.5, h * 0.55, w * 0.6);
+      glow.addColorStop(0, 'rgba(70,90,200,0.22)'); glow.addColorStop(1, 'rgba(70,90,200,0)');
+      ctx.fillStyle = glow; ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = '#ffffff'; ctx.textAlign = 'center'; ctx.font = '600 58px "Geist"';
+      ctx.fillText('Your brain is talking.', w / 2, 112);
+      ctx.fillStyle = 'rgba(255,255,255,0.5)'; ctx.fillText('Right now.', w / 2, 178);
+      ctx.strokeStyle = '#e9ecff'; ctx.lineWidth = 3.5; ctx.lineJoin = 'round'; ctx.shadowColor = 'rgba(160,180,255,0.9)'; ctx.shadowBlur = 14;
+      ctx.beginPath();
+      for (let k = 0; k < N; k++) { const x = 40 + (k / (N - 1)) * (w - 80), y = h * 0.62 - trace[k] * 38; k ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }
+      ctx.stroke(); ctx.shadowBlur = 0;
+      ctx.fillStyle = '#ffffff'; ctx.beginPath(); ctx.arc(w - 40, h * 0.62 - trace[N - 1] * 38, 7, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = 'rgba(255,255,255,0.45)'; ctx.font = '500 30px "Geist Mono"'; ctx.fillText('faintsignal.in', w / 2, h - 44);
+      tex.needsUpdate = true; drawnAt = t;
+    };
+    draw(0);
+    animators.push((t, dt) => {
+      // the trace scrolls left; a blink adds one big slow bump that buries the rhythm
+      phase += dt * 9;
+      while (phase >= 1) {
+        phase -= 1;
+        trace.copyWithin(0, 1);
+        const b = t - blinkAt, blink = b < 1.5 ? Math.sin((b / 1.5) * Math.PI) * 4.2 : 0;
+        trace[N - 1] = eeg(t * 3.2) + blink;
+      }
+      // redraw about 24 times a second, and only when the camera is close enough to see it
+      if (t - drawnAt > 1 / 24 && camera.position.distanceTo(g.position) < 140) draw(t);
+    });
+    place(2, g, 11.4, -1);
+    landmarks[2].poke = () => { blinkAt = t; };
+  }
+
+  // 03 GlucoTrace: a real glucose day as a sculpture, plus a pip package
   {
     const g = new THREE.Group();
     g.add(pedestal(15, 4.5));
@@ -356,9 +406,9 @@ function buildWorld(data) {
     }) }));
     lbl.position.set(0, -0.3, 1.31); box.add(lbl);
     animators.push((t) => { box.position.y = 2 + Math.abs(Math.sin(t * 2)) * 0.25; });
-    place(2, g, 9.5, -1);
+    place(3, g, 9.5, -1);
     // follows the card's demo: highlight the chosen match, or show the day with 30% removed
-    landmarks[2].apply = ({ value, flags }) => {
+    landmarks[3].apply = ({ value, flags }) => {
       matches.forEach((m, k) => {
         const on = !flags.drop && k === value - 1;
         m.material.color.set(on ? '#5a3a10' : '#f5c26b');
@@ -368,7 +418,7 @@ function buildWorld(data) {
     };
   }
 
-  // 03 Mobile EEG: a head with 32 sensors coloured by real artifact rates per treadmill speed
+  // 04 Mobile EEG: a head with 32 sensors coloured by real artifact rates per treadmill speed
   {
     const g = new THREE.Group();
     const base = mesh(new THREE.CylinderGeometry(5.4, 5.8, 0.8, 32), '#efe9ff'); base.position.y = 0.4; g.add(base);
@@ -400,11 +450,11 @@ function buildWorld(data) {
       });
       head.position.y = 2.4 + Math.sin(t * Math.PI * 2 * (1 + k * 0.5)) * 0.04 * k;
     });
-    place(3, g, 9.5, 1);
-    landmarks[3].apply = ({ value }) => { fromK = k; k = +value; changedAt = t; };
+    place(4, g, 9.5, 1);
+    landmarks[4].apply = ({ value }) => { fromK = k; k = +value; changedAt = t; };
   }
 
-  // 04 Wrist PPG: a giant watch showing the real cleaned pulse
+  // 05 Wrist PPG: a giant watch showing the real cleaned pulse
   {
     const g = new THREE.Group();
     g.add(pedestal(8, 5, '#ffe7e2'));
@@ -457,11 +507,11 @@ function buildWorld(data) {
     screen.position.set(0, 7, 0.57); g.add(screen);
     let acc = 0, off = 0;
     animators.push((t, dt) => { acc += dt; if (acc > 1 / 24) { off = (off + Math.round(fs * acc)) % clean.length; acc = 0; drawScreen(off); } });
-    place(4, g, 13.6, -1);
-    landmarks[4].apply = ({ value }) => { stage = STAGES[value]; drawScreen(off); };
+    place(5, g, 13.6, -1);
+    landmarks[5].apply = ({ value }) => { stage = STAGES[value]; drawScreen(off); };
   }
 
-  // 05 Chat-to-Pay: a phone with a Hinglish order and a spinning rupee coin
+  // 06 Chat-to-Pay: a phone with a Hinglish order and a spinning rupee coin
   {
     const g = new THREE.Group();
     g.add(pedestal(11, 5, '#e2f6ea'));
@@ -516,11 +566,11 @@ function buildWorld(data) {
     coin.castShadow = true; coin.rotation.x = Math.PI / 2; coin.position.set(4.6, 9.2, 0.8);
     const coinPivot = new THREE.Group(); coinPivot.position.copy(coin.position); coin.position.set(0, 0, 0); coinPivot.add(coin); g.add(coinPivot);
     animators.push((t) => { coinPivot.rotation.y = t * 1.6; coinPivot.position.y = 9.2 + Math.sin(t * 1.4) * 0.4; });
-    place(5, g, 11.5, 1);
-    landmarks[5].apply = ({ value }) => { screen.material.map = screens[value]; screen.material.needsUpdate = true; };
+    place(6, g, 11.5, 1);
+    landmarks[6].apply = ({ value }) => { screen.material.map = screens[value]; screen.material.needsUpdate = true; };
   }
 
-  // 06 GNN-DDI: two drugs, shown at the step the card's demo is on:
+  // 07 GNN-DDI: two drugs, shown at the step the card's demo is on:
   // molecule (atoms by element) → graph (nodes and edges) → embedding (each drug becomes one point) → predicted link
   {
     const g = new THREE.Group();
@@ -577,11 +627,11 @@ function buildWorld(data) {
       spark.visible = linkOn > 0.5;
       spark.position.copy(link.getPoint((t * 0.45) % 1));
     });
-    place(6, g, 11.6, -1);
-    landmarks[6].apply = ({ value }) => { step = value; };
+    place(7, g, 11.6, -1);
+    landmarks[7].apply = ({ value }) => { step = value; };
   }
 
-  // 07 Forecasting: one signal split into four modes
+  // 08 Forecasting: one signal split into four modes
   {
     const g = new THREE.Group();
     g.add(pedestal(14, 4, '#e3efff'));
@@ -602,12 +652,12 @@ function buildWorld(data) {
         m.position.y = Math.sin(t * 1.2 + k) * 0.12 + lift;
       });
     });
-    place(7, g, 11.8, 1);
+    place(8, g, 11.8, 1);
     // follows the card's demo: the modes either sit apart or lift up into the signal they add up to
-    landmarks[7].apply = ({ value }) => { mergeTarget = value === 'signal' ? 1 : 0; };
+    landmarks[8].apply = ({ value }) => { mergeTarget = value === 'signal' ? 1 : 0; };
   }
 
-  // 08 IEEE paper: the paper on an easel, with an award rosette and a stack of books
+  // 09 IEEE paper: the paper on an easel, with an award rosette and a stack of books
   {
     const g = new THREE.Group();
     g.add(pedestal(12, 5, '#fbeceb'));
@@ -647,11 +697,11 @@ function buildWorld(data) {
       rosette.position.y = 6.4 + Math.sin(t * 1.6) * 0.2;
       paper.rotation.y = turn;
     });
-    place(8, g, 11.4, -1);
-    landmarks[8].poke = () => { flipAt = t; };
+    place(9, g, 11.4, -1);
+    landmarks[9].poke = () => { flipAt = t; };
   }
 
-  // 09 Open source: a branch that merges back into main, and the pull requests
+  // 10 Open source: a branch that merges back into main, and the pull requests
   {
     const g = new THREE.Group();
     g.add(pedestal(13, 5, '#f1ebff'));
@@ -684,11 +734,11 @@ function buildWorld(data) {
       branchCommits.forEach((c, k) => c.scale.setScalar(1 + Math.max(0, Math.sin(t * 2 - k)) * 0.25));
       prs.forEach((c, k) => { c.position.y = 2.2 + k * 2 + Math.sin(t * 1.4 + k) * 0.12 + Math.abs(Math.sin((t - hopAt) * 8 - k)) * hp * 0.9; });
     });
-    place(9, g, 11.2, 1);
-    landmarks[9].poke = () => { hopAt = t; };
+    place(10, g, 11.2, 1);
+    landmarks[10].poke = () => { hopAt = t; };
   }
 
-  // 10 Contact: a mailbox with its flag up
+  // 11 Contact: a mailbox with its flag up
   {
     const g = new THREE.Group();
     g.add(pedestal(7, 5, '#ffe9e1'));
@@ -699,8 +749,8 @@ function buildWorld(data) {
     const flag = mesh(new THREE.BoxGeometry(0.1, 0.7, 1.1), '#ffc83d'); flag.position.set(1.4, 7.9, 1.1); g.add(flag);
     const letter = mesh(rbox(1.6, 0.06, 1.1, 0.03), '#ffffff'); letter.position.set(0, 7.5, 2.6); g.add(letter);
     animators.push((t) => { letter.position.y = 7.4 + Math.sin(t * 2) * 0.5; letter.rotation.z = Math.sin(t * 1.3) * 0.3; flag.rotation.x = Math.sin(t * 3) * 0.12; });
-    place(10, g, 9.4, -1);
-    landmarks[10].poke = () => { location.href = 'mailto:amantripathi3273@gmail.com'; };
+    place(11, g, 9.4, 1);
+    landmarks[11].poke = () => { location.href = 'mailto:amantripathi3273@gmail.com'; };
   }
 
   // a landmark without a demo gives a little hop when clicked

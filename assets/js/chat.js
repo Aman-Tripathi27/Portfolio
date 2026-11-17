@@ -5,7 +5,7 @@ import { answer } from './retrieve.js';
 
 const STOPS = {
   temple: 'Temple', gluco: 'GlucoTrace', eeg: 'Mobile EEG', ppg: 'Wrist PPG', chat: 'Chat-to-Pay',
-  gnn: 'GNN-DDI', vmd: 'Forecasting', paper: 'IEEE paper', oss: 'Open source', contact: 'Contact',
+  gnn: 'GNN-DDI', vmd: 'Forecasting', paper: 'IEEE paper', oss: 'Open source', faint: 'The Faint Signal', contact: 'Contact',
 };
 
 const fab = document.getElementById('chatFab');
@@ -104,6 +104,7 @@ const PEEKS = {
   'stop-vmd': ['Questions about the river-flow forecasts?', ['How does the forecasting work?', 'What is VMD?']],
   'stop-paper': ['Want a quick summary of the paper?', ['What is his IEEE paper about?', 'Where was it published?']],
   'stop-oss': ['Ask about his open-source work.', ['What did he contribute to NeuroKit2?', 'Is GlucoTrace open source?']],
+  'stop-faint': ['Want the tour of The Faint Signal?', ['What is The Faint Signal?', 'What is his BCI website?']],
   'stop-contact': ['Thinking of reaching out?', ['How can I contact him?', 'Is he open to remote roles?']],
 };
 const peek = document.getElementById('chatPeek');
